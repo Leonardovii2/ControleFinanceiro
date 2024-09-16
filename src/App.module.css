@@ -1,0 +1,13 @@
+.sectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0rem;
+  gap: 5rem;
+}
+
+.sectionCategorias {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}

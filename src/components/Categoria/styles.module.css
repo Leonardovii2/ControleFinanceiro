@@ -1,0 +1,26 @@
+.containerCategoria {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.imgs {
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  padding: 2rem;
+  height: 2rem;
+  border-radius: 5rem;
+}
+
+.controle {
+  width: 30px;
+}
+.titleCategoria {
+  font-size: 12px;
+}

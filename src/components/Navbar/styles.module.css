@@ -1,0 +1,21 @@
+.container {
+  background-color: #6d9773;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 18rem;
+}
+
+.container a {
+  text-decoration: none;
+  color: white;
+}
+
+.container ul {
+  display: flex;
+  gap: 8rem;
+}
+
+.container ul li {
+  list-style: none;
+}
