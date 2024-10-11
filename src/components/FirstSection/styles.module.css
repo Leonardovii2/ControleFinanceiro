@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem 0 4rem;
+  margin-left: 8rem;
+
+}
+
+.container h1 {
+  font-size: 22px;
+}
+
+.usuLogado {
+  display: flex;
+  gap: .5rem;
+}
+
+.titles {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.usuLogado {
+  display: flex;
+  align-items: center;
+}
+
+.futureApi, h2{
+    font-size: 15px;
+}
+
+.imgUsuarioLogado {
+    width: 2.5rem;
+}

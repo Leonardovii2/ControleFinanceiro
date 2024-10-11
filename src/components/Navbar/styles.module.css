@@ -1,21 +1,21 @@
 .container {
-  background-color: #6d9773;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 1.5rem 18rem;
+  width: 160px; /* Largura da navbar */
+  background-color: #3a554e; /* Cor de fundo */
+  height: 100vh;
+  position: fixed;
 }
 
-.container a {
-  text-decoration: none;
-  color: white;
-}
-
-.container ul {
+.icons {
   display: flex;
-  gap: 8rem;
-}
-
-.container ul li {
+  flex-direction: column;
+  gap: 4rem;
   list-style: none;
 }
+
+.icone {
+  width: 30px;
+}
+
