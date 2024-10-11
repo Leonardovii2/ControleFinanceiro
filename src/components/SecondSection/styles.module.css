@@ -1,0 +1,29 @@
+.contant {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  margin-left: 160px;
+  width: 60rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(97, 119, 113, 0.3);
+  border-radius: 45px;
+  padding: 60px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: row; /* Alinhamento vertical se necessário */
+  align-items: center; /* Centralizar horizontalmente */
+  height: 10rem;
+}
+
+.container h2 {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.imgPorcoDinheiro img {
+  width: 350px; /* Ajuste a largura conforme necessário */
+  margin-top: -122px; /* Espaçamento acima da imagem */
+}
