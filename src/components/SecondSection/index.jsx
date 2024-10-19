@@ -1,11 +1,13 @@
 import imgPorcoDinheiro from "../../assets/imgPorcoDinheiro.svg";
 import styles from "./styles.module.css";
+import Greeting from "../Greeting/index";
 
 export default function SecondSection() {
+  const username = "Leonardo";
   return (
     <div className={styles.contant}>
       <div className={styles.container}>
-        <h2>Boa tarde, Leonardo</h2>
+        <Greeting username={username}/>
         <div className={styles.imgPorcoDinheiro}>
           <img src={imgPorcoDinheiro} alt="" />
         </div>

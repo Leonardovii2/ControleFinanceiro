@@ -1,46 +1,85 @@
 import { db } from "../db.js";
 
-export const getGastos = (_, res) => {
+// Função para validar dados
+const validateGasto = (gasto) => {
+  const { categoria, descricao, valor } = gasto;
+  if (!categoria || !descricao || valor === undefined) {
+    return { valid: false, message: "Todos os campos são obrigatórios." };
+  }
+  if (typeof valor !== "number" || valor <= 0) {
+    return { valid: false, message: "O valor deve ser um número positivo." };
+  }
+  return { valid: true };
+};
+
+export const getGastos = (req, res) => {
   const q = "SELECT * FROM gastos";
-
+  
   db.query(q, (err, data) => {
-    if (err) return res.json(err);
-
+    if (err) {
+      console.error("Erro ao acessar o banco de dados:", err);
+      return res.status(500).json({ message: "Ocorreu um erro ao acessar o banco de dados." });
+    }
     return res.status(200).json(data);
   });
 };
 
 export const addGasto = (req, res) => {
-  const q = "INSERT INTO gastos(`categoria`, `descricao`, `valor`) VALUES(?)";
+  const { categoria, descricao, valor } = req.body;
 
-  const values = [req.body.categoria, req.body.descricao, req.body.valor];
+  const validation = validateGasto(req.body);
+  if (!validation.valid) {
+    return res.status(400).json({ message: validation.message });
+  }
 
-  db.query(q, [values], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Gasto adicionado com sucesso.");
+  const q = "INSERT INTO gastos (`categoria`, `descricao`, `valor`) VALUES (?, ?, ?)";
+  db.query(q, [categoria, descricao, valor], (err, result) => {
+    if (err) {
+      console.error("Erro ao adicionar o gasto:", err);
+      return res.status(500).json({ message: "Ocorreu um erro ao adicionar o gasto." });
+    }
+    return res.status(201).json({ message: "Gasto adicionado com sucesso.", id: result.insertId });
   });
 };
 
 export const updateGasto = (req, res) => {
-  const q =
-    "UPDATE gastos SET `categoria` = ?, `descricao` = ?, `valor` = ? WHERE `id` = ?";
+  const { categoria, descricao, valor } = req.body;
 
-  const values = [req.body.categoria, req.body.descricao, req.body.valor];
+  const validation = validateGasto(req.body);
+  if (!validation.valid) {
+    return res.status(400).json({ message: validation.message });
+  }
 
-  db.query(q, [...values, req.params.id], (err) => {
-    if (err) return res.json(err);
+  // Verifique se o gasto existe
+  const checkQuery = "SELECT * FROM gastos WHERE `id` = ?";
+  db.query(checkQuery, [req.params.id], (err, results) => {
+    if (err) {
+      console.error("Erro ao verificar o gasto:", err);
+      return res.status(500).json({ message: "Ocorreu um erro ao verificar o gasto." });
+    }
 
-    return res.status(200).json("Gasto atualizado com sucesso.");
+    if (results.length === 0) {
+      return res.status(404).json({ message: "Gasto não encontrado." });
+    }
+
+    const q = "UPDATE gastos SET `categoria` = ?, `descricao` = ?, `valor` = ? WHERE `id` = ?"; 
+    db.query(q, [categoria, descricao, valor, req.params.id], (err) => {
+      if (err) {
+        console.error("Erro ao atualizar o gasto:", err);
+        return res.status(500).json({ message: "Ocorreu um erro ao atualizar o gasto." });
+      }
+      return res.status(200).json({ message: "Gasto atualizado com sucesso." });
+    });
   });
 };
 
 export const deleteGasto = (req, res) => {
-  const q = "DELETE FROM gastos WHERE `id` = ?";
-
+  const q = "DELETE FROM gastos WHERE `id` = ?"; 
   db.query(q, [req.params.id], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Gasto deletado com sucesso.");
+    if (err) {
+      console.error("Erro ao deletar o gasto:", err);
+      return res.status(500).json({ message: "Ocorreu um erro ao deletar o gasto." });
+    }
+    return res.status(200).json({ message: "Gasto deletado com sucesso.", id: req.params.id });
   });
 };

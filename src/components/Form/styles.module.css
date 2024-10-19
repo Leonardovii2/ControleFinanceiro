@@ -1,15 +1,14 @@
 .contant {
   display: flex;
   justify-content: center;
+  margin-left: 160px;
+  padding: 5rem 0;
 }
 
 .container {
   display: flex;
-  align-items: flex-end;
-  margin-left: 160px;
-  margin-top: 5rem;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 50rem;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
@@ -25,11 +24,43 @@
 }
 
 .button {
-  padding: 10px;
+  padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
   border: none;
-  background-color: #2c73d2;
+  background-color: #3a554e;
   color: white;
   height: 42px;
+}
+
+.labelStyle {
+  margin-right: 0.4rem;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .contant {
+    margin: 0 1rem;
+    display: flex;
+    padding: 3rem 0 4rem 0;
+  }
+
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .container div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .button {
+    margin-top: 1rem;
+  }
 }

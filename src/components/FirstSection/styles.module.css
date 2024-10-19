@@ -12,7 +12,7 @@
 
 .usuLogado {
   display: flex;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .titles {
@@ -26,10 +26,26 @@
   align-items: center;
 }
 
-.futureApi, h2{
-    font-size: 15px;
+.futureApi,
+h2 {
+  font-size: 15px;
 }
 
 .imgUsuarioLogado {
-    width: 2.5rem;
+  width: 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0rem 0rem 0rem;
+    margin-left: 0rem;
+    margin-bottom: 120px;
+  }
+
+  .usuLogado {
+    display: none;
+  }
 }

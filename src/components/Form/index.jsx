@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import styles from "./styles.module.css";
 
-export default function AdicionarGasto({ onEdit, getGastos, setOnEdit }) {
+export default function AdicionarGasto({ onEdit, getGastos, setOnEdit, setGastos }) {
   const ref = useRef();
 
   useEffect(() => {
@@ -30,39 +30,46 @@ export default function AdicionarGasto({ onEdit, getGastos, setOnEdit }) {
       return toast.warn("Preencha todos os campos!");
     }
 
-    if (onEdit) {
-      await axios
-        .put("http://localhost:8800/" + onEdit.id, {
-          descricao: gasto.descricao.value,
-          categoria: gasto.categoria.value,
-          valor: gasto.valor.value,
-        })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
-    } else {
-      await axios
-        .post("http://localhost:8800", {
-          descricao: gasto.descricao.value,
-          categoria: gasto.categoria.value,
-          valor: gasto.valor.value,
-        })
-        .then(({ data }) => toast.success(data))
-        .catch(({ data }) => toast.error(data));
+    const valor = parseFloat(gasto.valor.value);
+    if (isNaN(valor)) {
+      return toast.warn("O valor deve ser um número válido!");
     }
 
-    gasto.descricao.value = "";
-    gasto.categoria.value = "";
-    gasto.valor.value = "";
+    try {
+      if (onEdit) {
+        const { data } = await axios.put(`http://localhost:8800/gastos/${onEdit.id}`, {
+          descricao: gasto.descricao.value,
+          categoria: gasto.categoria.value,
+          valor: valor,
+        });
+        toast.success(data.message); // Supondo que o backend retorne uma mensagem
+      } else {
+        const { data } = await axios.post("http://localhost:8800/gastos", {
+          descricao: gasto.descricao.value,
+          categoria: gasto.categoria.value,
+          valor: valor,
+        });
+        toast.success(data.message); // Supondo que o backend retorne uma mensagem
+      }
 
-    setOnEdit(null);
-    getGastos();
+      // Limpa os campos após a adição/edição
+      gasto.descricao.value = "";
+      gasto.categoria.value = "";
+      gasto.valor.value = "";
+
+      setOnEdit(null);
+      getGastos();
+    } catch (error) {
+      const message = error.response ? error.response.data.message : "Erro inesperado ao salvar!";
+      toast.error(message); // Mostra a mensagem de erro
+    }
   };
 
   return (
     <form className={styles.contant} ref={ref} onSubmit={handleSubmit}>
       <div className={styles.container}>
         <div>
-          <label>Descrição</label>
+          <label className={styles.labelStyle}>Descrição</label>
           <input
             className={styles.input}
             name="descricao"
@@ -71,16 +78,16 @@ export default function AdicionarGasto({ onEdit, getGastos, setOnEdit }) {
           />
         </div>
         <div>
-          <label>Categoria</label>
+          <label className={styles.labelStyle}>Categoria</label>
           <input className={styles.input} name="categoria" type="text" />
         </div>
         <div>
-          <label>Valor</label>
+          <label className={styles.labelStyle}>Valor</label>
           <input className={styles.input} name="valor" id="valor" type="text" />
         </div>
 
         <button className={styles.button} type="submit">
-          Salvar
+          Adicionar
         </button>
       </div>
     </form>

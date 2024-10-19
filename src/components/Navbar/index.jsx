@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav className={styles.container}>
       <ul className={styles.icons}>
         <li>
-          <a href="">
+          <a href="/">
             <img
               className={styles.icone}
               src={imgIconeCasa}
@@ -18,7 +18,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="/">
             <img
               className={styles.icone}
               src={imgIconeCarteira}
@@ -27,7 +27,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="/">
             <img
               className={styles.icone}
               src={imgIconeEngrenagem}
@@ -36,7 +36,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="/">
             <img
               className={styles.icone}
               src={imgIconeUsuario}

@@ -1,19 +1,17 @@
 .contant {
   display: flex;
   justify-content: center;
+  margin-left: 160px;
 }
 
 .container {
-  margin-left: 160px;
   width: 60rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   background-color: rgba(97, 119, 113, 0.3);
   border-radius: 45px;
   padding: 60px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-direction: row; /* Alinhamento vertical se necessário */
   align-items: center; /* Centralizar horizontalmente */
   height: 10rem;
 }
@@ -26,4 +24,26 @@
 .imgPorcoDinheiro img {
   width: 350px; /* Ajuste a largura conforme necessário */
   margin-top: -122px; /* Espaçamento acima da imagem */
+}
+
+@media (max-width: 600px) {
+  .contant {
+    margin: 0;
+  }
+
+  .labelCategoria {
+    padding: 1rem;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0px;
+    width: 23rem;
+    padding: 35px;
+  }
+
+  .imgPorcoDinheiro img {
+    width: 250px;
+    margin-top: -40px;
+  }
 }
