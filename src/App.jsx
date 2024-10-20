@@ -7,8 +7,6 @@ import {
 import { ToastContainer } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 import Home from "./pages/Home/index";
 import Login from "./pages/Login/index";
@@ -21,18 +19,25 @@ function App() {
   // Função para buscar gastos
   const getGastos = async () => {
     try {
-      const res = await axios.get("http://localhost:8800/gastos");
-      console.log(res.data);
-      setGastos(res.data);
+      const response = await fetch('/gastos', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      if (!response.ok) throw new Error('Erro ao buscar gastos');
+      const data = await response.json();
+      setGastos(data); // Atualiza o estado com os dados recebidos
     } catch (error) {
-      console.error("Erro ao buscar gastos", error);
-      toast.error("Erro ao buscar gastos.");
+      console.error(error);
     }
   };
 
   // useEffect para buscar gastos uma vez quando o componente é montado
   useEffect(() => {
-    getGastos();
+    if (localStorage.getItem("token")) {
+      getGastos();
+    }
   }, []); 
 
   return (
@@ -49,13 +54,17 @@ function App() {
           <Route
             path="/home"
             element={
-              <Home
-                onEdit={onEdit}
-                setOnEdit={setOnEdit}
-                getGastos={getGastos}
-                gastos={gastos}
-                setGastos={setGastos}
-              />
+              localStorage.getItem("token") ? (
+                <Home
+                  onEdit={onEdit}
+                  setOnEdit={setOnEdit}
+                  getGastos={getGastos}
+                  gastos={gastos}
+                  setGastos={setGastos}
+                />
+              ) : (
+                <Navigate to="/login" /> // Redireciona para a tela de login se não houver token
+              )
             }
           />
         </Routes>

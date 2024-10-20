@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import styles from "./styles.module.css";
 
-export default function AdicionarGasto({ onEdit, getGastos, setOnEdit, setGastos }) {
+export default function AdicionarGasto({ onEdit, getGastos, setOnEdit }) {
   const ref = useRef();
 
   useEffect(() => {
@@ -19,49 +19,56 @@ export default function AdicionarGasto({ onEdit, getGastos, setOnEdit, setGastos
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const gasto = ref.current;
-
-    if (
-      !gasto.descricao.value ||
-      !gasto.categoria.value ||
-      !gasto.valor.value
-    ) {
+  
+    if (!gasto.descricao.value || !gasto.categoria.value || !gasto.valor.value) {
       return toast.warn("Preencha todos os campos!");
     }
-
+  
     const valor = parseFloat(gasto.valor.value);
     if (isNaN(valor)) {
       return toast.warn("O valor deve ser um número válido!");
     }
-
+  
+    const token = localStorage.getItem("token"); // Obtenha o token
+  
     try {
       if (onEdit) {
         const { data } = await axios.put(`http://localhost:8800/gastos/${onEdit.id}`, {
           descricao: gasto.descricao.value,
           categoria: gasto.categoria.value,
           valor: valor,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}` // Adicione o token aqui
+          }
         });
-        toast.success(data.message); // Supondo que o backend retorne uma mensagem
+        toast.success(data.message);
       } else {
         const { data } = await axios.post("http://localhost:8800/gastos", {
           descricao: gasto.descricao.value,
           categoria: gasto.categoria.value,
           valor: valor,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}` // Adicione o token aqui
+          }
         });
-        toast.success(data.message); // Supondo que o backend retorne uma mensagem
+        toast.success(data.message);
       }
-
+  
       // Limpa os campos após a adição/edição
       gasto.descricao.value = "";
       gasto.categoria.value = "";
       gasto.valor.value = "";
-
+  
       setOnEdit(null);
       getGastos();
     } catch (error) {
+      console.error("Erro ao enviar dados:", error.response);
       const message = error.response ? error.response.data.message : "Erro inesperado ao salvar!";
-      toast.error(message); // Mostra a mensagem de erro
+      toast.error(message);
     }
   };
 

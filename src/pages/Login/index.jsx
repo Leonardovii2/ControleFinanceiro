@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
-import { toast } from "react-toastify"; // Importa toast
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,37 +9,49 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Corrigido para usar o parâmetro e
 
-    try {
-      const res = await axios.post("http://localhost:8800/usuarios/login", { // URL atualizada
-        email,
-        senha,
-      });
+    const response = await fetch("http://localhost:8800/usuarios/login", { // URL corrigida
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, senha }),
+    });
 
-      if (res.status === 200) {
-        toast.success("Login bem-sucedido!");
-        navigate("/home"); // Redireciona para a página Home
-      }
-    } catch (error) {
-      console.error("Erro ao fazer login", error);
-      toast.error("Erro no login. Verifique suas credenciais.");
+    if (response.ok) {
+      const data = await response.json();
+      // Armazenando o token e o nome do usuário no localStorage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("nomeUsuario", data.nome); // Armazena o nome do usuário
+      // Redirecionar para a página inicial ou outra lógica
+      navigate("/home");
+    } else {
+      // Trate erros, como e-mail ou senha inválidos
+      const error = await response.json();
+      alert(error.message || "Erro ao fazer login");
     }
   };
 
   const handleRegisterClick = () => {
-    navigate("/register"); // Redireciona para a página de registro
+    navigate("/register");
   };
 
   return (
     <main className={styles.main}>
       <section className={styles.sectionInfo}>
-        <h1>Bem vindo!</h1>
+        <h1>Bem-vindo!</h1>
         <p>
           Gerencie suas despesas de forma rápida e simples. Sem enrolação, o
           melhor sistema para organizar suas finanças.
         </p>
-        <button className={styles.buttonCadastro} onClick={handleRegisterClick} type="submit">Cadastrar</button>
+        <button
+          className={styles.buttonCadastro}
+          onClick={handleRegisterClick}
+          type="button"
+        >
+          Cadastrar
+        </button>
       </section>
       <section className={styles.sectionForm}>
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -53,6 +64,7 @@ function Login() {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <label className={styles.padding} htmlFor="senha">
@@ -63,6 +75,7 @@ function Login() {
             id="senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
+            required
           />
 
           <a className={styles.padding} href="#">

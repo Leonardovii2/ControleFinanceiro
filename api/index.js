@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import gastosRouter from "./routes/gastos.js";
 import usuariosRouter from "./routes/usuarios.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
@@ -13,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
 app.use("/gastos", gastosRouter);
 app.use("/usuarios", usuariosRouter);
 

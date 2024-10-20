@@ -7,16 +7,18 @@ const registrarUsuarios = (req, res) => {
   const { nome, email, senha } = req.body;
 
   // Hash da senha
-  bcrypt.hash(req.body.senha, saltRounds, (err, hash) => {
+  bcrypt.hash(senha, saltRounds, (err, hash) => {
     if (err) {
       return res.status(500).json({ error: "Erro ao hash da senha" });
     }
 
-    const q = "INSERT INTO usuarios(`nome`, `email`, `senha`) VALUES(?)";
-    const values = [req.body.nome, req.body.email, hash]; // Use o hash da senha aqui
+    // A consulta precisa usar placeholders (?) para cada valor
+    const q = "INSERT INTO usuarios(`nome`, `email`, `senha`) VALUES(?, ?, ?)";
+    const values = [nome, email, hash]; // Array simples com os valores
 
-    db.query(q, [values], (err) => {
+    db.query(q, values, (err) => { // Passe o array values diretamente
       if (err) {
+        console.error("Erro ao registrar usuário:", err); // Log do erro para debugging
         return res.status(500).json(err); // Retorne um erro mais específico, se possível
       }
 

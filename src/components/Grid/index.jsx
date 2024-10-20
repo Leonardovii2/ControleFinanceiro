@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";  // Para api 
+import axios from "axios"; // Para api
 import styles from "./styles.module.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -15,14 +15,28 @@ export default function Grid({ gastos, setGastos, setOnEdit }) {
   };
 
   const handleDelete = async (id) => {
-    await axios
-      .delete(`http://localhost:8800/gastos/${id}`) // Adicione /gastos
-      .then(({ data }) => {
-        const newArray = gastos.filter((gasto) => gasto.id !== id);
-        setGastos(newArray);
-        toast.success(data.message); // Use data.message para mostrar a mensagem correta
-      })
-      .catch(({ response }) => toast.error(response.data.message)); // Use response para obter a mensagem de erro
+    const token = localStorage.getItem("token"); // Obtém o token do localStorage
+
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:8800/gastos/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Adiciona o token ao cabeçalho
+          },
+        }
+      );
+
+      const newArray = gastos.filter((gasto) => gasto.id !== id);
+      setGastos(newArray);
+      toast.success(data.message); // Usa data.message para mostrar a mensagem correta
+    } catch (error) {
+      const message = error.response
+        ? error.response.data.message
+        : "Erro inesperado ao deletar!";
+      toast.error(message); // Exibe a mensagem de erro
+    }
+
     setOnEdit(null);
   };
   return (
@@ -40,10 +54,10 @@ export default function Grid({ gastos, setGastos, setOnEdit }) {
         </thead>
 
         <tbody>
-          {gastos.map((item, i) => (
-            <tr key={i}>
+          {gastos.map((item) => (
+            <tr key={item.id}>
               <td className={`${styles.firstConfigTd} ${styles.hideOnMobile}`}>
-              {formatDateForDisplay(item.data_gasto.split("T")[0])}
+                {formatDateForDisplay(item.data_gasto.split("T")[0])}
               </td>
               <td className={styles.firstConfigTd}>{item.descricao}</td>
               <td className={`${styles.firstConfigTd} ${styles.hideOnMobile}`}>

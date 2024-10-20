@@ -10,40 +10,50 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Aqui você pode adicionar a lógica de validação e envio dos dados
+  
+    // Validação dos campos
     if (!nome || !email || !senha) {
       alert("Por favor, preencha todos os campos!");
       return;
     }
-
-    fetch("http://localhost:8800/usuarios", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ nome, email, senha }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao cadastrar usuário");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        toast.success("Cadastro realizado com sucesso!"); // Exibe um toast de sucesso
-        // Resetar os campos do formulário
-        setNome("");
-        setEmail("");
-        setSenha("");
-      })
-      .catch((error) => {
-        console.error("Erro:", error);
-        toast.error("Erro ao cadastrar usuário!"); // Exibe um toast de erro
+  
+    try {
+      const response = await fetch("http://localhost:8800/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nome, email, senha }),
       });
+  
+      // Verifica se a resposta é ok
+      if (!response.ok) {
+        // Caso a resposta não seja 2xx, exiba uma mensagem adequada
+        const errorData = await response.json();
+        if (response.status === 409) {
+          // E-mail já existe
+          toast.error("E-mail já está em uso!");
+        } else {
+          toast.error("Erro ao cadastrar usuário!");
+        }
+        return;
+      }
+  
+      const data = await response.json();
+      console.log(data);
+      toast.success("Cadastro realizado com sucesso!"); // Exibe um toast de sucesso
+  
+      // Resetar os campos do formulário
+      setNome("");
+      setEmail("");
+      setSenha("");
+      navigate("/login"); // Redireciona para a página de login
+    } catch (error) {
+      console.error("Erro:", error);
+      toast.error("Erro ao cadastrar usuário!"); // Exibe um toast de erro
+    }
   };
 
   const handleLoginClick = () => {
