@@ -35,7 +35,7 @@ const Greeting = ({ username }) => {
 
   return (
     <div className={styles.greetingContainer}>
-      <h2>{greeting}</h2>
+      <h2 className={styles.titulo}>{greeting}</h2>
     </div>
   );
 };

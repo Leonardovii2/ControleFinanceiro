@@ -3,7 +3,7 @@ import {
   Route,
   Routes,
   Navigate,
-} from "react-router-dom"; 
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +12,11 @@ import Home from "./pages/Home/index";
 import Login from "./pages/Login/index";
 import Register from "./pages/Register/index";
 
+import RequestPassword from "./pages/RequestPassword";
+import ResetPassword from "./pages/ResetPassword";
+
+import Carteira from "./pages/Carteira/index.";
+
 function App() {
   const [gastos, setGastos] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
@@ -19,13 +24,13 @@ function App() {
   // Função para buscar gastos
   const getGastos = async () => {
     try {
-      const response = await fetch('/gastos', {
-        method: 'GET',
+      const response = await fetch("/gastos", {
+        method: "GET",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      if (!response.ok) throw new Error('Erro ao buscar gastos');
+      if (!response.ok) throw new Error("Erro ao buscar gastos");
       const data = await response.json();
       setGastos(data); // Atualiza o estado com os dados recebidos
     } catch (error) {
@@ -38,7 +43,7 @@ function App() {
     if (localStorage.getItem("token")) {
       getGastos();
     }
-  }, []); 
+  }, []);
 
   return (
     <Router>
@@ -47,6 +52,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/requestPassword" element={<RequestPassword />} />{" "}
+          <Route path="/resetPassword" element={<ResetPassword />} />{" "}
+          {/* Rota de Esqueci minha senha */}
           <Route
             path="/"
             element={<Navigate to="/login" />} // Redireciona para a tela de login
@@ -64,6 +72,16 @@ function App() {
                 />
               ) : (
                 <Navigate to="/login" /> // Redireciona para a tela de login se não houver token
+              )
+            }
+          />
+          <Route
+            path="/carteira"
+            element={
+              localStorage.getItem("token") ? (
+                <Carteira />
+              ) : (
+                <Navigate to="/login" />
               )
             }
           />

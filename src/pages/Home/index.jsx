@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import FirstSection from "../../components/FirstSection";
 import AdicionarGasto from "../../components/Form";
 import SecondSection from "../../components/SecondSection";
 import Grid from "../../components/Grid";
 import NavBar from "../../components/Navbar/index";
-import axios from "axios"; 
-import { toast } from "react-toastify"; 
+import axios from "axios";
+import { toast } from "react-toastify";
+import TotalSection from "../../components/TotalsSection";
 
 const Home = () => {
-  const [gastos, setGastos] = useState([]); 
-  const [onEdit, setOnEdit] = useState(null); 
+  const [gastos, setGastos] = useState([]);
+  const [onEdit, setOnEdit] = useState(null);
   const [nomeUsuario, setNomeUsuario] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   // Função para buscar gastos
   const getGastos = async () => {
@@ -20,16 +21,14 @@ const Home = () => {
     try {
       const { data } = await axios.get("http://localhost:8800/gastos", {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       });
-      setGastos(data); 
+      setGastos(data);
     } catch (error) {
       console.error("Erro ao buscar gastos:", error);
     }
   };
-
-
 
   // useEffect para verificar autenticação
   useEffect(() => {
@@ -49,11 +48,12 @@ const Home = () => {
       <NavBar />
       <FirstSection />
       <SecondSection nome={nomeUsuario} />
+      <TotalSection />
       <AdicionarGasto
         onEdit={onEdit}
         setOnEdit={setOnEdit}
-        getGastos={getGastos} 
-        setGastos={setGastos} 
+        getGastos={getGastos}
+        setGastos={setGastos}
       />
       <Grid gastos={gastos} setGastos={setGastos} setOnEdit={setOnEdit} />
     </>

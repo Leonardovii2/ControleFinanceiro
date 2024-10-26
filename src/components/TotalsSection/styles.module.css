@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-left: 160px;
+  padding-top: 3.5rem;
+  gap: 3rem;
+}
+
+.card {
+  background-color: #a5a5a5;
+  width: 11rem;
+  height: 5.2rem;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  gap: 2px;
+}
+
+.h2 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.saldo {
+  font-size: 20px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    gap: 1rem;
+    margin-left: 0px;
+    padding-top: 3rem;
+  }
+
+  .card {
+    background-color: #a5a5a5;
+    width: 8rem;
+    height: 5rem;
+    padding: 18px;
+  }
+
+  .h2 {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .saldo {
+    font-size: 16px;
+  }
+}

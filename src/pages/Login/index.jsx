@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useNavigate, useLocation } from "react-router-dom"; // Importando useLocation para obter o estado
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Exibir notificação de sucesso se passwordReset for true
+    if (location.state?.passwordReset) {
+      toast.success("Senha alterada com sucesso!");
+    }
+  }, [location.state]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Corrigido para usar o parâmetro e
+    e.preventDefault();
 
-    const response = await fetch("http://localhost:8800/usuarios/login", { // URL corrigida
+    const response = await fetch("http://localhost:8800/usuarios/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,20 +30,21 @@ function Login() {
 
     if (response.ok) {
       const data = await response.json();
-      // Armazenando o token e o nome do usuário no localStorage
       localStorage.setItem("token", data.token);
-      localStorage.setItem("nomeUsuario", data.nome); // Armazena o nome do usuário
-      // Redirecionar para a página inicial ou outra lógica
+      localStorage.setItem("nomeUsuario", data.nome);
       navigate("/home");
     } else {
-      // Trate erros, como e-mail ou senha inválidos
       const error = await response.json();
-      alert(error.message || "Erro ao fazer login");
+      toast.error(error.message || "Erro ao fazer login");
     }
   };
 
   const handleRegisterClick = () => {
     navigate("/register");
+  };
+
+  const handleForgotPasswordClick = () => {
+    navigate("/requestPassword");
   };
 
   return (
@@ -78,7 +88,10 @@ function Login() {
             required
           />
 
-          <a className={styles.padding} href="#">
+          <a
+            className={styles.esqueciSenha}
+            onClick={handleForgotPasswordClick}
+          >
             Esqueci minha senha
           </a>
 
@@ -87,6 +100,7 @@ function Login() {
           </button>
         </form>
       </section>
+      <ToastContainer /> {/* Componente para exibir as notificações */}
     </main>
   );
 }

@@ -4,6 +4,7 @@ import {
   addGasto,
   updateGasto,
   deleteGasto,
+  getTotalGastos
 } from "../controllers/gasto.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js"; // Importe o middleware
 
@@ -14,5 +15,7 @@ router.get("/", authenticateToken, getGastos);
 router.post("/", authenticateToken, addGasto);
 router.put("/:id", authenticateToken, updateGasto);
 router.delete("/:id", authenticateToken, deleteGasto);
+
+router.get("/totalGastos", authenticateToken, getTotalGastos);
 
 export default router;

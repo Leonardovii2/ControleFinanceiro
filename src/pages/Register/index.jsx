@@ -63,7 +63,7 @@ function Register() {
   return (
     <main className={styles.main}>
       <section className={styles.sectionInfo}>
-        <h1>Bem vindo!</h1>
+        <h1>Bem-vindo!</h1>
         <p>
           Cadastre-se e tenha controle total sobre suas finanças. Organize seus
           gastos e melhore seu planejamento em minutos.

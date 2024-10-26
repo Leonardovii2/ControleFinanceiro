@@ -3,11 +3,12 @@
   justify-content: center;
   align-items: center;
   width: 160px; /* Largura da navbar */
-  background-color: #3a554e; /* Cor de fundo */
+  background-color: #2E2E2E; /* Cor de fundo */
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .icons {
@@ -21,8 +22,43 @@
   width: 30px;
 }
 
+.button {
+  background: none; /* Remove o fundo */
+  border: none; /* Remove a borda */
+  padding: 0; /* Remove qualquer espaçamento interno */
+  margin: 0; /* Remove margens */
+  cursor: pointer; /* Mostra que é clicável */
+}
+
+.button:focus {
+  outline: none; /* Remove o contorno quando o botão estiver focado */
+}
+
 @media (max-width: 600px) {
   .container {
-    display: none;
+    width: 100%; /* Ocupa toda a largura da tela */
+    height: 70px; /* Define a altura da navbar */
+    position: fixed;
+    bottom: 0; /* Move a navbar para a parte inferior */
+    left: 0;
+    top: auto; /* Remove o topo fixo */
+    display: flex;
+    justify-content: space-around; /* Ícones distribuídos horizontalmente */
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-top-left-radius: 15px; /* Arredonda o canto superior esquerdo */
+    border-top-right-radius: 15px; /* Arredonda o canto superior direito */
+  }
+
+  .icons {
+    flex-direction: row; /* Ícones em linha (horizontal) */
+    gap: 2rem; /* Espaçamento entre os ícones */
+    width: 100%; /* Garantir que os ícones ocupem o espaço da navbar */
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .icone {
+    width: 25px; /* Ajusta o tamanho dos ícones para telas menores */
   }
 }

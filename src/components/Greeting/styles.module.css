@@ -1,0 +1,11 @@
+.titulo {
+  /* Ajuste o tamanho da fonte aqui */
+  font-weight: normal; /* Se quiser que a fonte não seja muito grossa */
+}
+
+@media (max-width: 600px) {
+  .titulo {
+    font-size: 15px !important;
+    font-weight: bold;
+  }
+}

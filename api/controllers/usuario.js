@@ -13,7 +13,7 @@ const registrarUsuarios = (req, res) => {
     }
 
     // A consulta precisa usar placeholders (?) para cada valor
-    const q = "INSERT INTO usuarios(`nome`, `email`, `senha`) VALUES(?, ?, ?)";
+    const q = "INSERT INTO usuarios(nome, email, senha) VALUES($1, $2, $3)";
     const values = [nome, email, hash]; // Array simples com os valores
 
     db.query(q, values, (err) => { // Passe o array values diretamente

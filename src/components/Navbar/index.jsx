@@ -1,48 +1,52 @@
 import styles from "./styles.module.css";
-import imgIconeCasa from "../../assets/iconeCasa.svg";
-import imgIconeCarteira from "../../assets/iconeCarteira.svg";
-import imgIconeEngrenagem from "../../assets/iconeUsuario.svg";
-import imgIconeUsuario from "../../assets/iconeEngrenagem.svg";
+import { FaHome, FaCog, FaWallet, FaUser } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation(); // Obtém a localização atual
+
   return (
     <nav className={styles.container}>
       <ul className={styles.icons}>
         <li>
-          <a href="/">
-            <img
-              className={styles.icone}
-              src={imgIconeCasa}
-              alt="Icone de casa navbar"
+          <button className={styles.button} onClick={() => navigate("/home")}>
+            <FaHome
+              color={location.pathname === "/home" ? "#A2B29B" : "white"}
+              size={30}
             />
-          </a>
+          </button>
         </li>
         <li>
-          <a href="/">
-            <img
-              className={styles.icone}
-              src={imgIconeCarteira}
-              alt="Icone de casa navbar"
+          <button
+            className={styles.button}
+            onClick={() => navigate("/carteira")}
+          >
+            <FaWallet
+              color={location.pathname === "/carteira" ? "#A2B29B" : "white"}
+              size={30}
             />
-          </a>
+          </button>
         </li>
         <li>
-          <a href="/">
-            <img
-              className={styles.icone}
-              src={imgIconeEngrenagem}
-              alt="Icone de casa navbar"
+          <button
+            className={styles.button}
+            onClick={() => navigate("/settings")}
+          >
+            <FaCog
+              color={location.pathname === "/settings" ? "#A2B29B" : "white"}
+              size={30}
             />
-          </a>
+          </button>
         </li>
         <li>
-          <a href="/">
-            <img
-              className={styles.icone}
-              src={imgIconeUsuario}
-              alt="Icone de casa navbar"
+          <button className={styles.button} onClick={() => navigate("/user")}>
+            <FaUser
+              color={location.pathname === "/user" ? "#A2B29B" : "white"}
+              size={30}
             />
-          </a>
+          </button>
         </li>
       </ul>
     </nav>
