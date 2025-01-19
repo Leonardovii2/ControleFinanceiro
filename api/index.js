@@ -24,6 +24,7 @@ app.use("/usuarios", usuariosRouter);
 app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
-app.listen(8801, () => {
-  console.log("Servidor rodando na porta 8801");
+const PORT = process.env.PORT || 8801;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
