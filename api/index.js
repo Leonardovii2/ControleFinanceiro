@@ -12,7 +12,7 @@ const app = express();
 
 // Configuração do CORS
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://thunderous-marshmallow-9f75e7.netlify.app"],
+  origin: ["http://localhost:5173", "https://controle-financeiro-lvii2.netlify.app"],
   credentials: true, // Se você estiver usando cookies
 };
 
