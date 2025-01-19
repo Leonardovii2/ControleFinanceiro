@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://controle-financeiro-woad.vercel.app", // URL do seu backend
+    baseURL: "https://controle-financeiro-five-lac.vercel.app", // URL do seu backend
     timeout: 60000, // Tempo máximo de resposta (60 segundos)
     withCredentials: true, // Para cookies e sessões, se necessário
 });
