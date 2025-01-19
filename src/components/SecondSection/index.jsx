@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import FirstIconeNovo from "../../assets/1iconeNovo.svg";
-import SecondIconeNovo from "../../assets/2iconeNovo.svg";
-import ThirdIconeNovo from "../../assets/3iconeNovo.svg";
+import FirstIconeNovo from "../../assets/1IconeNovo.svg";
+import SecondIconeNovo from "../../assets/2IconeNovo.svg";
+import ThirdIconeNovo from "../../assets/3IconeNovo.svg";
 
 export default function TotalSection({ atualizar }) {
   const [totalGastos, setTotalGastos] = useState(0);
