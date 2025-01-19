@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FirstSection from "../../components/FirstSection";
-import AdicionarGasto from "../../components/Form";
-import SecondSection from "../../components/SecondSection";
-import Grid from "../../components/Grid";
-import NavBar from "../../components/Navbar/index";
-import axios from "axios";
-import { toast } from "react-toastify";
-import TotalSection from "../../components/TotalsSection";
+import NavBar from "../../components/Navbar";
+import api from "../../services/api"; // 🛑 Importa o Axios configurado
+import TotalSection from "../../components/SecondSection";
+import ThirdSection from "../../components/ThirdSection";
+import SecondSection from "../../components/Pig"
 
 const Home = () => {
   const [gastos, setGastos] = useState([]);
+  const [atualizar, setAtualizar] = useState(false);
   const [onEdit, setOnEdit] = useState(null);
-  const [nomeUsuario, setNomeUsuario] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Adicionado estado do modal
   const navigate = useNavigate();
 
-  // Função para buscar gastos
   const getGastos = async () => {
     const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     try {
-      const { data } = await axios.get("http://localhost:8800/gastos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const { data } = await api.get("http://localhost:8801/gastos", {
+        headers: { Authorization: `Bearer ${token}` },
       });
       setGastos(data);
     } catch (error) {
@@ -30,32 +31,27 @@ const Home = () => {
     }
   };
 
-  // useEffect para verificar autenticação
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const nome = localStorage.getItem("nomeUsuario");
-
-    if (!token) {
-      navigate("/login"); // Redireciona para a tela de login se não houver token
-    } else {
-      setNomeUsuario(nome || "Usuário"); // Define o nome do usuário
-      getGastos(); // Se houver token, busca os gastos
-    }
-  }, [navigate]);
+    getGastos();
+  }, []);
 
   return (
     <>
       <NavBar />
       <FirstSection />
-      <SecondSection nome={nomeUsuario} />
-      <TotalSection />
-      <AdicionarGasto
+      <SecondSection/>
+      <TotalSection atualizar={atualizar} gastos={gastos} />
+      <ThirdSection
+        gastos={gastos}
+        setGastos={setGastos}
+        getGastos={getGastos}
         onEdit={onEdit}
         setOnEdit={setOnEdit}
-        getGastos={getGastos}
-        setGastos={setGastos}
+        atualizarTotal={() => setAtualizar((prev) => !prev)}
+        isModalOpen={isModalOpen} // Passando o estado para ThirdSection
+        setIsModalOpen={setIsModalOpen} // Passando a função para ThirdSection
       />
-      <Grid gastos={gastos} setGastos={setGastos} setOnEdit={setOnEdit} />
     </>
   );
 };

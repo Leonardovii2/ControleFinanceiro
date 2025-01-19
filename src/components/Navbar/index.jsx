@@ -2,7 +2,6 @@ import styles from "./styles.module.css";
 import { FaHome, FaCog, FaWallet, FaUser } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 
-
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation(); // Obtém a localização atual
@@ -13,7 +12,7 @@ export default function Navbar() {
         <li>
           <button className={styles.button} onClick={() => navigate("/home")}>
             <FaHome
-              color={location.pathname === "/home" ? "#A2B29B" : "white"}
+              color={location.pathname === "/home" ? "#e0af0e" : "white"}
               size={30}
             />
           </button>
@@ -24,7 +23,7 @@ export default function Navbar() {
             onClick={() => navigate("/carteira")}
           >
             <FaWallet
-              color={location.pathname === "/carteira" ? "#A2B29B" : "white"}
+              color={location.pathname === "/carteira" ? "#e0af0e" : "white"}
               size={30}
             />
           </button>
@@ -32,18 +31,19 @@ export default function Navbar() {
         <li>
           <button
             className={styles.button}
-            onClick={() => navigate("/settings")}
+            onClick={() => navigate("/configuracao")}
           >
             <FaCog
-              color={location.pathname === "/settings" ? "#A2B29B" : "white"}
+              color={location.pathname === "/configuracao" ? "#e0af0e" : "white"}
               size={30}
             />
           </button>
         </li>
+
         <li>
-          <button className={styles.button} onClick={() => navigate("/user")}>
+          <button className={styles.button} onClick={() => navigate("/perfil")}>
             <FaUser
-              color={location.pathname === "/user" ? "#A2B29B" : "white"}
+              color={location.pathname === "/perfil" ? "#e0af0e" : "white"}
               size={30}
             />
           </button>

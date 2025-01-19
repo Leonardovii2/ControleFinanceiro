@@ -18,7 +18,7 @@ export default function ForgotPassword() {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:8800/requestPassword/request",
+          "http://localhost:8801/requestPassword/request",
           {
             method: "POST",
             headers: {

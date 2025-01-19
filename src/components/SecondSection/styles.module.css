@@ -1,58 +1,86 @@
-.contant {
-  display: flex;
-  justify-content: center;
-  margin-left: 160px;
+:root {
+  --card-bg-color: rgba(97, 119, 113, 0.2);
+  --card-first-bg-gradient: linear-gradient(135deg, #e0af0e, #9e7e14);
+  --card-bg-color-mobile: #a5a5a5;
+  --gap-desktop: 2rem;
+  --gap-mobile: 1rem;
+}
+
+.card:first-child {
+  background: var(--card-first-bg-gradient);
 }
 
 .container {
-  width: 60rem;
   display: flex;
-  justify-content: space-between;
-  background-color: #A2B29B;
-  border-radius: 45px;
-  padding: 60px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  align-items: center; /* Centralizar horizontalmente */
+  justify-content: center;
+  margin-inline-start: 160px;
+  gap: var(--gap-desktop);
+  padding-top: 2rem;
+}
+
+/* Para o layout padrão em telas grandes */
+.cardWrapper {
+  display: flex;
+  gap: var(--gap-desktop);
+}
+
+.icone {
+  width: 3rem;
+}
+
+.card {
+  background-color: var(--card-bg-color);
+  width: 20rem;
+  max-width: 15rem;
   height: 10rem;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  gap: 0.5rem;
 }
 
-.container h2 {
-  color: #2E2E2E;
-  font-weight: bold;
-  font-size: 1.2rem;
+.h2 {
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-.imgPorcoDinheiro img {
-  width: 350px; /* Ajuste a largura conforme necessário */
-  margin-top: -122px; /* Espaçamento acima da imagem */
+.saldo {
+  font-size: 1.25rem;
 }
 
 @media (max-width: 600px) {
-  .contant {
-    margin: 0;
+  .container {
+    margin-inline-start: 0px;
+    margin: 0 1rem;
   }
 
-  .labelCategoria {
-    padding: 1rem;
-  }
-  .container {
+  .cardWrapper {
     display: flex;
-    flex-direction: row;
-    margin-left: 0px;
-    width: 23rem;
-    padding: 35px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
   }
 
-  .imgPorcoDinheiro img {
-    height: auto; /* Permite que a altura se ajuste automaticamente */
-    max-width: 100%; /* Limita o tamanho máximo */
-    margin-top: -28px;
+  .card {
+    flex: 0 0 40%;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease-in-out;
+    height: 7rem;
   }
 
-  .container {
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    align-items: center; /* Centralizar horizontalmente */
-    height: 10rem;
+  .cardWrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .h2 {
+    font-size: 0.8rem;
+  }
+
+  .icone {
+    width: 2.5rem;
   }
 }

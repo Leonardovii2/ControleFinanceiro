@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import imgUsuarioLogado from "../../assets/Perfil.svg";
 import DateDisplay from "../DateDisplay";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function FirstSection() {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [nomeUsuario, setNomeUsuario] = useState("");
   const navigate = useNavigate(); // Para redirecionar no logout
 
   const toggleDropdown = () => {
@@ -14,11 +15,14 @@ export default function FirstSection() {
 
   const handleLogout = () => {
     // Remover token do localStorage ou sessionStorage
-    localStorage.removeItem("authToken"); // ou sessionStorage.removeItem('authToken');
-
-    // Redirecionar para a página de login
-    navigate("/login"); // Usando useNavigate para redirecionamento
+    localStorage.removeItem("authToken");
+    navigate("/login");
   };
+
+  useEffect(() => {
+    const nome = localStorage.getItem("nomeUsuario");
+    setNomeUsuario(nome || "Bem-vindo!");
+  }, []);
 
   return (
     <header className={styles.container}>
@@ -36,7 +40,7 @@ export default function FirstSection() {
         {isDropdownVisible && (
           <div className={styles.dropdownMenu}>
             <div className={styles.userInfo}>
-              <p>Leonardo Viana</p>
+              <p>{nomeUsuario}</p>
             </div>
             <hr />
             <button onClick={handleLogout} className={styles.dropdownItem}>

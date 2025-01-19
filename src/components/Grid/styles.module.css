@@ -1,17 +1,26 @@
 .container {
   display: flex;
   justify-content: center;
-  margin-left: 160px;
+  padding: 2rem 0;
+}
+
+.scrollContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Melhorar a rolagem em dispositivos móveis */
+  
 }
 
 .table {
-  background-color: #fff;
+  color: rgb(0, 0, 0);
+  background-color: rgba(97, 119, 113, 0.2);
   padding: 20px;
-  box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
-  width: 60rem;
+  width: 52rem;
   word-break: break-all;
   margin-bottom: 3rem;
+  min-width: 600px;
+  /* Defina uma largura mínima para garantir que a rolagem ocorra */
 }
 
 .td {
@@ -35,8 +44,7 @@
   padding-bottom: 5px;
 }
 
-
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .onlyWeb {
     display: none;
   }
@@ -50,6 +58,21 @@
   }
 
   .table {
-    margin-bottom: 6rem;
+    margin-bottom: 5rem;
+    width: 100%;
+    /* A largura da tabela será 100% da tela em dispositivos móveis */
+  }
+
+  .scrollContainer {
+    margin: 0;
+    /* Remove margens para melhor adaptação em telas pequenas */
+  }
+
+  .firstConfigTd {
+    width: 5%;
+  }
+  
+  .secondConfigTd {
+    width: 0%;
   }
 }

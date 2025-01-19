@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-inline-start: 160px;
+}
+
+.contant {
+    display: flex;
+    align-items: center;
+    background-color: rgba(97, 119, 113, 0.2);
+    width: 70rem;
+    height: 12rem;
+    border-radius: 3rem;
+}
+
+.contant h2 {
+    font-size: 1.2rem;
+    padding-left: 5rem;
+}
+
+.img {
+    width: 380px;
+    position: absolute;
+    top: 25px;
+    left: 71rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        display: flex;
+        justify-content: center;
+        margin: 0 1rem;
+    }
+
+    .contant {
+        height: 7rem;
+        border-radius: 2.5rem;
+    }
+
+    .contant h2 {
+        display: none;
+    }
+
+    .img {
+        width: 200px;
+        position: absolute;
+        top: 63px;
+        left: 6rem;
+    }
+}

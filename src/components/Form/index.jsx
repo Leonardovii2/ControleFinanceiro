@@ -1,102 +1,137 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-
 import styles from "./styles.module.css";
 
-export default function AdicionarGasto({ onEdit, getGastos, setOnEdit }) {
-  const ref = useRef();
+export default function AdicionarGasto({
+  onEdit,
+  getGastos,
+  setOnEdit,
+  atualizarTotal,
+  isModalOpen,
+  setIsModalOpen,
+}) {
+  const [descricao, setDescricao] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [valor, setValor] = useState("");
 
+  const categorias = [
+    "Mercado",
+    "Saúde",
+    "Lazer",
+    "Educação",
+    "Transporte",
+    "Moradia",
+    "Roupas",
+  ];
+
+  // Preenche os campos do formulário se for edição
   useEffect(() => {
     if (onEdit) {
-      const gasto = ref.current;
-
-      gasto.descricao.value = onEdit.descricao;
-      gasto.categoria.value = onEdit.categoria;
-      gasto.valor.value = onEdit.valor;
+      setDescricao(onEdit.descricao); // Preenche o campo descrição
+      setCategoria(onEdit.categoria); // Preenche o campo categoria
+      setValor(onEdit.valor); // Preenche o campo valor
+    } else {
+      setDescricao(""); // Limpa os campos para adição
+      setCategoria(""); // Limpa os campos para adição
+      setValor(""); // Limpa os campos para adição
     }
-  }, [onEdit]);
+  }, [onEdit]); // Recarrega os dados sempre que onEdit mudar
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const gasto = ref.current;
-  
-    if (!gasto.descricao.value || !gasto.categoria.value || !gasto.valor.value) {
+
+    if (!descricao || !categoria || !valor) {
       return toast.warn("Preencha todos os campos!");
     }
-  
-    const valor = parseFloat(gasto.valor.value);
-    if (isNaN(valor)) {
-      return toast.warn("O valor deve ser um número válido!");
+
+    const parsedValor = parseFloat(valor);
+    if (isNaN(parsedValor) || parsedValor <= 0) {
+      return toast.warn("O valor deve ser um número maior que zero!");
     }
-  
-    const token = localStorage.getItem("token"); // Obtenha o token
-  
+
+    const token = localStorage.getItem("token");
+    const payload = { descricao, categoria, valor: parsedValor };
+
     try {
-      if (onEdit) {
-        const { data } = await axios.put(`http://localhost:8800/gastos/${onEdit.id}`, {
-          descricao: gasto.descricao.value,
-          categoria: gasto.categoria.value,
-          valor: valor,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}` // Adicione o token aqui
-          }
-        });
-        toast.success(data.message);
-      } else {
-        const { data } = await axios.post("http://localhost:8800/gastos", {
-          descricao: gasto.descricao.value,
-          categoria: gasto.categoria.value,
-          valor: valor,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}` // Adicione o token aqui
-          }
-        });
-        toast.success(data.message);
-      }
-  
-      // Limpa os campos após a adição/edição
-      gasto.descricao.value = "";
-      gasto.categoria.value = "";
-      gasto.valor.value = "";
-  
-      setOnEdit(null);
-      getGastos();
+      const endpoint = onEdit
+        ? `http://localhost:8801/gastos/${onEdit.id}` // Se estamos editando, usamos o ID do gasto
+        : "http://localhost:8801/gastos"; // Caso contrário, criamos um novo gasto
+
+      const method = onEdit ? "put" : "post"; // Se estamos editando, usamos PUT, caso contrário, POST
+      const { data } = await axios[method](endpoint, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      toast.success(data.message);
+      setOnEdit(null); // Limpa os dados de edição
+      getGastos(); // Atualiza a lista de gastos
+      atualizarTotal(); // Atualiza o total
+      setIsModalOpen(false); // Fecha o modal
     } catch (error) {
-      console.error("Erro ao enviar dados:", error.response);
-      const message = error.response ? error.response.data.message : "Erro inesperado ao salvar!";
-      toast.error(message);
+      console.error("Erro ao salvar gasto:", error);
+      toast.error(error.response?.data?.message || "Erro inesperado!");
     }
   };
 
   return (
-    <form className={styles.contant} ref={ref} onSubmit={handleSubmit}>
-      <div className={styles.container}>
-        <div>
-          <label className={styles.labelStyle}>Descrição</label>
-          <input
-            className={styles.input}
-            name="descricao"
-            id="descricao"
-            type="text"
-          />
+    <>
+      {isModalOpen && (
+        <div
+          className={styles.modalContainer}
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <button
+              className={styles.closeModalButton}
+              onClick={() => setIsModalOpen(false)}
+            >
+              X
+            </button>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.titulo}>
+                <h1>Adicionar gasto</h1>
+              </div>
+              <div className={styles.container}>
+                <label className={styles.labelStyle}>Descrição</label>
+                <input
+                  name="descricao"
+                  className={styles.input}
+                  type="text"
+                  placeholder="Descrição do gasto"
+                  value={descricao}
+                  onChange={(e) => setDescricao(e.target.value)}
+                />
+                <label className={styles.labelStyle}>Categoria</label>
+                <select
+                  value={categoria}
+                  className={styles.input}
+                  onChange={(e) => setCategoria(e.target.value)}
+                >
+                  <option value="">Selecione uma categoria</option>
+                  {categorias.map((cat, i) => (
+                    <option key={i} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+                <label className={styles.labelStyle}>Valor</label>
+                <input
+                  name="valor"
+                  type="text"
+                  className={styles.input}
+                  placeholder="Valor do gasto"
+                  value={valor}
+                  onChange={(e) => setValor(e.target.value)}
+                />
+                <button className={styles.button} type="submit">
+                  {onEdit ? "Atualizar" : "Adicionar"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <label className={styles.labelStyle}>Categoria</label>
-          <input className={styles.input} name="categoria" type="text" />
-        </div>
-        <div>
-          <label className={styles.labelStyle}>Valor</label>
-          <input className={styles.input} name="valor" id="valor" type="text" />
-        </div>
-
-        <button className={styles.button} type="submit">
-          Adicionar
-        </button>
-      </div>
-    </form>
+      )}
+    </>
   );
 }

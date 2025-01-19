@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import { useNavigate, useLocation } from "react-router-dom"; // Importando useLocation para obter o estado
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,7 +11,6 @@ function Login() {
   const location = useLocation();
 
   useEffect(() => {
-    // Exibir notificação de sucesso se passwordReset for true
     if (location.state?.passwordReset) {
       toast.success("Senha alterada com sucesso!");
     }
@@ -20,7 +19,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8800/usuarios/login", {
+    const response = await fetch("http://localhost:8801/usuarios/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,6 +69,7 @@ function Login() {
             E-mail
           </label>
           <input
+            className={styles.input}
             type="email"
             id="email"
             value={email}
@@ -81,6 +81,7 @@ function Login() {
             Senha
           </label>
           <input
+            className={styles.input}
             type="password"
             id="senha"
             value={senha}
@@ -100,7 +101,7 @@ function Login() {
           </button>
         </form>
       </section>
-      <ToastContainer /> {/* Componente para exibir as notificações */}
+      <ToastContainer />
     </main>
   );
 }

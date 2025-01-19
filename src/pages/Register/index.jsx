@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [nome, setNome] = useState("");
@@ -12,52 +13,48 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    // Validação dos campos
+
     if (!nome || !email || !senha) {
-      alert("Por favor, preencha todos os campos!");
+      toast.error("Por favor, preencha todos os campos!");
       return;
     }
-  
+
     try {
-      const response = await fetch("http://localhost:8800/usuarios", {
+      const response = await fetch("http://localhost:8801/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ nome, email, senha }),
       });
-  
-      // Verifica se a resposta é ok
+
       if (!response.ok) {
-        // Caso a resposta não seja 2xx, exiba uma mensagem adequada
         const errorData = await response.json();
         if (response.status === 409) {
-          // E-mail já existe
           toast.error("E-mail já está em uso!");
         } else {
           toast.error("Erro ao cadastrar usuário!");
         }
         return;
       }
-  
+
       const data = await response.json();
       console.log(data);
-      toast.success("Cadastro realizado com sucesso!"); // Exibe um toast de sucesso
-  
+      toast.success("Cadastro realizado com sucesso!");
+
       // Resetar os campos do formulário
       setNome("");
       setEmail("");
       setSenha("");
-      navigate("/login"); // Redireciona para a página de login
+      navigate("/login");
     } catch (error) {
       console.error("Erro:", error);
-      toast.error("Erro ao cadastrar usuário!"); // Exibe um toast de erro
+      toast.error("Erro ao cadastrar usuário!");
     }
   };
 
   const handleLoginClick = () => {
-    navigate("/login"); // Redireciona para a página de registro
+    navigate("/login");
   };
 
   return (
@@ -79,6 +76,7 @@ function Register() {
             Nome
           </label>
           <input
+            className={styles.input}
             type="text"
             id="nome"
             value={nome}
@@ -89,6 +87,7 @@ function Register() {
             E-mail
           </label>
           <input
+            className={styles.input}
             type="email"
             id="email"
             value={email}
@@ -99,6 +98,7 @@ function Register() {
             Senha
           </label>
           <input
+            className={styles.input}
             type="password"
             id="senha"
             value={senha}

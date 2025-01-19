@@ -24,6 +24,6 @@ app.use("/usuarios", usuariosRouter);
 app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
-app.listen(8800, () => {
-  console.log("Servidor rodando na porta 8800");
+app.listen(8801, () => {
+  console.log("Servidor rodando na porta 8801");
 });

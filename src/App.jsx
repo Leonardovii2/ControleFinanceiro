@@ -16,6 +16,8 @@ import RequestPassword from "./pages/RequestPassword";
 import ResetPassword from "./pages/ResetPassword";
 
 import Carteira from "./pages/Carteira/index.";
+import Configuracao from "./pages/Configuracao/index";
+import Perfil from "./pages/Perfil/index";
 
 function App() {
   const [gastos, setGastos] = useState([]);
@@ -80,6 +82,26 @@ function App() {
             element={
               localStorage.getItem("token") ? (
                 <Carteira />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/configuracao"
+            element={
+              localStorage.getItem("token") ? (
+                <Configuracao />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/perfil"
+            element={
+              localStorage.getItem("token") ? (
+                <Perfil />
               ) : (
                 <Navigate to="/login" />
               )

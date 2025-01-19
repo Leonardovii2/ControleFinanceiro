@@ -7,7 +7,7 @@
 }
 
 .container h1 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .usuLogado {
@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  color: rgb(0, 0, 0);
 }
 
 .usuLogado {
@@ -76,14 +77,14 @@ hr {
 @media (max-width: 600px) {
   .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem 0rem 0rem 0rem;
+    padding: 1rem;
     margin-left: 0rem;
     margin-bottom: 60px;
   }
 
-  .usuLogado {
-    display: none;
+  .dropdownMenu {
+    width: 200px;
   }
 }
