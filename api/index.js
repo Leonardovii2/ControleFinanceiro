@@ -12,7 +12,7 @@ const app = express();
 
 // Configuração do CORS
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://controle-financeiro-hazel-kappa.vercel.app/"],
+  origin: ["http://localhost:5173", "https://controle-financeiro-hazel-kappa.vercel.app"],
   credentials: true, // Se você estiver usando cookies
 };
 

@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("https://controle-financeiro-hazel-kappa.vercel.app/login", {
+    const response = await fetch("https://controle-financeiro-hazel-kappa.vercel.app/usuarios/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
