@@ -5,7 +5,7 @@ import loginUsuario from "../controllers/login.js"
 const router = express.Router();
 
 // Rota para registrar usuário
-router.post("/", registrarUsuarios);
+router.post("/register", registrarUsuarios);
 
 router.post("/login", loginUsuario);
 
