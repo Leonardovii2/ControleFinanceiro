@@ -20,7 +20,7 @@ function Register() {
     }
 
     try {
-      const response = await fetch("http://localhost:8801/usuarios/register", {
+      const response = await fetch("https://controlefinanceiro-dktx.onrender.com/usuarios/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
