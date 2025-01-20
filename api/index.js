@@ -19,9 +19,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use("/api/gastos", gastosRouter);
-app.use("/api/usuarios", usuariosRouter);
-app.use("/api/requestPassword", requestPasswordRouter);
-app.use("/api/resetPassword", resetPasswordRouter);
+app.use("/gastos", gastosRouter);
+app.use("/usuarios", usuariosRouter);
+app.use("/requestPassword", requestPasswordRouter);
+app.use("/resetPassword", resetPasswordRouter);
 
 export default app;
