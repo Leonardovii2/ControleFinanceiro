@@ -20,7 +20,7 @@ function Register() {
     }
 
     try {
-      const response = await fetch("https://controle-financeiro-hazel-kappa.vercel.app/register", {
+      const response = await fetch("https://controle-financeiro-hazel-kappa.vercel.app/usuarios/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
