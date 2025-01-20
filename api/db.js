@@ -1,6 +1,4 @@
-const pg = require("pg");
-
-const { Pool } = pg;
+import { Pool } from "pg";
 
 /* export const db = new Pool({
   host: "localhost",
@@ -28,4 +26,4 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-module.exports = { db };
+export { db };
