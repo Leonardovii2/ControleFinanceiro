@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "vercel dev",
-    "start": "nodemon index.js"
+    "build": "echo 'Nothing to build'",
+    "start": "node api/index.js"
   },
   "keywords": [],
   "author": "",
