@@ -11,6 +11,18 @@ export const db = new Pool({
   ssl: { rejectUnauthorized: false }, // Necessário para conexão com Neon
 });
 
+async function testQuery() {
+  try {
+    const res = await db.query('SELECT NOW()');
+    console.log('Resultado da query:', res.rows);
+  } catch (err) {
+    console.error('Erro ao executar a query:', err);
+  }
+}
+
+testQuery();
+
+
 async function connectToDatabase() {
   try {
     await db.connect();
