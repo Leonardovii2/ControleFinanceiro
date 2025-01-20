@@ -12,7 +12,7 @@ const app = express();
 
 // Configuração do CORS para aceitar requisições apenas do localhost
 const corsOptions = {
-  origin: "http://localhost:5173",  // URL do frontend local (Vite)
+  origin: "https://controlefinanceiro-dktx.onrender.com",  // URL do frontend local (Vite)
   credentials: true,  // Se você estiver usando cookies
 };
 
