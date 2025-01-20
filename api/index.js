@@ -10,18 +10,25 @@ dotenv.config();
 
 const app = express();
 
-// Configuração do CORS
+// Configuração do CORS para aceitar requisições apenas do localhost
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://controle-financeiro-hazel-kappa.vercel.app"],
-  credentials: true, // Se você estiver usando cookies
+  origin: "http://localhost:5173",  // URL do frontend local (Vite)
+  credentials: true,  // Se você estiver usando cookies
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Definindo as rotas
 app.use("/gastos", gastosRouter);
 app.use("/usuarios", usuariosRouter);
 app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
+
+// Definindo a porta do servidor
+const PORT = process.env.PORT || 8801;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
 
 export default app;
