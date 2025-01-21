@@ -1,20 +1,20 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
-/* export const db = new Pool({
+export const db = new Pool({
   host: "localhost",
   port: 5432,
   user: "postgres",
   password: "bancoleo12",
   database: "crud",
-}); */
+});
 
-const db = new Pool({
+/* const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
-});
+}); */
 
 async function connectToDatabase() {
   try {
@@ -27,4 +27,4 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-export { db };
+/*export { db };*/

@@ -98,15 +98,45 @@
   .main {
     flex-direction: column;
     height: auto;
+    padding: 20px; /* Adicionando padding para evitar que fique colado na borda */
   }
 
   .sectionInfo {
-    padding: 4rem 6rem;
-    display: flex;
-    width: 80vh;
+    padding: 2rem 3rem; /* Reduzindo o padding */
+    width: 100%; /* Garantindo que ocupe toda a largura da tela */
+  }
+
+  .sectionInfo h1 {
+    font-size: 28px; /* Reduzindo o tamanho da fonte para telas menores */
+  }
+
+  .sectionInfo p {
+    font-size: 14px; /* Ajustando o tamanho da fonte do parágrafo */
+  }
+
+  .buttonCadastro, .buttonLogin {
+    width: 100%; /* Tornando os botões de largura total */
+    height: 3rem; /* Ajustando altura para se adaptar melhor */
+  }
+
+  .form input {
+    width: 100%; /* Tornando os inputs de largura total */
+  }
+
+  .titulo {
+    font-size: 20px; /* Reduzindo o tamanho da fonte do título */
   }
 
   .sectionForm {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem; /* Ajustando a margem para melhorar o espaçamento */
+  }
+
+  .sectionForm a {
+    font-size: 14px; /* Ajustando o tamanho da fonte do link */
+  }
+
+  .esqueciSenha {
+    font-size: 14px; /* Ajustando o tamanho da fonte do texto */
   }
 }
+

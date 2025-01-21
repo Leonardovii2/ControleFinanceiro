@@ -40,6 +40,7 @@
 .titulo {
   font-size: 25px;
 }
+
 .sectionForm {
   display: flex;
   justify-content: center;
@@ -92,15 +93,67 @@
   .main {
     flex-direction: column;
     height: auto;
+    padding: 20px;
+    /* Adicionando padding para evitar que fique colado na borda */
   }
 
   .sectionInfo {
-    padding: 4rem 6rem;
-    display: flex;
-    width: 80vh;
+    padding: 2rem 3rem;
+    /* Reduzindo o padding para se ajustar melhor à tela */
+    width: 100%;
+    /* Garantindo que ocupe toda a largura da tela */
+  }
+
+  .sectionInfo h1 {
+    font-size: 28px;
+    /* Reduzindo o tamanho da fonte do título */
+  }
+
+  .sectionInfo p {
+    font-size: 14px;
+    /* Ajustando o tamanho da fonte do parágrafo */
+  }
+
+  .buttonCadastro,
+  .buttonLogin {
+    width: 100%;
+    /* Tornando os botões de largura total */
+    height: 3rem;
+    /* Ajustando a altura para se adaptar melhor */
+  }
+
+
+  .form input {
+    width: 100%;
+    /* Tornando os inputs de largura total */
+  }
+
+  .titulo {
+    font-size: 20px;
+    /* Ajustando o tamanho da fonte do título */
   }
 
   .sectionForm {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    /* Ajustando a margem para melhorar o espaçamento */
+  }
+
+  .sectionForm a {
+    font-size: 14px;
+    /* Ajustando o tamanho da fonte do link */
+  }
+
+  .padding {
+    padding-top: 1rem;
+  }
+
+  .buttonCadastro {
+    width: 100%;
+    /* Tornando o botão de cadastro de largura total */
+  }
+
+  .buttonLogin {
+    width: 100%;
+    /* Tornando o botão de login de largura total */
   }
 }

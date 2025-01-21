@@ -1,6 +1,9 @@
 import express from "express";
-import registrarUsuarios from "../controllers/usuario.js";
-import loginUsuario from "../controllers/login.js"
+import registrarUsuarios, {
+  atualizarNomeUsuario,
+} from "../controllers/usuario.js";
+import loginUsuario from "../controllers/login.js";
+import { authenticateToken } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -8,5 +11,7 @@ const router = express.Router();
 router.post("/register", registrarUsuarios);
 
 router.post("/login", loginUsuario);
+
+router.put("/update-name",authenticateToken, atualizarNomeUsuario);
 
 export default router;

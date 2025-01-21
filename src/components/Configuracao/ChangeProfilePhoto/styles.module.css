@@ -1,0 +1,63 @@
+.container {
+  margin-left: 160px;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(216, 216, 216);
+  width: 40rem;
+  height: auto;
+  padding: 20px 38px;
+  border-radius: 25px;
+}
+
+.profileContent {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
+}
+
+.changePhotoButton {
+  background-color: #3a554e;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.changePhotoButton:hover {
+  background-color: #e0af0e;
+  transition: 1s;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 0 1rem;
+  }
+
+  .changePhotoButton {
+    font-size: 10px;
+    padding: 10px 13px;
+  }
+
+  .tamNome {
+    font-size: 15px;
+  }
+}

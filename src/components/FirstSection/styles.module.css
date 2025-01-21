@@ -34,10 +34,12 @@ h2 {
 
 .imgUsuarioLogado {
   width: 2.5rem;
+  cursor: pointer;
 }
 
 .dropdownMenu {
   position: absolute;
+  margin-right: 2rem;
   top: 70px;
   right: 0;
   background-color: #242526;
