@@ -8,45 +8,49 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 if (!jwtSecret) {
   console.error("JWT_SECRET não está definido!");
+  process.exit(1); // Para evitar que o servidor inicie sem a chave JWT
 }
 
-const loginUsuario = (req, res) => {
-  console.log("Requisição de login recebida:", req.body); // Log da requisição
-  const q = "SELECT * FROM usuarios WHERE email = $1";
+const loginUsuario = async (req, res) => {
+  console.log("Requisição de login recebida:", req.body);
 
-  db.query(q, [req.body.email], (err, result) => {
-    if (err) {
-      console.error("Erro ao acessar o banco de dados:", err); // Log do erro
-      return res.status(500).json("Erro interno do servidor");
+  const { email, senha } = req.body;
+  if (!email || !senha) {
+    return res.status(400).json({ message: "E-mail e senha são obrigatórios." });
+  }
+
+  try {
+    // Buscar usuário no banco de dados
+    const q = "SELECT * FROM usuarios WHERE email = $1";
+    const { rows } = await db.query(q, [email]); // Executando a consulta de forma assíncrona
+
+    if (rows.length === 0) {
+      console.log("Usuário não encontrado:", email);
+      return res.status(404).json({ message: "Usuário não encontrado!" });
     }
-    
-    if (result.rows.length === 0) { // Use result.rows
-      console.log("Usuário não encontrado:", req.body.email); // Log se o usuário não for encontrado
-      return res.status(404).json("Usuário não encontrado!");
+
+    const usuario = rows[0]; // Pegando o primeiro usuário encontrado
+
+    // Comparar a senha informada com a senha armazenada no banco
+    const isMatch = await bcrypt.compare(senha, usuario.senha);
+
+    if (!isMatch) {
+      console.log("Senha incorreta para o usuário:", email);
+      return res.status(401).json({ message: "Senha incorreta!" });
     }
 
-    const usuario = result.rows[0]; // Use result.rows
+    // Gerar token JWT
+    const token = jwt.sign(
+      { id: usuario.id, nome: usuario.nome },
+      jwtSecret,
+      { expiresIn: "1h" }
+    );
 
-    bcrypt.compare(req.body.senha, usuario.senha, (err, isMatch) => {
-      if (err) {
-        console.error("Erro ao comparar senhas:", err); // Log do erro
-        return res.status(500).json("Erro interno ao comparar senhas");
-      }
-      if (!isMatch) {
-        console.log("Senha incorreta para o usuário:", usuario.email); // Log se a senha estiver incorreta
-        return res.status(400).json("Senha incorreta!");
-      }
-
-      const token = jwt.sign(
-        { id: usuario.id, nome: usuario.nome },
-        jwtSecret,
-        { expiresIn: "1h" }
-      );
-      console.log("Token gerado:", token); // Log do token gerado
-
-      return res.status(200).json({ token, nome: usuario.nome });
-    });
-  });
+    return res.status(200).json({ token, nome: usuario.nome });
+  } catch (error) {
+    console.error("Erro no login:", error);
+    return res.status(500).json({ message: "Erro interno do servidor" });
+  }
 };
 
 export default loginUsuario;

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:8801/usuarios", // URL do seu backend
+    baseURL: "http://localhost:8801/", // URL do seu backend
     timeout: 60000, // Tempo máximo de resposta (60 segundos)
     withCredentials: true, // Para cookies e sessões, se necessário
 });

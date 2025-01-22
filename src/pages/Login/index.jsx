@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     /* https://controlefinanceiro-dktx.onrender.com/usuarios/login */
-    const response = await fetch("http://localhost:8801/usuarios/login", {
+    const response = await fetch("http://localhost:8801/login/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
