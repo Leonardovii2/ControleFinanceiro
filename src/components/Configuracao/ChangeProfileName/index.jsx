@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function ChangeProfileNameSection() {
+export default function ChangeProfileNameSection({ setAtualizar }) {
   const [nome, setNome] = useState("");
   const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState(
@@ -36,8 +36,9 @@ export default function ChangeProfileNameSection() {
 
       if (data.success) {
         toast.success("Nome atualizado com sucesso!");
-        setUserName(nome);
-        localStorage.setItem("userName", nome);
+        localStorage.setItem("nomeUsuario", nome);
+        setAtualizar((prev) => !prev);
+        setNome("");
       } else {
         toast.error("Erro ao atualizar nome!");
       }

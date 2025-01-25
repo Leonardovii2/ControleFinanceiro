@@ -10,6 +10,8 @@ export default function AdicionarGasto({
   atualizarTotal,
   isModalOpen,
   setIsModalOpen,
+  gastos,
+  setGastos,
 }) {
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -25,18 +27,17 @@ export default function AdicionarGasto({
     "Roupas",
   ];
 
-  // Preenche os campos do formulário se for edição
   useEffect(() => {
     if (onEdit) {
-      setDescricao(onEdit.descricao); // Preenche o campo descrição
-      setCategoria(onEdit.categoria); // Preenche o campo categoria
-      setValor(onEdit.valor); // Preenche o campo valor
+      setDescricao(onEdit.descricao || "");
+      setCategoria(onEdit.categoria || "");
+      setValor(onEdit.valor || "");
     } else {
-      setDescricao(""); // Limpa os campos para adição
-      setCategoria(""); // Limpa os campos para adição
-      setValor(""); // Limpa os campos para adição
+      setDescricao("");
+      setCategoria("");
+      setValor("");
     }
-  }, [onEdit]); // Recarrega os dados sempre que onEdit mudar
+  }, [onEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,23 +52,46 @@ export default function AdicionarGasto({
     }
 
     const token = localStorage.getItem("token");
-    const payload = { descricao, categoria, valor: parsedValor };
+
+    // Verifica se estamos editando (se onEdit não for null)
+    const payload = onEdit
+      ? { id: onEdit.id, descricao, categoria, valor: parsedValor }
+      : { descricao, categoria, valor: parsedValor };
 
     try {
-      const endpoint = onEdit
-        ? `http://localhost:8801/gastos/${onEdit.id}` // Se estamos editando, usamos o ID do gasto
-        : "http://localhost:8801/gastos"; // Caso contrário, criamos um novo gasto
+      let data;
 
-      const method = onEdit ? "put" : "post"; // Se estamos editando, usamos PUT, caso contrário, POST
-      const { data } = await axios[method](endpoint, payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      if (onEdit) {
+        // Atualiza um gasto existente
+        data = await axios.put(
+          `http://localhost:8801/gastos/${onEdit.id}`,
+          payload,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+      } else {
+        // Adiciona um novo gasto
+        data = await axios.post("http://localhost:8801/gastos", payload, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
 
       toast.success(data.message);
-      setOnEdit(null); // Limpa os dados de edição
-      getGastos(); // Atualiza a lista de gastos
-      atualizarTotal(); // Atualiza o total
-      setIsModalOpen(false); // Fecha o modal
+
+      // Atualiza a lista de gastos
+      const updatedGastos = onEdit
+        ? gastos.map((gasto) =>
+            gasto.id === onEdit.id ? { ...gasto, ...payload } : gasto
+          )
+        : [...gastos, data.gasto]; // Adiciona o novo gasto à lista
+
+      setGastos(updatedGastos);
+      localStorage.setItem("gastos", JSON.stringify(updatedGastos));
+
+      atualizarTotal();
+      setOnEdit(null);
+      setIsModalOpen(false);
     } catch (error) {
       console.error("Erro ao salvar gasto:", error);
       toast.error(error.response?.data?.message || "Erro inesperado!");
@@ -90,22 +114,21 @@ export default function AdicionarGasto({
             </button>
             <form onSubmit={handleSubmit}>
               <div className={styles.titulo}>
-                <h1>Adicionar gasto</h1>
+                <h1>{onEdit ? "Editar Gasto" : "Adicionar Gasto"}</h1>
               </div>
               <div className={styles.container}>
                 <label className={styles.labelStyle}>Descrição</label>
                 <input
-                  name="descricao"
-                  className={styles.input}
                   type="text"
+                  className={styles.input}
                   placeholder="Descrição do gasto"
                   value={descricao}
                   onChange={(e) => setDescricao(e.target.value)}
                 />
                 <label className={styles.labelStyle}>Categoria</label>
                 <select
-                  value={categoria}
                   className={styles.input}
+                  value={categoria}
                   onChange={(e) => setCategoria(e.target.value)}
                 >
                   <option value="">Selecione uma categoria</option>
@@ -117,8 +140,7 @@ export default function AdicionarGasto({
                 </select>
                 <label className={styles.labelStyle}>Valor</label>
                 <input
-                  name="valor"
-                  type="text"
+                  type="number"
                   className={styles.input}
                   placeholder="Valor do gasto"
                   value={valor}

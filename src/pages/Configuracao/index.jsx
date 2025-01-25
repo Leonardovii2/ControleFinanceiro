@@ -6,13 +6,14 @@ import ChangeProfilePhotoSection from "../../components/Configuracao/ChangeProfi
 import ChangeProfileNameSection from "../../components/Configuracao/ChangeProfileName";
 
 export default function Configuracao() {
+  const [atualizar, setAtualizar] = useState(false);
   return (
     <div className={styles.container}>
       <Navbar />
-      <FirstSection />
+      <FirstSection atualizar={atualizar} />
       <div className={styles.secondSectionSettings}>
-        <ChangeProfilePhotoSection />
-        <ChangeProfileNameSection />
+        <ChangeProfilePhotoSection atualizar={atualizar} />
+        <ChangeProfileNameSection setAtualizar={setAtualizar} />
       </div>
     </div>
   );

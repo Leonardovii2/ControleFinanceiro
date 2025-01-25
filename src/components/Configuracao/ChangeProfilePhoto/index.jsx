@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
-export default function ChangeProfilePhotoSection() {
-  const [nomeUsuario, setNomeUsuario] = useState("");
+export default function ChangeProfilePhotoSection({ atualizar }) {
+  const [nomeUsuario, setNomeUsuario] = useState(
+    localStorage.getItem("nomeUsuario")
+  );
 
   useEffect(() => {
-    const nome = localStorage.getItem("nomeUsuario");
-    setNomeUsuario(nome);
-  });
+    setNomeUsuario(localStorage.getItem("nomeUsuario"));
+  }, [atualizar]);
 
   return (
     <section className={styles.container}>

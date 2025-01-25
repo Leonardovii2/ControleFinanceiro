@@ -2,27 +2,46 @@ import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import imgUsuarioLogado from "../../assets/Perfil.svg";
 import DateDisplay from "../DateDisplay";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstSection() {
+export default function FirstSection({ atualizar }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
   const [nomeUsuario, setNomeUsuario] = useState("");
-  const navigate = useNavigate(); // Para redirecionar no logout
+
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
+    setIsDropdownVisible((prev) => !prev);
   };
 
   const handleLogout = () => {
-    // Remover token do localStorage ou sessionStorage
     localStorage.removeItem("authToken");
     navigate("/login");
   };
 
   useEffect(() => {
-    const nome = localStorage.getItem("nomeUsuario");
-    setNomeUsuario(nome || "Bem-vindo!");
-  }, []);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownVisible(false);
+      }
+    };
+
+    if (isDropdownVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownVisible]);
+
+  useEffect(() => {
+    const nomeCompleto = localStorage.getItem("nomeUsuario") || "";
+    setNomeUsuario(nomeCompleto.trim().split(" ")[0]); // Pega o primeiro nome
+  }, [atualizar]);
 
   return (
     <header className={styles.container}>
@@ -30,7 +49,7 @@ export default function FirstSection() {
         <h1>Painel Financeiro</h1>
         <DateDisplay />
       </div>
-      <div className={styles.usuLogado}>
+      <div className={styles.usuLogado} ref={dropdownRef}>
         <img
           className={styles.imgUsuarioLogado}
           src={imgUsuarioLogado}
