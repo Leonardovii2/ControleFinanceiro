@@ -34,20 +34,22 @@ export default function Navbar() {
             onClick={() => navigate("/configuracao")}
           >
             <FaCog
-              color={location.pathname === "/configuracao" ? "#e0af0e" : "white"}
+              color={
+                location.pathname === "/configuracao" ? "#e0af0e" : "white"
+              }
               size={30}
             />
           </button>
         </li>
 
-        <li>
+        {/* <li>
           <button className={styles.button} onClick={() => navigate("/perfil")}>
             <FaUser
               color={location.pathname === "/perfil" ? "#e0af0e" : "white"}
               size={30}
             />
           </button>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

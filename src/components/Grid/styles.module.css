@@ -8,13 +8,10 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   /* Melhorar a rolagem em dispositivos móveis */
-  
 }
 
 .table {
   color: rgb(0, 0, 0);
-  background-color: rgba(97, 119, 113, 0.2);
-  padding: 20px;
   border-radius: 5px;
   width: 52rem;
   word-break: break-all;
@@ -31,6 +28,8 @@
 
 .firstConfigTd {
   width: 30%;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
 }
 
 .secondConfigTd {
@@ -39,9 +38,9 @@
 }
 
 .th {
+  background-color: #ddd;
   text-align: start;
-  border-bottom: inset;
-  padding-bottom: 5px;
+  padding: 5px 0;
 }
 
 @media (max-width: 600px) {
@@ -71,7 +70,7 @@
   .firstConfigTd {
     width: 5%;
   }
-  
+
   .secondConfigTd {
     width: 0%;
   }

@@ -16,13 +16,15 @@ const Home = () => {
 
   const getGastos = async () => {
     const token = localStorage.getItem("token");
+    const mes = new Date().toISOString().slice(0, 7);
+
     if (!token) {
       navigate("/login");
       return;
     }
 
     try {
-      const { data } = await api.get("http://localhost:8801/gastos", {
+      const { data } = await api.get(`http://localhost:8801/gastos?mes=${mes}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setGastos(data);

@@ -1,0 +1,94 @@
+/* src/components/styles.module.css */
+.carteiraContainer {
+  display: flex;
+  justify-content: center;
+  margin-inline-start: 160px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 52rem;
+}
+
+.seletorMes {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.seletorMes label {
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.inputMes {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.ulContent {
+  background-color: rgba(97, 119, 113, 0.2);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+}
+
+.ulContent p {
+  font-weight: bold;
+}
+
+.listaGastos ul {
+  list-style-type: none;
+  padding-top: 10px;
+}
+
+.listaGastos li {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.botaoAdicionar {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.botaoAdicionar:hover {
+  background-color: #45a049;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fecharModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .carteiraContainer {
+    display: flex;
+    justify-content: center;
+    margin-inline-start: 0px;
+    padding: 0 1rem;
+  }
+}

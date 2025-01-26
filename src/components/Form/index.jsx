@@ -60,9 +60,10 @@ export default function AdicionarGasto({
     }
 
     const token = localStorage.getItem("token");
+    const dataGasto = new Date().toISOString().split('T')[0];
     const payload = onEdit
-      ? { id: onEdit.id, descricao, categoria, valor: parsedValor }
-      : { descricao, categoria, valor: parsedValor };
+      ? { id: onEdit.id, descricao, categoria, valor: parsedValor, data_gasto: dataGasto }
+      : { descricao, categoria, valor: parsedValor, data_gasto: dataGasto };
 
     try {
       let data;
