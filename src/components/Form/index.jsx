@@ -10,8 +10,6 @@ export default function AdicionarGasto({
   atualizarTotal,
   isModalOpen,
   setIsModalOpen,
-  gastos,
-  setGastos,
 }) {
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -33,11 +31,21 @@ export default function AdicionarGasto({
       setCategoria(onEdit.categoria || "");
       setValor(onEdit.valor || "");
     } else {
-      setDescricao("");
-      setCategoria("");
-      setValor("");
+      limparCampos();
     }
   }, [onEdit]);
+
+  const limparCampos = () => {
+    setDescricao("");
+    setCategoria("");
+    setValor("");
+    setOnEdit(null);
+  };
+
+  const fecharModal = () => {
+    limparCampos();
+    setIsModalOpen(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,17 +60,13 @@ export default function AdicionarGasto({
     }
 
     const token = localStorage.getItem("token");
-
-    // Verifica se estamos editando (se onEdit não for null)
     const payload = onEdit
       ? { id: onEdit.id, descricao, categoria, valor: parsedValor }
       : { descricao, categoria, valor: parsedValor };
 
     try {
       let data;
-
       if (onEdit) {
-        // Atualiza um gasto existente
         data = await axios.put(
           `http://localhost:8801/gastos/${onEdit.id}`,
           payload,
@@ -71,27 +75,16 @@ export default function AdicionarGasto({
           }
         );
       } else {
-        // Adiciona um novo gasto
         data = await axios.post("http://localhost:8801/gastos", payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
 
-      toast.success(data.message);
-
-      // Atualiza a lista de gastos
-      const updatedGastos = onEdit
-        ? gastos.map((gasto) =>
-            gasto.id === onEdit.id ? { ...gasto, ...payload } : gasto
-          )
-        : [...gastos, data.gasto]; // Adiciona o novo gasto à lista
-
-      setGastos(updatedGastos);
-      localStorage.setItem("gastos", JSON.stringify(updatedGastos));
+      toast.success(data.data.message);
+      getGastos(); // Atualiza os gastos do backend
 
       atualizarTotal();
-      setOnEdit(null);
-      setIsModalOpen(false);
+      fecharModal();
     } catch (error) {
       console.error("Erro ao salvar gasto:", error);
       toast.error(error.response?.data?.message || "Erro inesperado!");
@@ -101,15 +94,9 @@ export default function AdicionarGasto({
   return (
     <>
       {isModalOpen && (
-        <div
-          className={styles.modalContainer}
-          onClick={() => setIsModalOpen(false)}
-        >
+        <div className={styles.modalContainer} onClick={fecharModal}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <button
-              className={styles.closeModalButton}
-              onClick={() => setIsModalOpen(false)}
-            >
+            <button className={styles.closeModalButton} onClick={fecharModal}>
               X
             </button>
             <form onSubmit={handleSubmit}>
@@ -144,7 +131,13 @@ export default function AdicionarGasto({
                   className={styles.input}
                   placeholder="Valor do gasto"
                   value={valor}
-                  onChange={(e) => setValor(e.target.value)}
+                  onChange={(e) =>
+                    setValor(
+                      e.target.value
+                        ? Math.max(0, parseFloat(e.target.value))
+                        : ""
+                    )
+                  }
                 />
                 <button className={styles.button} type="submit">
                   {onEdit ? "Atualizar" : "Adicionar"}

@@ -17,7 +17,12 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
-export default function Grid({ gastos = [], setGastos, atualizarTotal }) {
+export default function Grid({
+  gastos = [],
+  setGastos,
+  atualizarTotal,
+  getGastos,
+}) {
   const [gastoToEdit, setGastoToEdit] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -49,6 +54,8 @@ export default function Grid({ gastos = [], setGastos, atualizarTotal }) {
       const newArray = gastos.filter((gasto) => gasto.id !== id);
       setGastos(newArray);
       toast.success(data.message);
+
+      getGastos();
       atualizarTotal();
     } catch (error) {
       const message = error.response
@@ -112,7 +119,7 @@ export default function Grid({ gastos = [], setGastos, atualizarTotal }) {
       {isModalOpen && (
         <AdicionarGasto
           onEdit={gastoToEdit}
-          getGastos={atualizarTotal}
+          getGastos={getGastos}
           setOnEdit={setGastoToEdit}
           atualizarTotal={atualizarTotal}
           isModalOpen={isModalOpen}
