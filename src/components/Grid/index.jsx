@@ -5,18 +5,6 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import AdicionarGasto from "../../components/Form";
 
-const formatDateForDisplay = (date) => {
-  const [year, month, day] = date.split("-");
-  return `${day}/${month}/${year}`;
-};
-
-const formatCurrency = (value) => {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(value);
-};
-
 export default function Grid({
   gastos = [],
   setGastos,
@@ -33,6 +21,8 @@ export default function Grid({
   // Calcular índice inicial e final dos itens a serem exibidos
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  // Seleciona os gastos para a exibição na página atual
   const currentItems = gastos.slice(startIndex, endIndex);
 
   // Número total de páginas
@@ -108,15 +98,17 @@ export default function Grid({
               {currentItems.map((item) => (
                 <tr key={item.id}>
                   <td className={styles.firstConfigTd}>
-                    {formatDateForDisplay(item.data_gasto.split("T")[0])}
+                    {item.data_gasto.split("T")[0].replace(/-/g, "/")}
                   </td>
                   <td className={styles.firstConfigTd}>{item.descricao}</td>
                   <td className={styles.firstConfigTd}>{item.categoria}</td>
                   <td className={styles.firstConfigTd}>
-                    {formatCurrency(parseFloat(item.valor))}
+                    {new Intl.NumberFormat("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    }).format(item.valor)}
                   </td>
                   <td className={styles.secondConfigTd}>
-                    {/* Agrupe as ações em uma única célula */}
                     <FaEdit
                       onClick={() => handleEditClick(item)}
                       aria-label="Editar gasto"

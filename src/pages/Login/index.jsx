@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // ✅ Importando os ícones
 import styles from "./styles.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,16 +19,19 @@ function Login() {
     }
   }, [location.state]);
 
+  const togglePasswordVisibility = () => {
+    setMostrarSenha((prevState) => !prevState);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    /* https://controlefinanceiro-dktx.onrender.com/usuarios/login */
     const response = await fetch("http://localhost:8801/login/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, senha }),
+      credentials: "include",
     });
 
     if (response.ok) {
@@ -81,14 +87,31 @@ function Login() {
           <label className={styles.padding} htmlFor="senha">
             Senha
           </label>
-          <input
-            className={styles.input}
-            type="password"
-            id="senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-          />
+          {/* 🔹 Envolvendo o input e o ícone dentro de um div */}
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              className={styles.input}
+              type={mostrarSenha ? "text" : "password"}
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+              style={{ paddingRight: "40px" }} // 🔹 Espaço para o ícone
+            />
+            <span
+              onClick={togglePasswordVisibility}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#555",
+              }}
+            >
+              {mostrarSenha ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </span>
+          </div>
 
           <a
             className={styles.esqueciSenha}

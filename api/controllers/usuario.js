@@ -29,7 +29,7 @@ const registrarUsuarios = async (req, res) => {
 };
 
 export const atualizarNomeUsuario = async (req, res) => {
-  const userId = req.user.id;  // O userId vem do middleware de autenticação
+  const userId = req.user.id; // O userId vem do middleware de autenticação
   const { nome } = req.body;
 
   try {
@@ -49,5 +49,46 @@ export const atualizarNomeUsuario = async (req, res) => {
   }
 };
 
+export const atualizarSalario = async (req, res) => {
+  const userId = req.user.id;
+  const { salario } = req.body;
+
+  try {
+    const q = "UPDATE usuarios SET salario = $1 WHERE id = $2";
+    const values = [salario, userId];
+
+    const result = await db.query(q, values);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Usuário não encontrado." });
+    }
+
+    return res.status(200).json({ message: "Salário atualizado com sucesso!" });
+  } catch (err) {
+    console.error("Erro ao adicionar o salário: ", err);
+    return res.status(500).json({ error: "Erro ao adicionar o salário." });
+  }
+};
+
+export const pegarSalario = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const q = "SELECT salario FROM usuarios WHERE id = $1";
+    const values = [userId];
+
+    const result = await db.query(q, values);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Usuário não encontrado." });
+    }
+
+    const salario = result.rows[0].salario;
+    return res.status(200).json({ salario });
+  } catch (err) {
+    console.error("Erro ao buscar o salário: ", err);
+    return res.status(500).json({ error: "Erro ao buscar o salário." });
+  }
+};
 
 export default registrarUsuarios;

@@ -3,11 +3,13 @@ import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // ✅ Importando os ícones
 
 function Register() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false); // ✅ Estado para mostrar/ocultar senha
 
   const navigate = useNavigate();
 
@@ -59,6 +61,10 @@ function Register() {
     navigate("/login");
   };
 
+  const togglePasswordVisibility = () => {
+    setMostrarSenha((prevState) => !prevState); // Alterna a visibilidade da senha
+  };
+
   return (
     <main className={styles.main}>
       <section className={styles.sectionInfo}>
@@ -74,6 +80,7 @@ function Register() {
       <section className={styles.sectionForm}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2 className={styles.titulo}>Cadastro</h2>
+
           <label className={styles.padding} htmlFor="nome">
             Nome
           </label>
@@ -96,16 +103,34 @@ function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label className={styles.padding} htmlFor="">
+          <label className={styles.padding} htmlFor="senha">
             Senha
           </label>
-          <input
-            className={styles.input}
-            type="password"
-            id="senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          />
+          {/* Envolvendo o input e o ícone em um div */}
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              className={styles.input}
+              type={mostrarSenha ? "text" : "password"}
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+              style={{ paddingRight: "40px" }} // Espaço para o ícone
+            />
+            <span
+              onClick={togglePasswordVisibility}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#555",
+              }}
+            >
+              {mostrarSenha ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </span>
+          </div>
 
           <button className={styles.buttonLogin} type="submit">
             Cadastrar

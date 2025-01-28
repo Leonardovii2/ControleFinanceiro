@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { FaHome, FaCog, FaWallet, FaUser } from "react-icons/fa";
+import { FaHome, FaCog, FaWallet, FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Navbar() {

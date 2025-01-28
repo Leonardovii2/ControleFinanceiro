@@ -5,7 +5,7 @@ import NavBar from "../../components/Navbar";
 import api from "../../services/api"; // 🛑 Importa o Axios configurado
 import TotalSection from "../../components/SecondSection";
 import ThirdSection from "../../components/ThirdSection";
-import SecondSection from "../../components/Pig"
+import SecondSection from "../../components/Pig";
 
 const Home = () => {
   const [gastos, setGastos] = useState([]);
@@ -24,9 +24,12 @@ const Home = () => {
     }
 
     try {
-      const { data } = await api.get(`http://localhost:8801/gastos?mes=${mes}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await api.get(
+        `http://localhost:8801/gastos?mes=${mes}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setGastos(data);
     } catch (error) {
       console.error("Erro ao buscar gastos:", error);
@@ -42,7 +45,7 @@ const Home = () => {
     <>
       <NavBar />
       <FirstSection />
-      <SecondSection/>
+      <SecondSection />
       <TotalSection atualizar={atualizar} gastos={gastos} />
       <ThirdSection
         gastos={gastos}

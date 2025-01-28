@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "./styles.module.css";
@@ -10,6 +10,7 @@ export default function AdicionarGasto({
   atualizarTotal,
   isModalOpen,
   setIsModalOpen,
+  setGastos,
 }) {
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -60,9 +61,15 @@ export default function AdicionarGasto({
     }
 
     const token = localStorage.getItem("token");
-    const dataGasto = new Date().toISOString().split('T')[0];
+    const dataGasto = new Date().toISOString().split("T")[0];
     const payload = onEdit
-      ? { id: onEdit.id, descricao, categoria, valor: parsedValor, data_gasto: dataGasto }
+      ? {
+          id: onEdit.id,
+          descricao,
+          categoria,
+          valor: parsedValor,
+          data_gasto: dataGasto,
+        }
       : { descricao, categoria, valor: parsedValor, data_gasto: dataGasto };
 
     try {
@@ -82,8 +89,8 @@ export default function AdicionarGasto({
       }
 
       toast.success(data.data.message);
-      getGastos(); // Atualiza os gastos do backend
 
+      getGastos(); // Atualiza os gastos do backend
       atualizarTotal();
       fecharModal();
     } catch (error) {
