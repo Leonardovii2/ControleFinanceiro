@@ -9,6 +9,9 @@ export default function Wallet() {
     <div className={styles.container}>
       <Navbar />
       <FirstSection />
+      <div className={styles.title}>
+        <h2>Histórico Financeiro</h2>
+      </div>
       <FiltroMensal />
     </div>
   );

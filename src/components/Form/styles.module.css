@@ -25,15 +25,15 @@
 }
 
 .button {
-  background-color: rgba(97, 119, 113, 0.2);
-  color: rgb(0, 0, 0);
+  background-color: #2e2e2e;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #e0af0e;
+  background-color: #444444;
 }
 
 .labelStyle {
@@ -61,8 +61,8 @@
 .modal {
   background-color: #fff;
   padding: 2.5rem;
-  border-radius: 8px;
-  width: 400px;
+  border-radius: 10px;
+  width: 350px;
   position: relative;
   display: block;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);

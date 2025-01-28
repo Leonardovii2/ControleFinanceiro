@@ -26,6 +26,25 @@ export default function Grid({
   const [gastoToEdit, setGastoToEdit] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Paginação
+  const [currentPage, setCurrentPage] = useState(1); // Página atual
+  const itemsPerPage = 5; // Itens por página
+
+  // Calcular índice inicial e final dos itens a serem exibidos
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = gastos.slice(startIndex, endIndex);
+
+  // Número total de páginas
+  const totalPages = Math.ceil(gastos.length / itemsPerPage);
+
+  // Função para mudar a página
+  const changePage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   // Atualiza o localStorage sempre que os gastos forem alterados
   useEffect(() => {
     if (Array.isArray(gastos)) {
@@ -81,13 +100,12 @@ export default function Grid({
                 <th className={styles.th}>Descrição</th>
                 <th className={styles.th}>Categoria</th>
                 <th className={styles.th}>Valor</th>
-                <th className={styles.th}></th>
-                <th className={styles.th}></th>
+                <th className={styles.th}>Ações</th>
               </tr>
             </thead>
 
             <tbody className={styles.tbody}>
-              {gastos.map((item) => (
+              {currentItems.map((item) => (
                 <tr key={item.id}>
                   <td className={styles.firstConfigTd}>
                     {formatDateForDisplay(item.data_gasto.split("T")[0])}
@@ -98,12 +116,11 @@ export default function Grid({
                     {formatCurrency(parseFloat(item.valor))}
                   </td>
                   <td className={styles.secondConfigTd}>
+                    {/* Agrupe as ações em uma única célula */}
                     <FaEdit
                       onClick={() => handleEditClick(item)}
                       aria-label="Editar gasto"
                     />
-                  </td>
-                  <td className={styles.secondConfigTd}>
                     <FaTrash
                       onClick={() => handleDelete(item.id)}
                       aria-label="Excluir gasto"
@@ -113,6 +130,20 @@ export default function Grid({
               ))}
             </tbody>
           </table>
+
+          {/* Páginas */}
+          <div className={styles.pagination}>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                className={styles.pageButton}
+                onClick={() => changePage(index + 1)}
+                disabled={currentPage === index + 1}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 

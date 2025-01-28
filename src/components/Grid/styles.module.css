@@ -1,7 +1,6 @@
 .container {
-  display: flex;
-  justify-content: center;
-  padding: 2rem 0;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .scrollContainer {
@@ -11,13 +10,26 @@
 }
 
 .table {
-  color: rgb(0, 0, 0);
-  border-radius: 5px;
-  width: 52rem;
-  word-break: break-all;
-  margin-bottom: 3rem;
-  min-width: 600px;
-  /* Defina uma largura mínima para garantir que a rolagem ocorra */
+  width: 55rem;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: #ddd solid 1px;
+}
+
+.thead {
+  background-color: #f4f4f4;
+}
+
+.tbody {
+  background-color: #fff;
+}
+
+.tr {
+  transition: background-color 0.3s ease;
+}
+
+.tr:hover {
+  background-color: #f9f9f9;
 }
 
 .td {
@@ -26,21 +38,51 @@
   width: auto;
 }
 
-.firstConfigTd {
-  width: 30%;
+.firstConfigTd,
+.secondConfigTd {
+  padding: 12px;
+  text-align: center;
   border-bottom: 1px solid #ddd;
-  padding: 5px 0;
+}
+
+.firstConfigTd {
+  font-size: 14px;
 }
 
 .secondConfigTd {
-  align-items: center;
-  width: 5%;
+  text-align: center;
 }
 
 .th {
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageButton {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pageButton:disabled {
   background-color: #ddd;
-  text-align: start;
-  padding: 5px 0;
+  cursor: not-allowed;
+}
+
+.pageButton:hover:not(:disabled) {
+  background-color: #ddd;
 }
 
 @media (max-width: 600px) {

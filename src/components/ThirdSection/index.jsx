@@ -15,7 +15,7 @@ export default function ThirdSection({
 }) {
   // Função para abrir o modal de edição
   const handleEditClick = (gasto) => {
-    console.log('Edit clicked', gasto); // Verificar se o gasto correto é passado
+    console.log("Edit clicked", gasto); // Verificar se o gasto correto é passado
     setOnEdit(gasto); // Passa os dados do gasto para o estado onEdit
     setIsModalOpen(true); // Abre o modal
   };
@@ -28,7 +28,6 @@ export default function ThirdSection({
   return (
     <section className={styles.section}>
       <div className={styles.buttonContainer}>
-
         <div className={styles.transactioninformation}>
           <h2>Transações</h2>
 

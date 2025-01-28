@@ -3,9 +3,16 @@ import { toast } from "react-toastify";
 import styles from "./styles.module.css";
 
 const formatDateForDisplay = (date) => {
-    const [year, month, day] = date.split("-");
-    return `${day}/${month}/${year}`;
-  };
+  const [year, month, day] = date.split("-");
+  return `${day}/${month}/${year}`;
+};
+
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value);
+};
 
 export default function FiltroMensal() {
   const [gastos, setGastos] = useState([]);
@@ -13,16 +20,13 @@ export default function FiltroMensal() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Definir mês atual como valor inicial
-    const mesAtual = new Date().toISOString().slice(0, 7); // Formato YYYY-MM
+    const mesAtual = new Date().toISOString().slice(0, 7);
     setMesSelecionado(mesAtual);
     fetchGastos(mesAtual);
   }, []);
 
-  // Função para buscar os gastos do mês selecionado
   const fetchGastos = async (mes) => {
     const token = localStorage.getItem("token");
-
     if (!token) {
       alert("Você precisa estar logado.");
       return;
@@ -44,7 +48,6 @@ export default function FiltroMensal() {
       }
 
       const data = await response.json();
-
       setGastos(data);
     } catch (error) {
       toast.error("Erro ao carregar os gastos.");
@@ -54,7 +57,6 @@ export default function FiltroMensal() {
     }
   };
 
-  // Função chamada ao mudar o mês no seletor
   const handleMesChange = (e) => {
     const novoMes = e.target.value;
     setMesSelecionado(novoMes);
@@ -76,30 +78,33 @@ export default function FiltroMensal() {
 
         <div className={styles.listaGastos}>
           <h2>Gastos de {mesSelecionado}</h2>
-
-          {/* Mostrar mensagem de carregamento enquanto os dados são buscados */}
           {loading ? (
             <p>Carregando...</p>
-          ) : gastos.length === 0 ? ( // Verifica se a lista de gastos está vazia
+          ) : gastos.length === 0 ? (
             <p>Não possui gasto para o mês selecionado.</p>
           ) : (
-            <ul className={styles.ul}>
-              <div className={styles.ulContent}>
-                <p>Data</p>
-                <p>Descrição</p>
-                <p>Categoria</p>
-                <p>Valor</p>
-              </div>
-
-              {gastos.map((gasto) => (
-                <li key={gasto.id}>
-                  <span>{formatDateForDisplay(gasto.data_gasto.split("T")[0])}</span>
-                  <span>{gasto.descricao}</span>
-                  <span>{gasto.categoria}</span>
-                  <span>R${Number(gasto.valor).toFixed(2)}</span>
-                </li>
-              ))}
-            </ul>
+            <table className={styles.table}>
+              <thead className={styles.thead}>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Categoria</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody className={styles.tbody}>
+                {gastos.map((gasto) => (
+                  <tr key={gasto.id}>
+                    <td>
+                      {formatDateForDisplay(gasto.data_gasto.split("T")[0])}
+                    </td>
+                    <td>{gasto.descricao}</td>
+                    <td>{gasto.categoria}</td>
+                    <td>R$ {formatCurrency(Number(gasto.valor).toFixed(2))}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           )}
         </div>
       </div>

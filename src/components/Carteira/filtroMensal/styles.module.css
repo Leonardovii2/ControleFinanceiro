@@ -1,14 +1,15 @@
-/* src/components/styles.module.css */
 .carteiraContainer {
   display: flex;
   justify-content: center;
   margin-inline-start: 160px;
+  padding: 20px;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   width: 52rem;
+  max-width: 100%;
 }
 
 .seletorMes {
@@ -19,76 +20,66 @@
 
 .seletorMes label {
   font-weight: bold;
-  padding-bottom: 10px;
+  font-size: 16px;
+  padding-bottom: 8px;
+  color: #444;
 }
 
 .inputMes {
   padding: 10px;
   font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
 }
 
-.ulContent {
-  background-color: rgba(97, 119, 113, 0.2);
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 0;
+.inputMes:focus {
+  border-color: #007bff;
 }
 
-.ulContent p {
-  font-weight: bold;
-}
-
-.listaGastos ul {
-  list-style-type: none;
-  padding-top: 10px;
-}
-
-.listaGastos li {
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-around;
-}
-
-.botaoAdicionar {
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.botaoAdicionar:hover {
-  background-color: #45a049;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
+.table {
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 55rem;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #ddd;
 }
 
-.fecharModal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
+.table th,
+.table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
-@media (max-width: 600px) {
+.table th {
+  font-weight: 600;
+  color: #333;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
   .carteiraContainer {
-    display: flex;
-    justify-content: center;
-    margin-inline-start: 0px;
+    margin-inline-start: 0;
     padding: 0 1rem;
+  }
+  .content {
+    width: 100%;
+  }
+  .table {
+    font-size: 14px;
+  }
+  .table th,
+  .table td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }

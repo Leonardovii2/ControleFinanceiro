@@ -15,7 +15,7 @@
   justify-content: center;
   margin-inline-start: 160px;
   gap: var(--gap-desktop);
-  padding-top: 2rem;
+  padding-top: 1.8rem;
 }
 
 /* Para o layout padrão em telas grandes */

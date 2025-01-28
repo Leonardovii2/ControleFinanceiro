@@ -1,6 +1,6 @@
 /* Seção principal */
 .section {
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-left: 160px;
 
   /* Evitar que o conteúdo encoste na borda */
@@ -59,22 +59,17 @@
   padding: 10px;
   border-radius: 5px;
   height: 40px;
-  border: 1px solid #c7c7c7;
-  background-color: rgba(97, 119, 113, 0.2);
-  color: rgb(0, 0, 0);
+  border: none;
+  background-color: #2e2e2e;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: 0.25s;
 }
 
 .addButton:hover {
-  background-color: #e0af0e;
-
-}
-
-.addButton:focus {
-  outline: none;
-  /* Para remover o contorno azul ao clicar no botão */
+  background-color: #444444;
+  transform: translateX(0.5em);
 }
 
 .transactioninformation {
