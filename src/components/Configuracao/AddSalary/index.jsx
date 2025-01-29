@@ -2,9 +2,10 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InputSettings from "../InputSettings";
 
 export default function AddSalary({ setAtualizarSalario }) {
-  const [salario, setSalario] = useState(0);
+  const [salario, setSalario] = useState();
   const [loading, setLoading] = useState(false);
 
   const atualizarSalario = async () => {
@@ -56,21 +57,17 @@ export default function AddSalary({ setAtualizarSalario }) {
   };
 
   return (
-    <section className={styles.container}>
-      <div className={styles.content}>
-        <label htmlFor="salario">Salário</label>
-        <input
-          id="salario"
-          type="number"
-          value={salario}
-          placeholder="ex. 1000"
-          onChange={(e) => setSalario(e.target.value)}
-        />
-
-        <button type="button" onClick={atualizarSalario} disabled={loading}>
-          {loading ? "Salvando..." : "Adicionar"}
-        </button>
-      </div>
-    </section>
+    <form className={styles.container}>
+      <InputSettings
+        label="Salário"
+        value={salario}
+        onChange={(e) => setSalario(e.target.value)}
+        onSubmit={atualizarSalario}
+        loading={loading}
+        placeholder="ex. 1000"
+        id="salario"
+        nameButton="Adicionar"
+      />
+    </form>
   );
 }

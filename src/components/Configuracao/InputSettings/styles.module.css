@@ -34,3 +34,19 @@
 .label {
   font-weight: bold;
 }
+
+.button {
+  background-color: #2e2e2e;
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.button:hover {
+  background-color: #444444;
+  transform: translateX(0.5em);
+}

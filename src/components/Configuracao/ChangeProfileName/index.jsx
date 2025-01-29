@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InputSettings from "../InputSettings";
 
 export default function ChangeProfileNameSection({ setAtualizar }) {
   const [nome, setNome] = useState("");
@@ -13,7 +14,7 @@ export default function ChangeProfileNameSection({ setAtualizar }) {
   const handleUpdateName = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Você precisa estar logado.");
+      toast.error("Você precisa estar logado.");
       return;
     }
 
@@ -52,27 +53,16 @@ export default function ChangeProfileNameSection({ setAtualizar }) {
 
   return (
     <section className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.nameContent}>
-          <h2>Nome</h2>
-          <input
-            placeholder="Nome"
-            type="text"
-            value={nome}
-            className={styles.input}
-            onChange={(e) => setNome(e.target.value)}
-          />
-        </div>
-
-        <button
-          type="button"
-          className={styles.changePhotoButton}
-          onClick={handleUpdateName}
-          disabled={loading}
-        >
-          {loading ? "Salvando..." : "Alterar Nome"}
-        </button>
-      </div>
+      <InputSettings
+        label="Nome"
+        placeholder="Nome"
+        type="text"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+        onSubmit={handleUpdateName}
+        nameButton="Alterar"
+        nameLoading="Alterando"
+      />
     </section>
   );
 }
