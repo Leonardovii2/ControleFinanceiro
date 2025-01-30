@@ -1,0 +1,115 @@
+.carteiraContainer {
+  display: flex;
+  justify-content: center;
+  margin-inline-start: 160px;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 52rem;
+  max-width: 100%;
+}
+
+.seletorMes {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.seletorMes label {
+  font-weight: bold;
+  padding-bottom: 8px;
+  
+}
+
+.inputMes {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.inputMes:focus {
+  border-color: #007bff;
+}
+
+/* Estilo da tabela */
+/* Estilo da tabela */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+/* Cabeçalho da tabela */
+.thead {
+  background-color: #2e2e2e;
+  color: white;
+}
+
+.thead th {
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+}
+
+/* Corpo da tabela */
+.tbody {
+  background-color: #f9f9f9;
+}
+
+.tbody tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+.tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+.tbody td {
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  border: none;
+}
+
+/* Estilo para as células dos gastos */
+.gastoCell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gastoCell div {
+  font-size: 14px;
+}
+
+.gastoCell strong {
+  color: #4caf50;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .carteiraContainer {
+    margin-inline-start: 0px;
+    padding: 1rem;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+
+  .thead th,
+  .tbody td {
+    padding: 10px 8px;
+  }
+}

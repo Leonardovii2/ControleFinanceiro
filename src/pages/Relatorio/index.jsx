@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Navbar from "../../components/Navbar";
 import FirstSection from "../../components/FirstSection";
-import FiltroMensal from "../../components/Carteira/filtroMensal";
+import FiltroMensal from "../../components/Relatorio/filtroMensal";
 
-export default function Wallet() {
+export default function Perfil() {
   return (
     <div className={styles.container}>
       <Navbar />

@@ -100,7 +100,7 @@ export default function FiltroMensal() {
                     </td>
                     <td>{gasto.descricao}</td>
                     <td>{gasto.categoria}</td>
-                    <td>R$ {formatCurrency(Number(gasto.valor).toFixed(2))}</td>
+                    <td> {formatCurrency(Number(gasto.valor).toFixed(2))}</td>
                   </tr>
                 ))}
               </tbody>

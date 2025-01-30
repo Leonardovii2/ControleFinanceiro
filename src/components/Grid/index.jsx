@@ -112,10 +112,12 @@ export default function Grid({
                     <FaEdit
                       onClick={() => handleEditClick(item)}
                       aria-label="Editar gasto"
+                      className={styles.icone}
                     />
                     <FaTrash
                       onClick={() => handleDelete(item.id)}
                       aria-label="Excluir gasto"
+                      className={styles.icone}
                     />
                   </td>
                 </tr>

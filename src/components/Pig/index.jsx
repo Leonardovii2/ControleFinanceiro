@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import pigImg from "../../assets/pig-bank.svg";
+import pigImg from "../../assets/pigLogo.svg";
 import { useEffect, useState } from "react";
 
 const getGreeting = () => {

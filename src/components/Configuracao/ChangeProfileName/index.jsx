@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import InputSettings from "../InputSettings";
+import InputSettings from "../InputSettings/index";
 
 export default function ChangeProfileNameSection({ setAtualizar }) {
   const [nome, setNome] = useState("");

@@ -1,50 +1,51 @@
 .container {
-    display: flex;
-    justify-content: center;
-    margin-inline-start: 160px;
+  display: flex;
+  justify-content: center;
+  margin-inline-start: 160px;
 }
 
 .contant {
-    display: flex;
-    align-items: center;
-    background-color: rgba(97, 119, 113, 0.2);
-    width: 62rem;
-    height: 12rem;
-    border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: rgba(97, 119, 113, 0.2);
+  width: 62rem;
+  height: 12rem;
+  border-radius: 3rem;
 }
 
 .contant h2 {
-    font-size: 1.2rem;
-    padding-left: 5rem;
+  font-size: 1.2rem;
+  padding-left: 5rem;
 }
 
 .img {
-    width: 330px;
-    position: absolute;
-    top: 40px;
-    left: 71rem;
+  width: 330px;
+  position: absolute;
+  top: 40px;
+  left: 71rem;
 }
 
 @media (max-width: 600px) {
-    .container {
-        display: flex;
-        justify-content: center;
-        margin: 0 1rem;
-    }
+  .container {
+    display: flex;
+    justify-content: center;
+    margin: 0 1rem;
+  }
 
-    .contant {
-        height: 7rem;
-        border-radius: 2.5rem;
-    }
+  .contant {
+    height: 7rem;
+    border-radius: 2.5rem;
+    margin-top: 1rem;
+  }
 
-    .contant h2 {
-        display: none;
-    }
+  .contant h2 {
+    display: none;
+  }
 
-    .img {
-        width: 200px;
-        position: absolute;
-        top: 63px;
-        left: 6rem;
-    }
+  .img {
+    width: 200px;
+    position: absolute;
+    top: 40px;
+    left: 6rem;
+  }
 }

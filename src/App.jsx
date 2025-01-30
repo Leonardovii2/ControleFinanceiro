@@ -15,9 +15,9 @@ import Register from "./pages/Register/index";
 import RequestPassword from "./pages/RequestPassword";
 import ResetPassword from "./pages/ResetPassword";
 
-import Carteira from "./pages/Carteira/index.";
+import Relatorio from "./pages/Relatorio/index";
+import Carteira from "./pages/Carteira";
 import Configuracao from "./pages/Configuracao/index";
-import Perfil from "./pages/Perfil/index";
 
 function App() {
   const [gastos, setGastos] = useState([]);
@@ -78,12 +78,12 @@ function App() {
             }
           />
           <Route
-            path="/carteira"
+            path="/relatorio"
             element={
               localStorage.getItem("token") ? (
-                <Carteira />
+                <Relatorio />
               ) : (
-                <Navigate to="/login" />
+                <Navigate to="/relatorio" />
               )
             }
           />
@@ -98,10 +98,10 @@ function App() {
             }
           />
           <Route
-            path="/perfil"
+            path="/carteira"
             element={
               localStorage.getItem("token") ? (
-                <Perfil />
+                <Carteira />
               ) : (
                 <Navigate to="/login" />
               )

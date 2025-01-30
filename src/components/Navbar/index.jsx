@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { FaHome, FaCog, FaWallet, FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaHome, FaCog, FaWallet, FaFileAlt } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Navbar() {
@@ -20,8 +20,16 @@ export default function Navbar() {
         <li>
           <button
             className={styles.button}
-            onClick={() => navigate("/carteira")}
+            onClick={() => navigate("/relatorio")}
           >
+            <FaFileAlt
+              color={location.pathname === "/relatorio" ? "#e0af0e" : "white"}
+              size={30}
+            />
+          </button>
+        </li>
+        <li>
+          <button className={styles.button} onClick={() => navigate("/carteira")}>
             <FaWallet
               color={location.pathname === "/carteira" ? "#e0af0e" : "white"}
               size={30}
@@ -41,15 +49,6 @@ export default function Navbar() {
             />
           </button>
         </li>
-
-        {/* <li>
-          <button className={styles.button} onClick={() => navigate("/perfil")}>
-            <FaUser
-              color={location.pathname === "/perfil" ? "#e0af0e" : "white"}
-              size={30}
-            />
-          </button>
-        </li> */}
       </ul>
     </nav>
   );

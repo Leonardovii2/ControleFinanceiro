@@ -10,55 +10,46 @@
 }
 
 .table {
-  width: 55rem;
+  width: 52rem;
+  max-width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-  border: #ddd solid 1px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
 }
 
 .thead {
-  background-color: #f4f4f4;
+  background-color: #2e2e2e;
+  color: white;
+}
+
+.thead th {
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
 }
 
 .tbody {
   background-color: #fff;
 }
 
-.tr {
-  transition: background-color 0.3s ease;
+.tbody tr:nth-child(even) {
+  background-color: #f1f1f1;
 }
 
-.tr:hover {
-  background-color: #f9f9f9;
+.tbody tr:hover {
+  background-color: #e0e0e0;
 }
 
-.td {
-  padding-top: 15px;
-  text-align: start;
-  width: auto;
-}
-
-.firstConfigTd,
-.secondConfigTd {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-.firstConfigTd {
+.tbody td {
+  padding: 12px 20px;
+  text-align: left;
   font-size: 14px;
-}
-
-.secondConfigTd {
-  text-align: center;
-}
-
-.th {
-  padding: 12px;
-  text-align: center;
-  font-weight: 600;
   color: #333;
-  border-bottom: 2px solid #ddd;
+  border: none;
 }
 
 .pagination {
@@ -85,7 +76,11 @@
   background-color: #ddd;
 }
 
-@media (max-width: 600px) {
+.icone {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
   .onlyWeb {
     display: none;
   }
@@ -99,9 +94,8 @@
   }
 
   .table {
-    margin-bottom: 5rem;
-    width: 100%;
-    /* A largura da tabela será 100% da tela em dispositivos móveis */
+    font-size: 12px;
+    margin-bottom: 4rem;
   }
 
   .scrollContainer {
@@ -109,11 +103,8 @@
     /* Remove margens para melhor adaptação em telas pequenas */
   }
 
-  .firstConfigTd {
-    width: 5%;
-  }
-
-  .secondConfigTd {
-    width: 0%;
+  .thead th,
+  .tbody td {
+    padding: 10px 8px;
   }
 }
