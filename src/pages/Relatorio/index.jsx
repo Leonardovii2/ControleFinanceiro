@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 import Navbar from "../../components/Navbar";
 import FirstSection from "../../components/FirstSection";
@@ -9,10 +9,12 @@ export default function Perfil() {
     <div className={styles.container}>
       <Navbar />
       <FirstSection />
-      <div className={styles.title}>
-        <h2>Histórico Financeiro</h2>
-      </div>
-      <FiltroMensal />
+
+      <section className={styles.monthlyReportSection}>
+        <h2 className={styles.title}>Relátorio Mensal</h2>
+        <FiltroMensal />
+      </section>
+
     </div>
   );
 }

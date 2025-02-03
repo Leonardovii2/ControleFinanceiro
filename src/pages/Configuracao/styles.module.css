@@ -1,5 +1,22 @@
+.container {
+  margin-left: 160px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .secondSectionSettings {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-left: 0px;
+  }
+
+  .secondSectionSettings {
+    gap: 2rem;
+  }
 }

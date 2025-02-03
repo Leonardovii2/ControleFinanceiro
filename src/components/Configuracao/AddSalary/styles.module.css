@@ -1,5 +1,4 @@
 .container {
-  margin-left: 160px;
   display: flex;
   justify-content: center;
 }
@@ -33,4 +32,10 @@
 
 .label {
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0 1rem;
+  }
 }

@@ -152,9 +152,12 @@ export const getTotalGastos = (req, res) => {
     req.user.id
   );
 
+  const mes = req.query.mes || new Date().toISOString().slice(0, 7); // Obtém o mês no formato YYYY-MM
+
   const q =
-    "SELECT SUM(CAST(valor AS DECIMAL)) AS totalgastos FROM gastos WHERE usuarioId = $1";
-  db.query(q, [req.user.id], (err, result) => {
+    "SELECT SUM(CAST(valor AS DECIMAL)) AS totalgastos FROM gastos WHERE usuarioId = $1 AND TO_CHAR(data_gasto, 'YYYY-MM') = $2";
+
+  db.query(q, [req.user.id, mes], (err, result) => {
     if (err) {
       console.error("Erro ao acessar o banco de dados:", err.message);
       return res
@@ -166,7 +169,8 @@ export const getTotalGastos = (req, res) => {
     const totalGastos = result.rows[0]?.totalgastos
       ? parseFloat(result.rows[0].totalgastos)
       : 0;
-    console.log("Total de gastos:", totalGastos);
+
+    console.log("Total de gastos para o mês", mes, ":", totalGastos);
 
     return res.status(200).json({ totalGastos });
   });

@@ -28,14 +28,14 @@ export default function Navbar() {
             />
           </button>
         </li>
-        <li>
+        {/* <li>
           <button className={styles.button} onClick={() => navigate("/carteira")}>
             <FaWallet
               color={location.pathname === "/carteira" ? "#e0af0e" : "white"}
               size={30}
             />
           </button>
-        </li>
+        </li> */}
         <li>
           <button
             className={styles.button}

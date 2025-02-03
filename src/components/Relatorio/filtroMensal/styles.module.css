@@ -1,8 +1,6 @@
 .carteiraContainer {
   display: flex;
   justify-content: center;
-  margin-inline-start: 160px;
-  padding: 20px;
 }
 
 .content {
@@ -21,7 +19,6 @@
 .seletorMes label {
   font-weight: bold;
   padding-bottom: 8px;
-  
 }
 
 .inputMes {
@@ -97,11 +94,26 @@
   color: #4caf50;
 }
 
+.totalsInformationSection {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
 /* Responsividade para dispositivos móveis */
 @media (max-width: 768px) {
   .carteiraContainer {
     margin-inline-start: 0px;
     padding: 1rem;
+  }
+
+  .content {
+    gap: 1rem;
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
   }
 
   .table {
@@ -110,6 +122,11 @@
 
   .thead th,
   .tbody td {
-    padding: 10px 8px;
+    padding: 10px 5px;
   }
+
+  .totalsInformationSection {
+    gap: 1rem;
+  }
+
 }

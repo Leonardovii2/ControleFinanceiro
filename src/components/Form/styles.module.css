@@ -99,7 +99,7 @@
 }
 
 /* Responsividade para telas pequenas */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .content {
     margin: 0 1rem;
     flex-direction: column;

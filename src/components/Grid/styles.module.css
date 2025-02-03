@@ -1,6 +1,7 @@
 .container {
   margin: 0 auto;
-  max-width: 1200px;
+  display: flex;
+  justify-content: center;
 }
 
 .scrollContainer {
@@ -86,7 +87,9 @@
   }
 
   .container {
-    margin: 0 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 5.5rem;
   }
 
   .hideOnMobile {
@@ -95,7 +98,6 @@
 
   .table {
     font-size: 12px;
-    margin-bottom: 4rem;
   }
 
   .scrollContainer {

@@ -7,6 +7,8 @@ import TotalSection from "../../components/SecondSection";
 import ThirdSection from "../../components/ThirdSection";
 import SecondSection from "../../components/Pig";
 
+import styles from "./styles.module.css"
+
 const Home = () => {
   const [gastos, setGastos] = useState([]);
   const [atualizar, setAtualizar] = useState(false);
@@ -42,7 +44,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.container}>
       <NavBar />
       <FirstSection />
       <SecondSection />
@@ -57,7 +59,7 @@ const Home = () => {
         isModalOpen={isModalOpen} // Passando o estado para ThirdSection
         setIsModalOpen={setIsModalOpen} // Passando a função para ThirdSection
       />
-    </>
+    </div>
   );
 };
 
