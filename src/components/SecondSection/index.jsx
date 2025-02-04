@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import FirstIconeNovo from "../../assets/1IconeNovo.svg";
-import SecondIconeNovo from "../../assets/2IconeNovo.svg";
-import ThirdIconeNovo from "../../assets/3IconeNovo.svg";
+import FirstIconeNovo from "../../assets/images/1IconeNovo.svg";
+import SecondIconeNovo from "../../assets/images/2IconeNovo.svg";
+import ThirdIconeNovo from "../../assets/images/3IconeNovo.svg";
 import InformationCard from "../InformationCard";
 
 export default function TotalSection({ atualizar }) {

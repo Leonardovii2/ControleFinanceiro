@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import imgUsuarioLogado from "../../assets/Perfil.svg";
+import imgUsuarioLogado from "../../assets/Images/Perfil.svg";
 import DateDisplay from "../DateDisplay";
 import React, { useState, useEffect, useRef } from "react";
 import GetInitialsContainer from "../Ultis/index";

@@ -1,24 +1,6 @@
-import React from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // ✅ Importando os ícones
 import styles from "./styles.module.css";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 
-import useLogin from "../../assets/Hooks/useLogin";
-
-function Login() {
-  const {
-    email,
-    setEmail,
-    senha,
-    setSenha,
-    mostrarSenha,
-    togglePasswordVisibility,
-    handleSubmit,
-    handleRegisterClick,
-    handleForgotPasswordClick,
-  } = useLogin();
-
+export default function CardLogin() {
   return (
     <main className={styles.main}>
       <section className={styles.sectionInfo}>
@@ -69,7 +51,7 @@ function Login() {
               style={{
                 position: "absolute",
                 right: "10px",
-                top: "55%",
+                top: "50%",
                 transform: "translateY(-50%)",
                 cursor: "pointer",
                 color: "#555",
@@ -96,5 +78,3 @@ function Login() {
     </main>
   );
 }
-
-export default Login;

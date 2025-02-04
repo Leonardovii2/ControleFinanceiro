@@ -26,17 +26,21 @@
 }
 
 .buttonCadastro {
-  width: 10rem;
-  height: 2.2rem;
   background-color: #b5911b;
-  border: none;
   color: #fff;
+  padding: 10px 25px;
+  width: 50%;
+  border: none;
+  border-radius: 10px;
   font-weight: bold;
-  border-radius: 8px;
-  margin-top: 1rem;
   cursor: pointer;
+  transition: 0.25s;
 }
 
+.buttonCadastro:hover {
+  background-color: #947a27;
+  transform: translateX(0.5em);
+}
 .titulo {
   font-size: 25px;
 }
@@ -61,28 +65,35 @@
   padding: 50px;
   border-radius: 40px;
   height: auto;
-  gap: 5px;
 }
 
 .form input {
   width: 16rem;
   height: 2.2rem;
+  border: none;
+  border-radius: 10px;
+  margin-top: 0.2rem;
 }
 
 .padding {
-  padding-top: 1rem;
+  margin-top: 1rem;
 }
 
 .buttonLogin {
-  width: 16rem;
-  height: 2.2rem;
   background-color: #b5911b;
-  border: none;
   color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
   font-weight: bold;
-  border-radius: 8px;
-  margin-top: 1rem;
   cursor: pointer;
+  transition: 0.25s;
+  margin-top: 1.2rem;
+}
+
+.buttonLogin:hover {
+  background-color: #947a27;
+  transform: translateX(0.5em);
 }
 
 .input {
@@ -118,10 +129,9 @@
   .buttonLogin {
     width: 100%;
     /* Tornando os botões de largura total */
-    height: 3rem;
+    height: 2.8rem;
     /* Ajustando a altura para se adaptar melhor */
   }
-
 
   .form input {
     width: 100%;

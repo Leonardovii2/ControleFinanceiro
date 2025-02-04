@@ -82,7 +82,7 @@ function Register() {
           <h2 className={styles.titulo}>Cadastro</h2>
 
           <label className={styles.padding} htmlFor="nome">
-            Nome
+            Nome completo
           </label>
           <input
             className={styles.input}
@@ -122,7 +122,7 @@ function Register() {
               style={{
                 position: "absolute",
                 right: "10px",
-                top: "50%",
+                top: "55%",
                 transform: "translateY(-50%)",
                 cursor: "pointer",
                 color: "#555",

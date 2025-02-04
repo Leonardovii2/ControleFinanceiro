@@ -26,15 +26,20 @@
 }
 
 .buttonCadastro {
-  width: 10rem;
-  height: 2.2rem;
   background-color: #b5911b;
-  border: none;
   color: #fff;
+  padding: 10px 25px;
+  width: 50%;
+  border: none;
+  border-radius: 10px;
   font-weight: bold;
-  border-radius: 8px;
-  margin-top: 1rem;
   cursor: pointer;
+  transition: 0.25s;
+}
+
+.buttonCadastro:hover {
+  background-color: #947a27;
+  transform: translateX(0.5em);
 }
 
 .titulo {
@@ -61,40 +66,49 @@
   padding: 50px;
   border-radius: 40px;
   height: auto;
-  gap: 5px;
+}
+
+.padding {
+  margin-top: 1rem;
 }
 
 .form input {
   width: 16rem;
   height: 2.2rem;
-}
-
-.padding {
-  padding-top: 1rem;
+  border: none;
+  border-radius: 10px;
+  margin-top: 0.2rem;
 }
 
 .esqueciSenha {
-  padding-top: 1rem;
+  display: flex;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+  padding: 1rem 0;
 }
 
 .buttonLogin {
-  width: 16rem;
-  height: 2.2rem;
   background-color: #b5911b;
-  border: none;
   color: #fff;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
   font-weight: bold;
-  border-radius: 8px;
-  margin-top: 1rem;
   cursor: pointer;
+  transition: 0.25s;
+}
+
+.buttonLogin:hover {
+  background-color: #947a27;
+  transform: translateX(0.5em);
 }
 
 .input {
   padding: 0 10px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .main {
     flex-direction: column;
     height: auto;
@@ -114,9 +128,10 @@
     font-size: 14px; /* Ajustando o tamanho da fonte do parágrafo */
   }
 
-  .buttonCadastro, .buttonLogin {
+  .buttonCadastro,
+  .buttonLogin {
     width: 100%; /* Tornando os botões de largura total */
-    height: 3rem; /* Ajustando altura para se adaptar melhor */
+    height: 2.8rem; /* Ajustando altura para se adaptar melhor */
   }
 
   .form input {
@@ -136,7 +151,6 @@
   }
 
   .esqueciSenha {
-    font-size: 14px; /* Ajustando o tamanho da fonte do texto */
+    font-size: 12px; /* Ajustando o tamanho da fonte do texto */
   }
 }
-
