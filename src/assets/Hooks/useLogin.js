@@ -10,10 +10,11 @@ export default function useLogin() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Efeito para mostrar mensagem de sucesso de mudança de senha
   useEffect(() => {
     if (location.state?.passwordReset) {
       toast.success("Senha alterada com sucesso!");
-      navigate(location.pathname, { replace: true, state: {} }); // 🔹 Limpa o estado após exibir a mensagem
+      navigate(location.pathname, { replace: true, state: {} }); // Limpa o estado após a mensagem
     }
   }, [location, navigate]);
 
@@ -28,13 +29,16 @@ export default function useLogin() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
-        credentials: "include",
+        credentials: "include", // Certifique-se de que o backend está configurado para receber o token no cookie ou no header
       });
 
       if (response.ok) {
         const data = await response.json();
+        // Salvando o token no localStorage após sucesso no login
         localStorage.setItem("token", data.token);
         localStorage.setItem("nomeUsuario", data.nome);
+
+        // Redirecionando para a página inicial após login bem-sucedido
         navigate("/home");
       } else {
         const error = await response.json();

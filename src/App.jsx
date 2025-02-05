@@ -1,11 +1,6 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/Home/index";
@@ -20,67 +15,70 @@ import useGastos from "./assets/Hooks/useGastos";
 
 function App() {
   const [onEdit, setOnEdit] = useState(null);
-  const { gastos, setGastos, getGastos } = useGastos();
+  const navigate = useNavigate();
+  const { gastos, setGastos, getGastos } = useGastos(navigate);
+
+  const isAuthenticated = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [navigate, isAuthenticated]);
+
+  const ProtectedRoute = ({ children }) => {
+    return isAuthenticated ? children : <Navigate to="/login" />;
+  };
 
   return (
-    <Router>
-      <div className="app">
-        <ToastContainer />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/requestPassword" element={<RequestPassword />} />
-          <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route
-            path="/home"
-            element={
-              localStorage.getItem("token") ? (
-                <Home
-                  onEdit={onEdit}
-                  setOnEdit={setOnEdit}
-                  getGastos={getGastos}
-                  gastos={gastos}
-                  setGastos={setGastos}
-                />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/relatorio"
-            element={
-              localStorage.getItem("token") ? (
-                <Relatorio />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/configuracao"
-            element={
-              localStorage.getItem("token") ? (
-                <Configuracao />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/carteira"
-            element={
-              localStorage.getItem("token") ? (
-                <Carteira />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-        </Routes>
-      </div>
-    </Router>
+    <div className="app">
+      <ToastContainer />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/requestPassword" element={<RequestPassword />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home
+                onEdit={onEdit}
+                setOnEdit={setOnEdit}
+                getGastos={getGastos}
+                gastos={gastos}
+                setGastos={setGastos}
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/relatorio"
+          element={
+            <ProtectedRoute>
+              <Relatorio />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/configuracao"
+          element={
+            <ProtectedRoute>
+              <Configuracao />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/carteira"
+          element={
+            <ProtectedRoute>
+              <Carteira />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 
