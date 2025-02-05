@@ -1,48 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import FirstSection from "../../components/FirstSection";
 import NavBar from "../../components/Navbar";
-import api from "../../services/api"; // 🛑 Importa o Axios configurado
 import TotalSection from "../../components/SecondSection";
 import ThirdSection from "../../components/ThirdSection";
 import SecondSection from "../../components/Pig";
 
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
+import useHome from "../../assets/Hooks/useHome";
 
 const Home = () => {
-  const [gastos, setGastos] = useState([]);
-  const [atualizar, setAtualizar] = useState(false);
-  const [onEdit, setOnEdit] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Adicionado estado do modal
-  const navigate = useNavigate();
-
-  const getGastos = async () => {
-    const token = localStorage.getItem("token");
-    const mes = new Date().toISOString().slice(0, 7);
-
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    try {
-      const { data } = await api.get(
-        `http://localhost:8801/gastos?mes=${mes}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setGastos(data);
-    } catch (error) {
-      console.error("Erro ao buscar gastos:", error);
-    }
-  };
-
-  useEffect(() => {
-    const nome = localStorage.getItem("nomeUsuario");
-    getGastos();
-  }, []);
-
+  const {
+    atualizar,
+    gastos,
+    isModalOpen,
+    onEdit,
+    setAtualizar,
+    setIsModalOpen,
+    setOnEdit,
+    getGastos,
+    setGastos,
+  } = useHome();
   return (
     <div className={styles.container}>
       <NavBar />

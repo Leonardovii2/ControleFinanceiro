@@ -1,56 +1,18 @@
-import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import React from "react";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Importando para navegar programaticamente
 import styles from "./styles.module.css";
+import UseResetPassword from "../../assets/Hooks/useResetPassword"; // Importando o hook
 
 export default function ResetPassword() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  // Obtenha o token da URL
-  const token = new URLSearchParams(window.location.search).get("token");
-  const navigate = useNavigate(); // Para redirecionar com o estado
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      toast.error("As senhas não coincidem.");
-      return;
-    }
-
-    // Adicionando validação de senha
-    if (password.length < 8) {
-      toast.error("A senha deve ter pelo menos 8 caracteres.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await axios.post("http://localhost:8801/resetPassword", {
-        token,
-        password,
-      });
-
-      if (response.status === 200) {
-        // Redireciona para a página de login com um estado indicando sucesso
-        navigate("/login", { state: { passwordReset: true } });
-      }
-    } catch (error) {
-      console.error(
-        "Erro ao alterar a senha:",
-        error.response?.status,
-        error.response?.data
-      );
-      const errorMessage =
-        error.response?.data?.message || "Erro ao alterar a senha.";
-      toast.error(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    loading,
+    handleSubmit,
+  } = UseResetPassword();
 
   return (
     <main className={styles.container}>

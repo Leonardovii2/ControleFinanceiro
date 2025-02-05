@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import InputSettings from "../InputSettings/index";
 
 export default function AddSalary({ setAtualizarSalario }) {
-  const [salario, setSalario] = useState();
+  const [salario, setSalario] = useState("");
   const [loading, setLoading] = useState(false);
 
   const atualizarSalario = async () => {
@@ -30,24 +30,18 @@ export default function AddSalary({ setAtualizarSalario }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ salario }),
+        body: JSON.stringify({ salario: salarioNumerico }),
       });
 
       const data = await response.json();
 
-      // Se a resposta não for OK, lançar um erro
       if (!response.ok) {
-        throw new Error(`Erro: ${data.message || "Erro desconhecido"}`);
+        throw new Error(data.message || "Erro desconhecido");
       }
 
-      // Checando a resposta de sucesso do backend
-      if (data.message === "Salário atualizado com sucesso!") {
-        toast.success("Salário atualizado com sucesso!");
-        setAtualizarSalario((prev) => !prev);
-        setSalario(0);
-      } else {
-        toast.error("Erro ao atualizar o salário!");
-      }
+      toast.success("Salário atualizado com sucesso!");
+      setAtualizarSalario(true); // 🚀 Agora a interface será atualizada
+      setSalario("");
     } catch (error) {
       console.error("Erro ao atualizar o salário:", error);
       toast.error(error.message || "Erro ao atualizar o salário!");
@@ -57,7 +51,7 @@ export default function AddSalary({ setAtualizarSalario }) {
   };
 
   return (
-    <form className={styles.container}>
+    <form className={styles.container} onSubmit={(e) => e.preventDefault()}>
       <InputSettings
         label="Salário"
         value={salario}

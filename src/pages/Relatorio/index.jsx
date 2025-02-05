@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import Navbar from "../../components/Navbar";
 import FirstSection from "../../components/FirstSection";
-import FiltroMensal from "../../components/Relatorio/filtroMensal";
+import FiltroMensal from "../../components/Relatorio/MonthlyFilter";
 
 export default function Perfil() {
   return (
@@ -14,7 +14,6 @@ export default function Perfil() {
         <h2 className={styles.title}>Relátorio Mensal</h2>
         <FiltroMensal />
       </section>
-
     </div>
   );
 }

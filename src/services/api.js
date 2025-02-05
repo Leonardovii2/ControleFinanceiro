@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const api = axios.create({
   baseURL: "http://localhost:8801/", // URL do seu backend
@@ -29,7 +30,9 @@ api.interceptors.request.use(
     if (token && !isTokenExpired(token)) {
       config.headers["Authorization"] = `Bearer ${token}`; // Adiciona o token ao cabeçalho
     } else {
-      window.location.href = "/login"; // Redireciona para o login se o token estiver expirado ou não presente
+      // Usar navigate para redirecionar no React
+      const navigate = useNavigate();
+      navigate("/login"); // Redireciona para o login se o token estiver expirado ou não presente
       return Promise.reject("Token expirado");
     }
     return config;
@@ -44,8 +47,10 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
+      // Usar navigate para redirecionar no React
+      const navigate = useNavigate();
       alert("Sessão expirada. Faça login novamente.");
-      window.location.href = "/login"; // Redireciona para login
+      navigate("/login"); // Redireciona para login
     }
     return Promise.reject(error);
   }
