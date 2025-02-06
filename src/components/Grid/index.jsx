@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import styles from "./styles.module.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { toast } from "react-toastify";
+import useGrid from "../../assets/Hooks/useGrid";
 import AdicionarGasto from "../../components/Form";
 
 export default function Grid({
@@ -11,73 +10,18 @@ export default function Grid({
   atualizarTotal,
   getGastos,
 }) {
-  const [gastoToEdit, setGastoToEdit] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Paginação
-  const [currentPage, setCurrentPage] = useState(1); // Página atual
-  const itemsPerPage = 5; // Itens por página
-
-  // Calcular índice inicial e final dos itens a serem exibidos
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  // Seleciona os gastos para a exibição na página atual
-  const currentItems = gastos.slice(startIndex, endIndex);
-
-  // Número total de páginas
-  const totalPages = Math.ceil(gastos.length / itemsPerPage);
-
-  // Função para mudar a página
-  const changePage = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-  // Atualiza o localStorage sempre que os gastos forem alterados
-  useEffect(() => {
-    if (Array.isArray(gastos)) {
-      localStorage.setItem("gastos", JSON.stringify(gastos));
-    }
-  }, [gastos]);
-
-  const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      toast.error("Você precisa estar logado para excluir um gasto.");
-      return;
-    }
-
-    try {
-      const { data } = await axios.delete(
-        `http://localhost:8801/gastos/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const newArray = gastos.filter((gasto) => gasto.id !== id);
-      setGastos(newArray);
-      toast.success(data.message);
-
-      getGastos();
-      atualizarTotal();
-    } catch (error) {
-      const message = error.response
-        ? error.response.data.message
-        : "Erro inesperado ao deletar!";
-      toast.error(message);
-    }
-  };
-
-  const handleEditClick = (item) => {
-    setGastoToEdit(item);
-    setIsModalOpen(true);
-  };
+  const {
+    gastoToEdit,
+    setGastoToEdit,
+    isModalOpen,
+    setIsModalOpen,
+    currentItems,
+    currentPage,
+    totalPages,
+    changePage,
+    handleDelete,
+    handleEditClick,
+  } = useGrid(setGastos, atualizarTotal, getGastos, gastos);
 
   return (
     <>
@@ -125,7 +69,7 @@ export default function Grid({
             </tbody>
           </table>
 
-          {/* Páginas */}
+          {/* Paginação */}
           <div className={styles.pagination}>
             {Array.from({ length: totalPages }, (_, index) => (
               <button

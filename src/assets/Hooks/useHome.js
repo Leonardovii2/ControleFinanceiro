@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import api from "../../services/api"; // 🛑 Importa o Axios configurado
+import api from "../../services/api";
 
 export default function useHome() {
   const [gastos, setGastos] = useState([]);
@@ -30,8 +30,11 @@ export default function useHome() {
   };
 
   useEffect(() => {
-    getGastos();
-  }, [atualizar]); // Atualiza sempre que `atualizar` mudar
+    if (atualizar) {
+      getGastos();
+      setAtualizar(false); // Reseta a flag após atualizar
+    }
+  }, [atualizar]);
 
   return {
     gastos,
@@ -42,7 +45,6 @@ export default function useHome() {
     isModalOpen,
     setIsModalOpen,
     getGastos,
-    setAtualizar,
     setGastos,
   };
 }
