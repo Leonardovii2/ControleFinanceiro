@@ -48,3 +48,12 @@
     left: 6rem;
   }
 }
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .img {
+    width: 330px;
+    position: absolute;
+    top: 56px;
+    left: 23rem;
+  }
+}

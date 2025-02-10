@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import styles from "./styles.module.css";
 
-export default function GetInitialsContainer({ atualizar }) {
+export default function UseGetInitials({ atualizar }) {
   const [nomeUsuario, setNomeUsuario] = useState(
     localStorage.getItem("nomeUsuario") || ""
   );
@@ -16,9 +15,6 @@ export default function GetInitialsContainer({ atualizar }) {
     if (words.length === 1) return words[0][0].toUpperCase(); // Se for só um nome
     return `${words[0][0]}${words[words.length - 1][0]}`.toUpperCase(); // Primeiro + Último
   };
-  return (
-    <div className={styles.profileImage}>
-      <div className={styles.avatar}>{getInitials(nomeUsuario)}</div>
-    </div>
-  );
+
+  return { nomeUsuario, getInitials };
 }

@@ -8,7 +8,6 @@ export default function AdicionarGasto({
   setIsModalOpen,
   getGastos,
   atualizarTotal,
-  setGastos,
   isModalOpen,
 }) {
   // Chamando o hook useForm e passando as funções e variáveis necessárias

@@ -42,7 +42,7 @@ export default function Grid({
               {currentItems.map((item) => (
                 <tr key={item.id}>
                   <td className={styles.firstConfigTd}>
-                    {item.data_gasto.split("T")[0].replace(/-/g, "/")}
+                    {new Date(item.data_gasto).toLocaleDateString("pt-BR")}
                   </td>
                   <td className={styles.firstConfigTd}>{item.descricao}</td>
                   <td className={styles.firstConfigTd}>{item.categoria}</td>

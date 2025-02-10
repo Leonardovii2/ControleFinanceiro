@@ -29,6 +29,7 @@
   border-radius: 5px;
   padding-left: 0.5rem;
   outline: none;
+  width: 15rem;
 }
 
 .label {
@@ -49,4 +50,10 @@
 .button:hover {
   background-color: #444444;
   transform: translateX(0.5em);
+}
+
+@media (max-width: 600px) {
+  .input {
+    width: 10rem;
+  }
 }

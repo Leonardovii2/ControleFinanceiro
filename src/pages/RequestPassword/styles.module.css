@@ -68,16 +68,25 @@
 
 .returnToClick {
   display: flex;
+  background-color: transparent;
+  color: #fff;
   cursor: pointer;
   justify-content: center;
   padding-top: 1rem;
+  border: none;
 }
 
 @media (max-width: 600px) {
   .section {
     width: 48vh;
-    height: auto;
     padding: 3rem;
     border-radius: 40px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .section {
+    width: 33vh;
+    padding: 4rem;
   }
 }

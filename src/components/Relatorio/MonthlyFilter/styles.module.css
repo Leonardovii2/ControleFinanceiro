@@ -130,3 +130,9 @@
   }
 
 }
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .listaGastos h2 {
+    padding-top: 1rem;
+  }
+}

@@ -63,7 +63,6 @@
 @media (max-width: 600px) {
   .section {
     width: 48vh;
-    height: auto;
     padding: 3rem;
     border-radius: 40px;
   }

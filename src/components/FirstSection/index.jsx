@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import imgUsuarioLogado from "../../assets/Images/Perfil.svg";
 import DateDisplay from "../DateDisplay";
 import React, { useState, useEffect, useRef } from "react";
-import GetInitialsContainer from "../Ultis/index";
+import GetInitialsContainer from "../GetInitials/index";
 
 export default function FirstSection({ atualizar }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -51,12 +51,9 @@ export default function FirstSection({ atualizar }) {
         <DateDisplay />
       </div>
       <div className={styles.usuLogado} ref={dropdownRef}>
-        <img
-          className={styles.imgUsuarioLogado}
-          src={imgUsuarioLogado}
-          alt="Perfil do usuário"
-          onClick={toggleDropdown}
-        />
+        <div className={styles.imgUsuarioLogado} onClick={toggleDropdown}>
+          <GetInitialsContainer atualizar={true} />
+        </div>
 
         {isDropdownVisible && (
           <div className={styles.dropdownMenu}>

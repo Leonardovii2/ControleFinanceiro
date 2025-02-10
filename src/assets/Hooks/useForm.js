@@ -1,13 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 export default function useForm({
   onEdit,
   setOnEdit,
   setIsModalOpen,
   atualizarTotal,
-  setGastos,
   getGastos,
 }) {
   const [descricao, setDescricao] = useState("");

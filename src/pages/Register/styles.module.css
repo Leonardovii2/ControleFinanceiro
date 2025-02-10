@@ -41,6 +41,7 @@
   background-color: #947a27;
   transform: translateX(0.5em);
 }
+
 .titulo {
   font-size: 25px;
 }
@@ -75,10 +76,6 @@
   margin-top: 0.2rem;
 }
 
-.padding {
-  margin-top: 1rem;
-}
-
 .buttonLogin {
   background-color: #b5911b;
   color: #fff;
@@ -96,6 +93,10 @@
   transform: translateX(0.5em);
 }
 
+.padding {
+  padding-top: 1rem;
+}
+
 .input {
   padding: 0 10px;
 }
@@ -103,7 +104,7 @@
 @media (max-width: 600px) {
   .main {
     flex-direction: column;
-    height: auto;
+
     padding: 20px;
     /* Adicionando padding para evitar que fique colado na borda */
   }
@@ -165,5 +166,14 @@
   .buttonLogin {
     width: 100%;
     /* Tornando o botão de login de largura total */
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .main {
+    padding: 0 4rem;
+  }
+  .sectionInfo {
+    padding: 1.2rem;
   }
 }

@@ -8,11 +8,17 @@ export default function ChangeProfileNameSection({ setAtualizar }) {
   const [nome, setNome] = useState("");
   const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState(
-    localStorage.getItem("userName") || ""
+    localStorage.getItem("nomeUsuario") || ""
   );
 
   const handleUpdateName = async () => {
+    if (!nome.trim()) {
+      toast.error("O nome não pode estar vazio!");
+      return;
+    }
+
     const token = localStorage.getItem("token");
+
     if (!token) {
       toast.error("Você precisa estar logado.");
       return;
@@ -38,6 +44,7 @@ export default function ChangeProfileNameSection({ setAtualizar }) {
       if (data.success) {
         toast.success("Nome atualizado com sucesso!");
         localStorage.setItem("nomeUsuario", nome);
+        setUserName(nome);
         setAtualizar((prev) => !prev);
         setNome("");
       } else {
@@ -45,23 +52,22 @@ export default function ChangeProfileNameSection({ setAtualizar }) {
       }
     } catch (error) {
       console.error("Erro ao atualizar nome:", error);
-      alert("Erro ao atualizar nome!");
+      toast.error("Erro ao atualizar nome!");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <section className={styles.container}>
       <InputSettings
-        label="Nome"
-        placeholder="Nome"
+        label="Nome completo"
+        placeholder="Novo nome completo"
         type="text"
         value={nome}
         onChange={(e) => setNome(e.target.value)}
-        onSubmit={handleUpdateName}
-        nameButton="Alterar"
-        nameLoading="Alterando"
+        onSubmit={!loading ? handleUpdateName : null} // Evita cliques múltiplos
+        nameButton={loading ? "Alterando..." : "Alterar"}
       />
     </section>
   );
