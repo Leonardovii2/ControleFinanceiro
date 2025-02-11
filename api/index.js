@@ -19,6 +19,7 @@ const app = express();
 // Configuração do CORS para aceitar requisições apenas do localhost
 const corsOptions = {
   origin: [
+    "https://controle-financeiro-ashen.vercel.app",
     "https://controlefinanceiro-1.onrender.com",
     "https://controlefinanceiro-dktx.onrender.com",
     "http://localhost:5173",
