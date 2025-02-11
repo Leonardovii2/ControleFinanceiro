@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputSettings from "../InputSettings/index";
+import api from "../../../services/api"; // Importando a instância do axios
 
 export default function ChangeProfileNameSection({ setAtualizar }) {
   const [nome, setNome] = useState("");
@@ -27,21 +28,10 @@ export default function ChangeProfileNameSection({ setAtualizar }) {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:8801/usuarios/update-name",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ nome }),
-        }
-      );
+      // Usando a instância do Axios (api)
+      const response = await api.put("/usuarios/update-name", { nome });
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.data.success) {
         toast.success("Nome atualizado com sucesso!");
         localStorage.setItem("nomeUsuario", nome);
         setUserName(nome);

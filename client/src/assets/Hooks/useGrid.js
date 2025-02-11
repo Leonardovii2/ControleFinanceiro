@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function useGrid(setGastos, atualizarTotal, getGastos, gastos) {
   const [gastoToEdit, setGastoToEdit] = useState(null);
@@ -40,14 +40,12 @@ export default function useGrid(setGastos, atualizarTotal, getGastos, gastos) {
     }
 
     try {
-      const { data } = await axios.delete(
-        `http://localhost:8801/gastos/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await api.delete(`/gastos/${id}`, {
+        // Usando a instância api
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const newArray = gastos.filter((gasto) => gasto.id !== id);
       setGastos(newArray);

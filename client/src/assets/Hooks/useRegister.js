@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function UseRegister() {
   const [nome, setNome] = useState("");
@@ -18,29 +19,16 @@ export default function UseRegister() {
       return;
     }
 
-    /* https://controlefinanceiro-dktx.onrender.com/usuarios/register */
-
     try {
-      const response = await fetch("http://localhost:8801/register/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ nome, email, senha }),
+      const response = await api.post("/register/register", {
+        // Usando a instância api
+        nome,
+        email,
+        senha,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        if (response.status === 409) {
-          toast.error("E-mail já está em uso!");
-        } else {
-          toast.error("Erro ao cadastrar usuário!");
-        }
-        return;
-      }
+      const data = response.data;
 
-      const data = await response.json();
-      console.log(data);
       toast.success("Cadastro realizado com sucesso!");
 
       // Resetar os campos do formulário
@@ -50,7 +38,11 @@ export default function UseRegister() {
       navigate("/login");
     } catch (error) {
       console.error("Erro:", error);
-      toast.error("Erro ao cadastrar usuário!");
+      if (error.response?.status === 409) {
+        toast.error("E-mail já está em uso!");
+      } else {
+        toast.error("Erro ao cadastrar usuário!");
+      }
     }
   };
 

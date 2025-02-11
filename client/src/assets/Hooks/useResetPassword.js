@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function UseResetPassword() {
   const [password, setPassword] = useState("");
@@ -36,7 +36,8 @@ export default function UseResetPassword() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8801/resetPassword", {
+      const response = await api.post("/resetPassword", {
+        // Usando a instância api
         token,
         password,
       });

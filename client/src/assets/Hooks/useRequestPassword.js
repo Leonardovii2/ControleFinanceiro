@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function useRequestPassword(service = "gmail") {
   const [email, setEmail] = useState("");
@@ -16,17 +17,14 @@ export default function useRequestPassword(service = "gmail") {
 
     setLoading(true);
     try {
-      const response = await fetch(
-        "http://localhost:8801/requestPassword/request",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, service }),
-        }
-      );
+      const response = await api.post("/requestPassword/request", {
+        // Usando a instância api
+        email,
+        service,
+      });
 
-      const data = await response.json();
-      if (response.ok) {
+      const data = response.data;
+      if (response.status === 200) {
         toast.success(data.message);
       } else {
         toast.error(

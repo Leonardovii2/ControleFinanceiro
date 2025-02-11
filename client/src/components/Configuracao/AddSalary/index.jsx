@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
+import api from "../../../services/api"; // Importando a instância do axios
 import "react-toastify/dist/ReactToastify.css";
 import InputSettings from "../InputSettings/index";
 
@@ -24,27 +25,19 @@ export default function AddSalary({ setAtualizarSalario }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8801/usuarios/salario", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ salario: salarioNumerico }),
+      // Usando a instância personalizada do Axios (api)
+      const response = await api.put("/usuarios/salario", {
+        salario: salarioNumerico,
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Erro desconhecido");
-      }
 
       toast.success("Salário atualizado com sucesso!");
       setAtualizarSalario(true); // 🚀 Agora a interface será atualizada
       setSalario("");
     } catch (error) {
       console.error("Erro ao atualizar o salário:", error);
-      toast.error(error.message || "Erro ao atualizar o salário!");
+      toast.error(
+        error.response?.data?.message || "Erro ao atualizar o salário!"
+      );
     }
 
     setLoading(false);

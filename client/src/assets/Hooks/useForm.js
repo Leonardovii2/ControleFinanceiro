@@ -1,6 +1,6 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function useForm({
   onEdit,
@@ -73,15 +73,9 @@ export default function useForm({
     try {
       let response;
       if (onEdit) {
-        response = await axios.put(
-          `http://localhost:8801/gastos/${onEdit.id}`,
-          payload,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        response = await api.put(`/gastos/${onEdit.id}`, payload); // Usando a instância api
       } else {
-        response = await axios.post("http://localhost:8801/gastos", payload, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        response = await api.post("/gastos", payload); // Usando a instância api
       }
 
       toast.success(response.data.message);

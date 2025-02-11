@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function useLogin() {
   const [email, setEmail] = useState("");
@@ -33,21 +34,19 @@ export default function useLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8801/login/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha }),
+      const response = await api.post("/login/login", {
+        // Usando a instância api
+        email,
+        senha,
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("nomeUsuario", data.nome);
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("nomeUsuario", response.data.nome);
 
         navigate("/home");
       } else {
-        const error = await response.json();
-        toast.error(error.message || "Erro ao fazer login");
+        toast.error(response.data.message || "Erro ao fazer login");
       }
     } catch (error) {
       toast.error("Erro na conexão com o servidor.");

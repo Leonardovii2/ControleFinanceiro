@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import FirstIconeNovo from "../../assets/Images/1IconeNovo.svg";
 import SecondIconeNovo from "../../assets/Images/2IconeNovo.svg";
 /* import ThirdIconeNovo from "../../assets/images/3IconeNovo.svg"; */
@@ -16,14 +16,11 @@ export default function TotalSection({ atualizar }) {
     const mesAtual = new Date().toISOString().slice(0, 7); // Obtém o mês no formato YYYY-MM
 
     try {
-      const response = await axios.get(
-        `http://localhost:8801/gastos/totalGastos?mes=${mesAtual}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.get(`/gastos/totalGastos?mes=${mesAtual}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setTotalGastos(response.data.totalGastos || 0);
     } catch (error) {
@@ -34,15 +31,13 @@ export default function TotalSection({ atualizar }) {
 
   const fetchSalario = async () => {
     const token = localStorage.getItem("token");
+
     try {
-      const response = await axios.get(
-        "http://localhost:8801/usuarios/salario",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.get("/usuarios/salario", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setSalario(response.data.salario || 0);
     } catch (error) {
       console.error("Erro ao buscar salário:", error.message);

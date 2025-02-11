@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
+import api from "../../services/api"; // Importando a instância do axios
 
 export default function useMonthlyFilter() {
   const [gastos, setGastos] = useState([]);
@@ -33,10 +33,10 @@ export default function useMonthlyFilter() {
     setLoading(true);
 
     try {
-      const { data } = await axios.get(
-        `http://localhost:8801/gastos?mes=${mes}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const { data } = await api.get(`/gastos?mes=${mes}`, {
+        // Usando a instância api
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setGastos(data);
     } catch (error) {
       toast.error("Erro ao carregar os gastos.");
@@ -49,10 +49,10 @@ export default function useMonthlyFilter() {
   const fetchSalario = async () => {
     const token = localStorage.getItem("token");
     try {
-      const { data } = await axios.get(
-        "http://localhost:8801/usuarios/salario",
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const { data } = await api.get("/usuarios/salario", {
+        // Usando a instância api
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setSalario(data.salario || 0);
     } catch (error) {
       console.error("Erro ao buscar salário:", error);
