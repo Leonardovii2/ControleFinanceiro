@@ -42,9 +42,12 @@ app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
 // Definindo a porta do servidor
-const PORT = process.env.PORT || 8801;
+/* const PORT = process.env.PORT || 8801;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+}); */
+
+const host = process.env.HOST || "localhost"; // Definindo a URL com base no ambiente
+console.log(`Servidor rodando em http://${host}:${PORT}`);
 
 export default app;
