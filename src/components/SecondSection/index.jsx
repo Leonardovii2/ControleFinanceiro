@@ -1,8 +1,8 @@
 import styles from "./styles.module.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import FirstIconeNovo from "../../assets/images/1IconeNovo.svg";
-import SecondIconeNovo from "../../assets/images/2IconeNovo.svg";
+import FirstIconeNovo from "../../assets/Images/1IconeNovo.svg";
+import SecondIconeNovo from "../../assets/Images/2IconeNovo.svg";
 import ThirdIconeNovo from "../../assets/images/3IconeNovo.svg";
 import InformationCard from "../InformationCard";
 

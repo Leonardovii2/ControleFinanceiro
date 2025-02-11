@@ -17,8 +17,14 @@ export default function FirstSection({ atualizar }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    localStorage.removeItem("nomeUsuario");
+    sessionStorage.removeItem("nomeUsuario");
+    localStorage.removeItem("rememberMe");
+
     navigate("/login");
+    window.location.reload(); // Garante que o estado seja atualizado corretamente
   };
 
   useEffect(() => {

@@ -14,9 +14,17 @@ export default function useLogin() {
   useEffect(() => {
     if (location.state?.passwordReset) {
       toast.success("Senha alterada com sucesso!");
-      navigate(location.pathname, { replace: true, state: {} }); // Limpa o estado após a mensagem
+      navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location, navigate]);
+
+  useEffect(() => {
+    const token =
+      localStorage.getItem("token") || sessionStorage.getItem("token");
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const togglePasswordVisibility = () => {
     setMostrarSenha((prevState) => !prevState);
@@ -29,16 +37,13 @@ export default function useLogin() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
-        credentials: "include", // Certifique-se de que o backend está configurado para receber o token no cookie ou no header
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Salvando o token no localStorage após sucesso no login
         localStorage.setItem("token", data.token);
         localStorage.setItem("nomeUsuario", data.nome);
 
-        // Redirecionando para a página inicial após login bem-sucedido
         navigate("/home");
       } else {
         const error = await response.json();

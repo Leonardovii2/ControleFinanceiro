@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // ✅ Importando os ícones
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./styles.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -53,7 +53,6 @@ function Login() {
           <label className={styles.padding} htmlFor="senha">
             Senha
           </label>
-          {/* 🔹 Envolvendo o input e o ícone dentro de um div */}
           <div style={{ position: "relative", width: "100%" }}>
             <input
               className={styles.input}
@@ -62,7 +61,7 @@ function Login() {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              style={{ paddingRight: "40px" }} // 🔹 Espaço para o ícone
+              style={{ paddingRight: "40px" }}
             />
             <span
               onClick={togglePasswordVisibility}
