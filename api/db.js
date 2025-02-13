@@ -1,9 +1,5 @@
 import pkg from "pg";
 
-import dotenv from "dotenv";
-
-dotenv.config();
-
 const { Pool } = pkg;
 
 export const db = new Pool({
@@ -13,19 +9,12 @@ export const db = new Pool({
   password: "bancoleo12",
   database: "crud", */
 
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: "dpg-culo7hin91rc73eg1dmg-a.oregon-postgres.render.com",
+  port: 5432,
+  user: "crud_8j2e_user",
+  password: "D1am4bGwisgQUvcLWVfpFB0Y3jflyT3P",
+  database: "crud_8j2e",
 });
-
-/* const db = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-}); */
 
 async function connectToDatabase() {
   try {
