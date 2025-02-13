@@ -6,9 +6,10 @@ import loginRouter from "./routes/logins.js";
 import registerRouter from "./routes/registers.js";
 import requestPasswordRouter from "./routes/requestPassword.js";
 import resetPasswordRouter from "./routes/resetPassword.js";
-import dotenv from "dotenv";
+import dotenv from "dotenv"; // Importando o dotenv para usar no JWT
 import bodyParser from "body-parser";
 
+// Carrega as variáveis de ambiente do .env
 dotenv.config();
 
 const app = express();
@@ -38,11 +39,11 @@ app.use("/resetPassword", resetPasswordRouter);
 
 // Definindo a porta do servidor
 const PORT = process.env.PORT || 8801; // Usa a variável de ambiente PORT ou o valor padrão 8801
-const host = process.env.HOST || "localhost"; // Definindo a URL com base no ambiente
+const host = "0.0.0.0"; // Alterado para 0.0.0.0 para escutar em todas as interfaces
 console.log(`Servidor rodando em http://${host}:${PORT}`);
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+app.listen(PORT, host, () => {
+  console.log(`Servidor rodando em http://${host}:${PORT}`);
 });
 
 export default app;
