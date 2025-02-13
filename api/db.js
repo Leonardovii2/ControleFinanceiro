@@ -14,6 +14,9 @@ export const db = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  ssl: {
+    rejectUnauthorized: false, // Defina como `false` para permitir a conexão com a validação SSL desativada (caso contrário, pode gerar erros).
+  },
 });
 
 async function connectToDatabase() {
