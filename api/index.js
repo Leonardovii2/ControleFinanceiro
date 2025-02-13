@@ -6,10 +6,7 @@ import loginRouter from "./routes/logins.js";
 import registerRouter from "./routes/registers.js";
 import requestPasswordRouter from "./routes/requestPassword.js";
 import resetPasswordRouter from "./routes/resetPassword.js";
-import dotenv from "dotenv";
 import bodyParser from "body-parser";
-
-dotenv.config();
 
 const app = express();
 
@@ -37,8 +34,8 @@ app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
 // Definindo a porta do servidor
-const PORT = process.env.PORT || 8801; // Usa a variável de ambiente PORT ou o valor padrão 8801
-const host = process.env.HOST || "localhost"; // Definindo a URL com base no ambiente
+const PORT = 8801; // Defina o valor fixo para a porta
+const host = "localhost"; // Defina o valor fixo para o host
 console.log(`Servidor rodando em http://${host}:${PORT}`);
 
 app.listen(PORT, () => {
