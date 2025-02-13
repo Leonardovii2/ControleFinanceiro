@@ -38,7 +38,7 @@ app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
 // Definindo a porta do servidor
-const PORT = process.env.PORT || 8801; // Usa a variável de ambiente PORT ou o valor padrão 8801
+const PORT = process.env.PORT || 10000; // Usa a variável de ambiente PORT ou o valor padrão 8801
 const host = "0.0.0.0"; // Alterado para 0.0.0.0 para escutar em todas as interfaces
 console.log(`Servidor rodando em http://${host}:${PORT}`);
 
