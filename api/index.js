@@ -36,7 +36,7 @@ app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
 // Iniciando o servidor
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 const HOST = "0.0.0.0"; // Garante que escute em todas as interfaces
 
 app.listen(PORT, HOST, () => {
