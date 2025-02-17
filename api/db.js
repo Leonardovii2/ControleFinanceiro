@@ -16,15 +16,11 @@ export const db = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-async function connectToDatabase() {
-  try {
-    await db.connect();
-    console.log("Conectado ao banco de dados!");
-  } catch (err) {
-    console.error("Erro ao conectar ao banco de dados:", err);
-  }
-}
-
-connectToDatabase();
+// Testando conexão apenas uma vez
+db.query("SELECT NOW()")
+  .then((res) =>
+    console.log(`✅ Conectado ao banco de dados! Timestamp: ${res.rows[0].now}`)
+  )
+  .catch((err) => console.error("❌ Erro ao conectar ao banco de dados:", err));
 
 /*export { db };*/
