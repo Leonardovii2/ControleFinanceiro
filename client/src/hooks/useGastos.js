@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../../services/api"; // Instância do axios
+import api from "../services/api"; // Instância do axios
 
 export default function useGastos(navigate) {
   const [gastos, setGastos] = useState([]);

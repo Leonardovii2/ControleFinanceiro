@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import FirstSection from "../../components/FirstSection";
 import FiltroMensal from "../../components/Relatorio/MonthlyFilter";
 
-export default function Perfil() {
+export default function Report() {
   return (
     <div className={styles.container}>
       <Navbar />

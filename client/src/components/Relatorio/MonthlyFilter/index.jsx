@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import InformationCard from "../../InformationCard";
-import useMonthlyFilter from "../../../assets/Hooks/useMonthlyFilter";
+import useMonthlyFilter from "../../../hooks/useMonthlyFilter";
 
 export default function MonthlyFilter() {
   const {

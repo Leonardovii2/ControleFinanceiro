@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import api from "../../services/api"; // Importando a instância do axios
+import api from "../services/api"; // Importando a instância do axios
 
 export default function useRequestPassword(service = "gmail") {
   const [email, setEmail] = useState("");

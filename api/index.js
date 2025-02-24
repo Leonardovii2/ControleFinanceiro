@@ -1,31 +1,26 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import gastosRouter from "./routes/gastos.js";
 import usuariosRouter from "./routes/usuarios.js";
 import loginRouter from "./routes/logins.js";
 import registerRouter from "./routes/registers.js";
 import requestPasswordRouter from "./routes/requestPassword.js";
 import resetPasswordRouter from "./routes/resetPassword.js";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
 
+// Carrega as variáveis de ambiente
 dotenv.config();
 
 const app = express();
 
+// Configuração do CORS
 const corsOptions = {
-  origin: [
-    "https://controle-financeiro-ashen.vercel.app",
-    "https://controlefinanceiro-1.onrender.com",
-    "https://controlefinanceiro-dktx.onrender.com",
-    "http://localhost:5173",
-  ],
+  origin: process.env.CORS_ORIGIN || "http://localhost:5173", // Permite o frontend no localhost por padrão
   credentials: true,
 };
 
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(express.json());
+app.use(cors(corsOptions)); // Habilita o CORS
+app.use(express.json()); // Substitui bodyParser.json()
 
 // Definindo as rotas
 app.use("/gastos", gastosRouter);
@@ -36,9 +31,10 @@ app.use("/requestPassword", requestPasswordRouter);
 app.use("/resetPassword", resetPasswordRouter);
 
 // Iniciando o servidor
-const PORT = process.env.PORT || 3000;
-const HOST = "0.0.0.0"; // Garante que escute em todas as interfaces
+const PORT = process.env.PORT || 8801;
+const HOST = process.env.HOST || "0.0.0.0"; // Garante que escute em todas as interfaces
 
 app.listen(PORT, HOST, () => {
   console.log(`✅ Servidor rodando em http://${HOST}:${PORT}`);
+  console.log("A API está pronta para receber requisições.");
 });

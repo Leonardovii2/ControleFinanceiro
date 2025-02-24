@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import api from "../../services/api"; // Importando a instância do axios
+import api from "../services/api"; // Importando a instância do axios
 
 export default function useForm({
   onEdit,

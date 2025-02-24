@@ -2,7 +2,7 @@ import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.css";
-import UseResetPassword from "../../assets/Hooks/useResetPassword"; // Importando o hook
+import UseResetPassword from "../../hooks/useResetPassword"; // Importando o hook
 
 export default function ResetPassword() {
   const {

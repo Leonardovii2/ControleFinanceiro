@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import useGrid from "../../assets/Hooks/useGrid";
+import useGrid from "../../hooks/useGrid";
 import AdicionarGasto from "../Form";
 
 export default function Grid({

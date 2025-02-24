@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import api from "../../services/api";
+import api from "../services/api";
 
 export default function useHome() {
   const [gastos, setGastos] = useState([]);

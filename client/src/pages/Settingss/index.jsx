@@ -6,7 +6,7 @@ import ChangeProfilePhotoSection from "../../components/Configuracao/ChangeProfi
 import ChangeProfileNameSection from "../../components/Configuracao/ChangeProfileName";
 import AddSalary from "../../components/Configuracao/AddSalary";
 
-export default function Configuracao() {
+export default function Settings() {
   const [atualizar, setAtualizar] = useState(false);
   const [atualizarSalario, setAtualizarSalario] = useState(false);
 

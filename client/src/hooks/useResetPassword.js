@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
-import api from "../../services/api"; // Importando a instância do axios
+import api from "../services/api"; // Importando a instância do axios
 
 export default function UseResetPassword() {
   const [password, setPassword] = useState("");

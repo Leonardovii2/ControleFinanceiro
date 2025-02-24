@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-import useLogin from "../../assets/Hooks/useLogin";
+import useLogin from "../../hooks/useLogin";
 
 function Login() {
   const {
@@ -35,9 +35,12 @@ function Login() {
           Cadastrar
         </button>
       </section>
+
       <section className={styles.sectionForm}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2 className={styles.titulo}>Login</h2>
+
+          {/* Input de E-mail */}
           <label className={styles.padding} htmlFor="email">
             E-mail
           </label>
@@ -50,6 +53,7 @@ function Login() {
             required
           />
 
+          {/* Input de Senha */}
           <label className={styles.padding} htmlFor="senha">
             Senha
           </label>
@@ -68,7 +72,7 @@ function Login() {
               style={{
                 position: "absolute",
                 right: "10px",
-                top: "55%",
+                top: "50%",
                 transform: "translateY(-50%)",
                 cursor: "pointer",
                 color: "#555",
@@ -78,6 +82,7 @@ function Login() {
             </span>
           </div>
 
+          {/* Link para "Esqueci minha senha" */}
           <button
             type="button"
             className={styles.esqueciSenha}
@@ -86,11 +91,13 @@ function Login() {
             Esqueci minha senha
           </button>
 
+          {/* Botão de Login */}
           <button className={styles.buttonLogin} type="submit">
             Acessar
           </button>
         </form>
       </section>
+
       <ToastContainer />
     </main>
   );

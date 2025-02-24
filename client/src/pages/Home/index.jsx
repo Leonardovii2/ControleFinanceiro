@@ -1,12 +1,11 @@
 import React from "react";
 import FirstSection from "../../components/FirstSection";
-import NavBar from "../../components/Navbar";
 import TotalSection from "../../components/SecondSection";
 import ThirdSection from "../../components/ThirdSection";
 import SecondSection from "../../components/Pig";
 
 import styles from "./styles.module.css";
-import useHome from "../../assets/Hooks/useHome";
+import useHome from "../../hooks/useHome";
 
 const Home = () => {
   const {
@@ -22,7 +21,6 @@ const Home = () => {
   } = useHome();
   return (
     <div className={styles.container}>
-      <NavBar />
       <FirstSection />
       <SecondSection />
       <TotalSection atualizar={atualizar} gastos={gastos} />

@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useRequestPassword from "../../assets/Hooks/useRequestPassword";
+import useRequestPassword from "../../hooks/useRequestPassword";
 
 export default function RequestPassword() {
   const {

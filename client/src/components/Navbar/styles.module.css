@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 160px; /* Largura da navbar */
-  background-color: #2e2e2e; /* Cor de fundo */
+  width: 160px;
+  background-color: #2e2e2e;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -23,15 +23,15 @@
 }
 
 .button {
-  background: none; /* Remove o fundo */
-  border: none; /* Remove a borda */
-  padding: 0; /* Remove qualquer espaçamento interno */
-  margin: 0; /* Remove margens */
-  cursor: pointer; /* Mostra que é clicável */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
 }
 
 .button:focus {
-  outline: none; /* Remove o contorno quando o botão estiver focado */
+  outline: none;
 }
 
 @media (max-width: 600px) {

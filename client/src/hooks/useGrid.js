@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import api from "../../services/api"; // Importando a instância do axios
+import api from "../services/api"; // Importando a instância do axios
 
 export default function useGrid(setGastos, atualizarTotal, getGastos, gastos) {
   const [gastoToEdit, setGastoToEdit] = useState(null);

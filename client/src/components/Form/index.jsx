@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import useForm from "../../assets/Hooks/useForm";
+import useForm from "../../hooks/useForm";
 
 export default function AdicionarGasto({
   onEdit,

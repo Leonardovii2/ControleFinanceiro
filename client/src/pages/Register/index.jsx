@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./styles.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import UseRegister from "../../assets/Hooks/useRegister";
+import UseRegister from "../../hooks/useRegister";
 
 function Register() {
   const {
