@@ -13,18 +13,22 @@ import Settings from "./src/pages/Settingss";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <Login />,
+  },
+  {
+    path: "/",
+    element: (
+      <PrivateRoute>
+        <RootLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
-        element: (
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
-        ),
+        element: <Home />,
       },
       {
-        path: "/wallet",
+        path: "wallet",
         element: (
           <PrivateRoute>
             <Wallet />
@@ -32,7 +36,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/report",
+        path: "report",
         element: (
           <PrivateRoute>
             <Report />
@@ -40,7 +44,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings",
+        path: "settings",
         element: (
           <PrivateRoute>
             <Settings />
@@ -51,11 +55,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login />, // Página de login
   },
   {
     path: "/register",
-    element: <Register />,
+    element: <Register />, // Página de registro
   },
   {
     path: "/requestPassword",

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import api from "../services/api";
 
 export default function useLogin() {
@@ -8,6 +9,9 @@ export default function useLogin() {
   const [senha, setSenha] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const navigate = useNavigate();
+
+  // Função de validação de senha
+  const isSenhaValid = (senha) => senha.length >= 6;
 
   // Verifica se já existe um token e redireciona se já estiver autenticado
   useEffect(() => {
@@ -17,9 +21,9 @@ export default function useLogin() {
     }
   }, [navigate]);
 
-  const togglePasswordVisibility = () => {
-    setMostrarSenha((prevState) => !prevState);
-  };
+  const togglePasswordVisibility = () => setMostrarSenha((prev) => !prev);
+
+  const showToastError = (message) => toast.error(message);
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -27,28 +31,32 @@ export default function useLogin() {
 
       // Validação de campos
       if (!email || !senha) {
-        toast.error("Por favor, preencha todos os campos.");
-        return;
+        return showToastError("Por favor, preencha todos os campos.");
+      }
+
+      if (!isSenhaValid(senha)) {
+        return showToastError("Senha deve ter pelo menos 6 caracteres.");
       }
 
       try {
         const { data } = await api.post("/login", { email, senha });
 
         if (!data) {
-          toast.error("Resposta inválida do servidor.");
-          return;
+          return showToastError("Resposta inválida do servidor.");
         }
 
-        const { token, message } = data;
+        const { token, message, nomeUsuario } = data;
 
         if (token) {
           localStorage.setItem("token", token);
+          localStorage.setItem("nomeUsuario", nomeUsuario); // Salva o nome do usuário corretamente
+          toast.success("Login bem-sucedido!");
           navigate("/"); // Redireciona para a página inicial
         } else {
-          toast.error(message || "Erro ao fazer login.");
+          showToastError(message || "Erro ao fazer login.");
         }
       } catch (error) {
-        toast.error(
+        showToastError(
           error.response?.data?.message || "Erro na conexão com o servidor."
         );
       }
@@ -60,6 +68,7 @@ export default function useLogin() {
     () => navigate("/register"),
     [navigate]
   );
+
   const handleForgotPasswordClick = useCallback(
     () => navigate("/requestPassword"),
     [navigate]

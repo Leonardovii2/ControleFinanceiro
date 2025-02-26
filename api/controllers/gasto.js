@@ -55,36 +55,45 @@ export const getGastos = (req, res) => {
 };
 
 export const addGasto = (req, res) => {
-  const { categoria, descricao, valor, data_gasto } = req.body;
+  const { categoria, descricao, valor } = req.body;
 
-  if (!data_gasto) {
-    return res.status(400).json({ message: "Data do gasto é obrigatória." });
-  }
-
-  const mes = data_gasto.slice(0, 7);
-
+  // Validação dos campos obrigatórios
   const validation = validateGasto(req.body);
   if (!validation.valid) {
     return res.status(400).json({ message: validation.message });
   }
 
+  // Verifica o formato de valor (se é um número válido)
+  if (isNaN(valor) || valor <= 0) {
+    return res.status(400).json({
+      message: "O valor do gasto deve ser um número válido maior que zero.",
+    });
+  }
+
+  // Não precisa validar ou enviar data_gasto, pois o banco vai preencher automaticamente
+  const mes = new Date().toISOString().slice(0, 7); // Mes atual
+
   const q =
-    "INSERT INTO gastos (categoria, descricao, valor, usuarioId, data_gasto, mes) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
+    "INSERT INTO gastos (categoria, descricao, valor, usuarioId, data_gasto, mes) VALUES ($1, $2, $3, $4, DEFAULT, $5) RETURNING id";
+
   db.query(
     q,
-    [categoria, descricao, valor, req.user.id, data_gasto, mes],
+    [categoria, descricao, valor, req.user.id, mes],
     (err, result) => {
       if (err) {
         console.error("Erro ao adicionar o gasto:", err);
-        return res
-          .status(500)
-          .json({ message: "Ocorreu um erro ao adicionar o gasto." });
+        return res.status(500).json({
+          message: "Ocorreu um erro ao adicionar o gasto.",
+          error: err.message, // Retornar a mensagem do erro para depuração
+        });
       }
 
-      updateTotalGastos(req.user.id, res); // Atualizar total de gastos após adicionar
+      // Atualiza o total de gastos após adicionar o gasto
+      updateTotalGastos(req.user.id, res);
+
       return res.status(201).json({
         message: "Gasto adicionado com sucesso.",
-        id: result.rows[0].id,
+        id: result.rows[0].id, // Retorna o id do gasto adicionado
       });
     }
   );
@@ -145,6 +154,7 @@ export const deleteGasto = (req, res) => {
       .json({ message: "Gasto deletado com sucesso.", id: req.params.id });
   });
 };
+
 
 export const getTotalGastos = (req, res) => {
   console.log(

@@ -4,7 +4,7 @@ import {
   addGasto,
   updateGasto,
   deleteGasto,
-  getTotalGastos
+  getTotalGastos,
 } from "../controllers/gasto.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js"; // Importe o middleware
 
@@ -16,6 +16,7 @@ router.post("/", authenticateToken, addGasto);
 router.put("/:id", authenticateToken, updateGasto);
 router.delete("/:id", authenticateToken, deleteGasto);
 
-router.get("/totalGastos", authenticateToken, getTotalGastos);
+// Rota para obter o total de gastos
+router.get("/total", authenticateToken, getTotalGastos); // Ajustei para a rota /total, que é chamada no frontend
 
 export default router;

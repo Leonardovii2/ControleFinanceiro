@@ -5,6 +5,41 @@
   flex-direction: column;
 }
 
+.secondSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+}
+
+.firstRow {
+  display: flex;
+  justify-content: space-around;
+}
+
+.secondRow {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Botão de adicionar */
+.addButton {
+  width: 190px;
+  padding: 10px;
+  border-radius: 5px;
+  height: 40px;
+  border: none;
+  background-color: #2e2e2e;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.addButton:hover {
+  background-color: #444444;
+  transform: translateX(0.5em);
+}
+
 @media (max-width: 768px) {
   .container {
     margin-left: 0px;

@@ -60,7 +60,7 @@ export default function TotalSection({ atualizar }) {
       <div className={styles.cardWrapper}>
         <InformationCard
           image={FirstIconeNovo}
-          title="Saldo total gasto"
+          title=" Total gasto"
           value={totalGastos.toFixed(2).replace(".", ",")}
         />
 
@@ -68,6 +68,12 @@ export default function TotalSection({ atualizar }) {
           image={SecondIconeNovo}
           title="Saldo disponível"
           value={saldoDisponivel.toFixed(2).replace(".", ",")}
+        />
+
+        <InformationCard
+          image={SecondIconeNovo}
+          title="Valor investido"
+          value="..."
         />
       </div>
     </section>

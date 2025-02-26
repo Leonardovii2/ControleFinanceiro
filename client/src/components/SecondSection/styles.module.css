@@ -2,7 +2,7 @@
   --card-bg-color: rgba(97, 119, 113, 0.2);
   --card-first-bg-gradient: linear-gradient(135deg, #e0af0e, #9e7e14);
   --card-bg-color-mobile: #a5a5a5;
-  --gap-desktop: 2rem;
+  --gap-desktop: 1.2rem;
   --gap-mobile: 1rem;
 }
 
@@ -13,7 +13,7 @@
 .container {
   display: flex;
   justify-content: center;
-  
+
   gap: var(--gap-desktop);
   padding-top: 1.8rem;
 }
