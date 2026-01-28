@@ -7,7 +7,6 @@ import { FaChevronRight } from "react-icons/fa";
 import Modal from "../../components/Modal";
 import ModalConfirm from "../../components/ModalConfirm";
 import Navbar from "../../components/Navbar/index";
-import FinancialDashboardHeader from "../../components/FinancialDashboardHeader";
 
 const fields = ["nome", "salario"];
 
@@ -103,7 +102,7 @@ const Settings = () => {
       const response = await api.put(
         endpoints[field],
         updatedData, // Aqui estamos passando o objeto já formatado
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       if (response.status === 200) {
@@ -116,7 +115,7 @@ const Settings = () => {
     } catch (error) {
       console.error("Erro na atualização:", error);
       toast.error(
-        `Erro ao atualizar ${capitalize(field)}: ${error.message || error}`
+        `Erro ao atualizar ${capitalize(field)}: ${error.message || error}`,
       );
     }
   };
@@ -127,7 +126,6 @@ const Settings = () => {
 
       <section>
         <Navbar />
-        <FinancialDashboardHeader />
       </section>
 
       <section className={styles.firstSectionTest}>

@@ -4,8 +4,8 @@ import Register from "./pages/Register/index";
 import Home from "./pages/Home/index";
 import Report from "./pages/Report/index";
 import Settings from "./pages/Settings/index";
-import ResetPassword from "./pages/ResetPassword/index"
-import RequestPassword from "./pages/RequestPassword/index"
+import ResetPassword from "./pages/ResetPassword/index";
+import RequestPassword from "./pages/RequestPassword/index";
 import PrivateRoute from "./PrivateRoute/index";
 
 function App() {

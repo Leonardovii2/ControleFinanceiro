@@ -1,236 +1,100 @@
-:root {
-  --card-bg-color: rgba(46, 46, 46, 0);
-  --gap-desktop: 1.5rem;
-  --gap-mobile: 0.8rem;
-  --border-radius: 10px;
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-}
-
-.container {
-  margin-left: 160px;
+.page {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  gap: 32px;
 }
 
-.containerFirstSection {
-  padding-top: 2rem;
-}
-
-.miniMenu {
-  width: 100%;
+.header {
   display: flex;
   align-items: center;
-  justify-content: left;
-  padding: 0 8.5rem;
-  gap: 0.5rem;
+  justify-content: space-between;
 }
 
-.miniMenu h2 {
-  color: #000000;
-  padding: 1rem 0;
-}
-
-button.eyeButton {
+/* ===== SUMMARY ===== */
+.summary {
+  background-color: #1f1f1f;
+  border-radius: 16px;
+  padding: 24px;
   display: flex;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.cardWrapper {
-  display: flex;
-  width: 100%;
-  justify-content: center; /* Alinha os cards à esquerda */
-  gap: var(--gap-desktop);
-  flex-wrap: nowrap; /* Impede a quebra dos cards */
-  overflow-x: hidden;
-  padding-bottom: 1rem; /* Adiciona um espaço abaixo dos cards */
-}
-
-.containerCard {
-  background-color: var(--card-bg-color);
-  width: 30rem;
-  height: 15rem;
-  display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: center;
-  border-radius: var(--border-radius);
-  gap: 0.5rem;
-  box-shadow: var(--box-shadow);
-  color: #333;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex-shrink: 0; /* Impede o encolhimento dos cards */
+  gap: 24px;
 }
 
-.containerCard:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.content {
-  width: 100%;
+.summaryHeader {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  padding: 0 2rem;
   align-items: center;
-}
-
-.content h2 {
-  color: #000000;
-  font-size: 19px;
-  font-weight: 500;
-}
-
-.divP {
-  width: 100%;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
 }
 
-.divP p {
-  font-size: 25px;
+.summaryHeader h2 {
+  font-size: 20px;
   font-weight: 600;
 }
 
-.icone {
-  width: 3rem;
+.eyeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.transactions {
+  background-color: #1f1f1f;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionHeader h2 {
+  font-size: 18px;
 }
 
 .addButton {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  width: 9rem;
-  height: 3rem;
+  gap: 8px;
+  background-color: #e0af0e;
+  color: #000;
   border: none;
-  background-color: #2e2e2e;
-  color: white;
-  border-radius: 1rem;
-  font-weight: 600;
-  font-size: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 8px 14px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 600;
 }
 
-.addButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.analytics {
+  background-color: #1f1f1f;
+  border-radius: 16px;
+  padding: 24px;
 }
 
-.addButton:active {
-  transform: scale(0.96);
-}
-
-.secondSection {
-  display: flex;
-  justify-content: center;
-  height: 450px;
-}
-
-.contentGrid {
-  display: flex;
-  justify-content: center;
-  gap: var(--gap-desktop);
-  flex-wrap: wrap;
-}
-
-.gridSection {
-  background-color: var(--card-bg-color);
-  width: 61.5rem;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--border-radius);
-  gap: 0.5rem;
-  padding: 1rem;
-  box-shadow: var(--box-shadow);
-}
-
-.graphSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 30rem;
-  background-color: var(--card-bg-color);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  box-shadow: var(--box-shadow);
-  gap: 2rem;
-}
-
-.graphSection h2,
-.firstRow h2 {
-  color: #000000;
-}
-
-.firstRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .container {
-    margin-left: 0;
-    margin-top: 1rem;
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: 1fr;
   }
 
-  .miniMenu {
-    padding: 0 1rem;
-  }
-
-  .miniMenu h2 {
-    font-size: 18px;
-  }
-
-  .containerCard {
-    width: 17rem;
-    height: 9rem;
-  }
-
-  .cardWrapper {
-    width: 100%;
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-  }
-
-  .addButton {
-    width: 10rem;
-  }
-
-  .secondSection {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: auto;
-  }
-
-  .contentGrid {
-    flex-direction: column;
-    align-items: center;
-    padding: 1.2rem;
-  }
-
-  .gridSection {
-    width: 100%;
-  }
-
-  .graphSection {
-    width: 100%;
-    margin-bottom: 5rem;
+  .content {
+    grid-template-columns: 1fr;
   }
 }

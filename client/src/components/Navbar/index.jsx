@@ -8,7 +8,8 @@ import {
   FaMoon,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { use } from "react";
 
 const navItems = [
   { path: "/home", icon: <FaHome size={26} />, label: "Dashboard" },
@@ -18,6 +19,12 @@ const navItems = [
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(true);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <nav className={styles.container}>
@@ -49,7 +56,7 @@ export default function Navbar() {
             <span>{darkMode ? "Modo escuro" : "Modo claro"}</span>
           </li>
 
-          <li className={styles.bottomItem}>
+          <li className={styles.bottomItem} onClick={handleLogout}>
             <FaSignOutAlt size={26} />
             <span>Sair</span>
           </li>

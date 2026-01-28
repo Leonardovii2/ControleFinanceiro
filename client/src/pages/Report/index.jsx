@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaFilePdf, FaDownload } from "react-icons/fa";
 import Navbar from "../../components/Navbar/index";
-import FinancialDashboardHeader from "../../components/FinancialDashboardHeader";
 
 const BaixarButton = () => {
   return (
@@ -135,7 +134,7 @@ export default function Report() {
     doc.text(
       `Saldo Disponível (Sobrou): ${formatCurrency(saldoDisponivel)}`,
       14,
-      54
+      54,
     );
 
     // Tabela de gastos com parcelas no formato 1/x
@@ -163,14 +162,13 @@ export default function Report() {
 
   const saldoTotalGasto = gastos.reduce(
     (acc, gasto) => acc + (Number(gasto.valor) || 0),
-    0
+    0,
   );
   const saldoDisponivel = salario - saldoTotalGasto;
 
   return (
     <main className={styles.container}>
       <Navbar />
-      <FinancialDashboardHeader />
 
       <h2 className={styles.title}>Relatório Mensal</h2>
 
