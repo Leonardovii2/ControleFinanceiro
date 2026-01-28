@@ -32,6 +32,12 @@ export const atualizarNomeUsuario = async (req, res) => {
   const userId = req.user.id; // O userId vem do middleware de autenticação
   const { nome } = req.body;
 
+  console.log("Nome recebido:", nome); // Verifique se o nome não é nulo ou vazio
+
+  if (!nome || nome.trim() === "") {
+    return res.status(400).json({ error: "O nome não pode ser vazio." });
+  }
+
   try {
     const q = "UPDATE usuarios SET nome = $1 WHERE id = $2 RETURNING *";
     const values = [nome, userId];
@@ -70,6 +76,27 @@ export const atualizarSalario = async (req, res) => {
   }
 };
 
+export const atualizarApelidoUsuario = async (req, res) => {
+  const userId = req.user.id;
+  const { apelido } = req.body;
+
+  try {
+    const q = "UPDATE usuarios SET apelido = $1 WHERE id = $2 RETURNING *";
+    const values = [apelido, userId];
+
+    const result = await db.query(q, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Usuário não encontrado." });
+    }
+
+    return res.json({ success: true, updatedUser: result.rows[0] });
+  } catch (err) {
+    console.error("Erro ao atualizar o apelido do usuário:", err);
+    return res.status(500).json({ error: "Erro ao atualizar o apelido." });
+  }
+};
+
 export const pegarSalario = async (req, res) => {
   const userId = req.user.id;
 
@@ -88,6 +115,24 @@ export const pegarSalario = async (req, res) => {
   } catch (err) {
     console.error("Erro ao buscar o salário: ", err);
     return res.status(500).json({ error: "Erro ao buscar o salário." });
+  }
+};
+
+export const getUsuarioLogado = async (req, res) => {
+  try {
+    const { id } = req.user;
+
+    const q = "SELECT id, nome, email FROM usuarios WHERE id = $1";
+    const { rows } = await db.query(q, [id]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Usuário não encontrado." });
+    }
+
+    return res.status(200).json(rows[0]);
+  } catch (error) {
+    console.error("Erro ao buscar usuário:", error);
+    return res.status(500).json({ message: "Erro interno do servidor." });
   }
 };
 

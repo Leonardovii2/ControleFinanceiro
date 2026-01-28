@@ -1,8 +1,8 @@
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./styles.module.css";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import useLogin from "../../hooks/useLogin";
 
@@ -20,29 +20,28 @@ function Login() {
   } = useLogin();
 
   return (
-    <main className={styles.main}>
-      <section className={styles.sectionInfo}>
+    <main className={styles.container}>
+      <ToastContainer />
+      <section className={styles.firstSection}>
         <h1>Bem-vindo!</h1>
         <p>
-          Gerencie suas despesas de forma rápida e simples. Sem enrolação, o
+          Gerencie suas despesas de forma rápida e simples. Sem complicação, o
           melhor sistema para organizar suas finanças.
         </p>
         <button
-          className={styles.buttonCadastro}
+          className={styles.buttonRegister}
           onClick={handleRegisterClick}
           type="button"
         >
-          Cadastrar
+          Cadastrar-se
         </button>
       </section>
 
-      <section className={styles.sectionForm}>
+      <section className={styles.secondSection}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h2 className={styles.titulo}>Login</h2>
-
-          {/* Input de E-mail */}
-          <label className={styles.padding} htmlFor="email">
-            E-mail
+          <h2>Entrar</h2>
+          <label className={styles.label} htmlFor="email">
+            Email
           </label>
           <input
             className={styles.input}
@@ -50,11 +49,11 @@ function Login() {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
             required
           />
 
-          {/* Input de Senha */}
-          <label className={styles.padding} htmlFor="senha">
+          <label className={styles.label} htmlFor="senha">
             Senha
           </label>
           <div style={{ position: "relative", width: "100%" }}>
@@ -66,39 +65,40 @@ function Login() {
               onChange={(e) => setSenha(e.target.value)}
               required
               style={{ paddingRight: "40px" }}
+              placeholder="Senha"
             />
             <span
               onClick={togglePasswordVisibility}
-              style={{
-                position: "absolute",
+              className={styles.eyeIcon}
+              style={
+                {
+                  /* position: "absolute",
                 right: "10px",
-                top: "50%",
+                display: "flex",
+                alignItems: "center",
                 transform: "translateY(-50%)",
                 cursor: "pointer",
-                color: "#555",
-              }}
+                color: "#555", */
+                }
+              }
             >
               {mostrarSenha ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
             </span>
           </div>
 
-          {/* Link para "Esqueci minha senha" */}
           <button
             type="button"
             className={styles.esqueciSenha}
             onClick={handleForgotPasswordClick}
           >
-            Esqueci minha senha
+            Esqueceu sua senha?
           </button>
 
-          {/* Botão de Login */}
-          <button className={styles.buttonLogin} type="submit">
-            Acessar
+          <button className={styles.button} type="submit">
+            Entrar
           </button>
         </form>
       </section>
-
-      <ToastContainer />
     </main>
   );
 }

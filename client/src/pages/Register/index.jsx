@@ -19,47 +19,44 @@ function Register() {
   } = UseRegister();
 
   return (
-    <main className={styles.main}>
-      <section className={styles.sectionInfo}>
+    <main className={styles.container}>
+      <section className={styles.firstSection}>
         <h1>Bem-vindo!</h1>
         <p>
           Cadastre-se e tenha controle total sobre suas finanças. Organize seus
-          gastos e melhore seu planejamento em minutos.
+          gastos e melhore seu planejamento em poucos minutos.
         </p>
         <button className={styles.buttonCadastro} onClick={handleLoginClick}>
-          Logar
+          Entrar
         </button>
       </section>
-      <section className={styles.sectionForm}>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <h2 className={styles.titulo}>Cadastro</h2>
 
-          <label className={styles.padding} htmlFor="nome">
-            Nome completo
-          </label>
+      <section className={styles.secondSection}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <h2 className={styles.titulo}>Cadastrar-se</h2>
+
+          <label htmlFor="nome">Nome completo</label>
           <input
             className={styles.input}
             type="text"
             id="nome"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
+            placeholder="Nome completo"
           />
 
-          <label className={styles.padding} htmlFor="email">
-            E-mail
-          </label>
+          <label htmlFor="email">E-mail</label>
           <input
             className={styles.input}
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
           />
 
-          <label className={styles.padding} htmlFor="senha">
-            Senha
-          </label>
-          {/* Envolvendo o input e o ícone em um div */}
+          <label htmlFor="senha">Senha</label>
+
           <div style={{ position: "relative", width: "100%" }}>
             <input
               className={styles.input}
@@ -68,7 +65,8 @@ function Register() {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              style={{ paddingRight: "40px" }} // Espaço para o ícone
+              style={{ paddingRight: "40px" }}
+              placeholder="Senha"
             />
             <span
               onClick={togglePasswordVisibility}
@@ -85,7 +83,7 @@ function Register() {
             </span>
           </div>
 
-          <button className={styles.buttonLogin} type="submit">
+          <button className={styles.button} type="submit">
             Cadastrar
           </button>
         </form>

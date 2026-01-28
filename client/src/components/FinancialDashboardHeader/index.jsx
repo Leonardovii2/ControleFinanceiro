@@ -2,14 +2,20 @@ import DateDisplay from "../../components/DateDisplay";
 import styles from "./styles.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
+import UserAvatar from "../UserAvatar";
+import useLogin from "../../hooks/useLogin";
 
 export default function FinancialDashboardHeader() {
-  const [nomeUsuario, setNomeUsuario] = useState("");
+  const { nomeLogado } = useLogin(); // Pegando o nome logado diretamente do hook
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  // Função para alternar a visibilidade do dropdown
-  const toggleDropdown = () => setIsDropdownVisible((prev) => !prev);
+
+  // Alterna a visibilidade do dropdown
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prev) => !prev); // Alterna entre abrir e fechar
+  };
 
   // Função de logout
   const handleLogout = () => {
@@ -20,42 +26,32 @@ export default function FinancialDashboardHeader() {
     sessionStorage.removeItem("nomeUsuario");
     localStorage.removeItem("rememberMe");
 
-    // Redirecionamento para a página de login
+    // Redirecionamento e atualização da página
     navigate("/login");
-    window.location.reload(); // Garante que o estado seja atualizado corretamente
-  };
-
-  // Função para obter as iniciais do nome
-  const getInitials = (name) => {
-    if (!name) return "U"; // Se não houver nome, usa "U" de usuário
-    const words = name.trim().split(" ");
-    return words.length > 1
-      ? `${words[0][0]}${words[words.length - 1][0]}`.toUpperCase() // Primeiro + Último
-      : words[0][0].toUpperCase(); // Se for só um nome
+    window.location.reload();
   };
 
   useEffect(() => {
-    const nomeCompleto = localStorage.getItem("nomeUsuario") || "";
-    setNomeUsuario(nomeCompleto); // Define o nome no estado
-    // Adiciona evento de clique fora para fechar o dropdown
+    // Função que fecha o dropdown ao clicar fora
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownVisible(false);
+        setIsDropdownVisible(false); // Fecha o dropdown se clicar fora
       }
     };
 
-    // Controla o estado do dropdown
+    // Adiciona o evento de clique fora se o dropdown estiver visível
     if (isDropdownVisible) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
 
-    // Limpeza do evento quando o componente for desmontado
+    // Limpeza do evento quando o componente for desmontado ou dropdown mudar
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isDropdownVisible]);
+  }, [isDropdownVisible]); // Depende da visibilidade do dropdown
+
   return (
     <section className={styles.firstSection}>
       <div>
@@ -64,18 +60,24 @@ export default function FinancialDashboardHeader() {
       </div>
 
       <div className={styles.usuLogado}>
-        <div className={styles.imgUsuarioLogado} onClick={toggleDropdown}>
-          <div className={styles.avatar}>{getInitials(nomeUsuario)}</div>
+        <div
+          className={styles.imgUsuarioLogado}
+          onClick={toggleDropdown} // Alterna entre abrir e fechar o dropdown
+        >
+          <UserAvatar nome={nomeLogado || "Nome não disponível"} />
         </div>
 
         {isDropdownVisible && (
           <div className={styles.dropdownMenu} ref={dropdownRef}>
             <div className={styles.userInfo}>
-              <p>{nomeUsuario || "Nome não disponível"}</p>
+              <p>{nomeLogado || "Nome não disponível"}</p>
+              {/* Exibe o nome do usuário */}
             </div>
             <hr />
+            <button className={styles.dropdownItem}>Aparência</button>
             <button onClick={handleLogout} className={styles.dropdownItem}>
-              Sair da conta
+              <FaSignOutAlt />
+              <p>Sair</p>
             </button>
           </div>
         )}

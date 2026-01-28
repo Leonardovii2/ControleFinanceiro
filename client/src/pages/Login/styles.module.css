@@ -1,4 +1,4 @@
-.main {
+.container {
   background-color: #2e2e2e;
   width: 100%;
   height: 100dvh;
@@ -8,105 +8,98 @@
   color: #fff;
 }
 
-.sectionInfo {
+.firstSection {
   padding: 8rem;
   display: flex;
   flex-direction: column;
   width: 80vh;
 }
 
-.sectionInfo h1 {
+.firstSection h1 {
   font-size: 40px;
 }
 
-.sectionInfo p {
+.firstSection p {
   padding: 2rem 0;
   font-weight: 500;
   line-height: 1.5;
 }
 
-.buttonCadastro {
-  background-color: #b5911b;
+h2 {
   color: #fff;
-  padding: 10px 25px;
-  width: 50%;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-.buttonCadastro:hover {
-  background-color: #947a27;
-  transform: translateX(0.5em);
-}
-
-.titulo {
   font-size: 25px;
-}
-
-.sectionForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sectionForm a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 12px;
+  font-weight: bold;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 50px;
-  border-radius: 40px;
+  background-color: #5f5f5f;
+  padding: 3rem 2rem;
+  border-radius: 2rem;
   height: auto;
+  gap: 0.5rem;
 }
 
-.padding {
-  margin-top: 1rem;
+.label {
+  color: #fff;
+  font-weight: bold;
 }
 
-.form input {
+.input {
   width: 16rem;
   height: 2.2rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-top: 0.2rem;
+  padding-left: 1rem;
 }
 
 .esqueciSenha {
   display: flex;
+  flex-direction: row-reverse;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 1rem 0;
   color: #fff;
+  padding: 1rem 0;
+  font-size: 13px;
 }
 
-.buttonLogin {
+.button {
   background-color: #b5911b;
   color: #fff;
-  padding: 10px 25px;
+  padding: 1rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   font-weight: bold;
   cursor: pointer;
   transition: 0.25s;
 }
 
-.buttonLogin:hover {
+.buttonRegister {
+  width: 50%;
+  background-color: #b5911b;
+  color: #fff;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.button:hover {
   background-color: #947a27;
   transform: translateX(0.5em);
 }
 
-.input {
-  padding: 0 10px;
+.eyeIcon {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  color: #424242;
 }
 
 @media (max-width: 600px) {

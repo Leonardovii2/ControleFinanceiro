@@ -26,7 +26,7 @@ export default function RequestPassword() {
         <div className={styles.secondDiv}>
           <form className={styles.form} onSubmit={handlePasswordResetRequest}>
             <label className={styles.label} htmlFor="email">
-              Digite seu e-mail
+              Digite seu email
             </label>
             <input
               className={styles.input}
@@ -35,7 +35,7 @@ export default function RequestPassword() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              aria-label="Digite seu e-mail"
+              placeholder="Email"
             />
             <button className={styles.button} type="submit" disabled={loading}>
               {loading ? "Enviando..." : "Enviar"}

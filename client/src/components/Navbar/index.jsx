@@ -1,35 +1,60 @@
-import React from "react";
+import { React, useState } from "react";
 import styles from "./styles.module.css";
-import { FaHome, FaCog, FaWallet, FaFileAlt } from "react-icons/fa";
-import { useNavigate, useLocation } from "react-router-dom";
+import {
+  FaHome,
+  FaCog,
+  FaFileAlt,
+  FaSun,
+  FaMoon,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const navItems = [
-  { path: "/", icon: <FaHome size={30} />, label: "Home" },
-  { path: "/report", icon: <FaFileAlt size={30} />, label: "Report" },
-  /* { path: "/carteira", icon: <FaWallet size={30} />, label: "Wallet" }, */
-  { path: "/settings", icon: <FaCog size={30} />, label: "Settings" },
+  { path: "/home", icon: <FaHome size={26} />, label: "Dashboard" },
+  { path: "/report", icon: <FaFileAlt size={26} />, label: "Relatórios" },
+  { path: "/settings", icon: <FaCog size={26} />, label: "Minha conta" },
 ];
 
 export default function Navbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [darkMode, setDarkMode] = useState(true);
 
   return (
     <nav className={styles.container}>
+      <h1 className={styles.title}>YourOrça</h1>
+      <hr />
       <ul className={styles.icons}>
         {navItems.map((item) => (
-          <li key={item.path}>
-            <button
-              className={styles.button}
-              onClick={() => navigate(item.path)}
+          <li key={item.path} className={styles.item}>
+            <NavLink
+              to={item.path}
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.active : ""}`
+              }
             >
-              {React.cloneElement(item.icon, {
-                color: location.pathname === item.path ? "#e0af0e" : "white",
-              })}
-            </button>
+              {item.icon}
+              <span className={styles.label}>{item.label}</span>
+            </NavLink>
           </li>
         ))}
       </ul>
+      <div className={styles.bottomSection}>
+        <hr />
+        <ul>
+          <li
+            className={styles.bottomItem}
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? <FaMoon size={22} /> : <FaSun size={22} />}
+            <span>{darkMode ? "Modo escuro" : "Modo claro"}</span>
+          </li>
+
+          <li className={styles.bottomItem}>
+            <FaSignOutAlt size={26} />
+            <span>Sair</span>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }
