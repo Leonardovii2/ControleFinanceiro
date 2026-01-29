@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   min-height: 100vh;
+  background-color: #201f1f;
 }
 
 .content {

@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import Grid from "../../components/Grid";
 import ExpensesByCategory from "../../components/ExpensesByCategory";
-import AdicionarGasto from "../../components/ExpenseFormModal";
+import ExpenseModal from "../../components/ExpenseFormModal";
 import SummaryCard from "../../components/SummaryCard";
 import {
   FaEye,
@@ -24,6 +24,9 @@ const HomeView = ({
   setIsModalOpen,
   isModalOpen,
   gastoToEdit,
+  getGastos,
+  getTotalGastos,
+  refreshGastos,
 }) => {
   return (
     <main className={styles.page}>
@@ -56,23 +59,38 @@ const HomeView = ({
         </div>
       </section>
 
-      <section className={styles.content}>
-        <Grid
-          gastos={gastos}
-          setGastoToEdit={setGastoToEdit}
-          setIsModalOpen={setIsModalOpen}
-          handleDeleteGasto={handleDeleteGasto}
-          mostrarValor={mostrarValor}
-        />
+      <section className={styles.contentHeader}>
+        <button
+          className={styles.addButton}
+          onClick={() => setIsModalOpen(true)}
+        >
+          + Adicionar gasto
+        </button>
+      </section>
 
-        <ExpensesByCategory gastos={gastos} />
+      <section className={styles.content}>
+        <div className={styles.main}>
+          <Grid
+            gastos={gastos}
+            setGastoToEdit={setGastoToEdit}
+            setIsModalOpen={setIsModalOpen}
+            handleDeleteGasto={handleDeleteGasto}
+            mostrarValor={mostrarValor}
+          />
+        </div>
+
+        <aside className={styles.aside}>
+          <ExpensesByCategory gastos={gastos} />
+        </aside>
       </section>
 
       {isModalOpen && (
-        <AdicionarGasto
-          onEdit={gastoToEdit}
-          setGastoToEdit={setGastoToEdit}
+        <ExpenseModal
+          gastoToEdit={gastoToEdit}
           setIsModalOpen={setIsModalOpen}
+          setGastoToEdit={setGastoToEdit}
+          refreshGastos={getGastos}
+          getTotalGastos={getTotalGastos}
         />
       )}
     </main>

@@ -1,4 +1,3 @@
-import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import styles from "./styles.module.css";
 import { motion } from "framer-motion";
@@ -17,7 +16,6 @@ export default function Grid({
   setGastoToEdit,
   setIsModalOpen,
   handleDeleteGasto,
-  mostrarValor,
 }) {
   const handleEditClick = (item) => {
     setGastoToEdit(item);
@@ -31,61 +29,68 @@ export default function Grid({
   };
 
   return (
-    <div className={styles.section}>
-      <div className={styles.buttonContainer}>
-        <div className={styles.container}>
-          <div className={styles.scrollBody}>
-            <table className={styles.table}>
-              <thead className={styles.thead}>
-                <tr>
-                  <th className={styles.th}>Data</th>
-                  <th className={styles.th}>Descrição</th>
-                  <th className={styles.th}>Categoria</th>
-                  <th className={styles.th}>Valor</th>
-                  <th className={styles.th}>Ações</th>
-                </tr>
-              </thead>
-              <tbody className={styles.tbody}>
-                {gastos.length > 0 ? (
-                  gastos.map((item) => (
-                    <motion.tr
-                      key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <td>{formatDate(item.data_gasto)}</td>
-                      <td>{item.descricao}</td>
-                      <td>{item.categoria}</td>
-                      <td>
-                        {mostrarValor ? formatCurrency(item.valor) : "*****"}
-                      </td>
-                      <td className={styles.secondConfigTd}>
-                        <FaEdit
-                          onClick={() => handleEditClick(item)}
-                          aria-label="Editar gasto"
-                          className={styles.icone}
-                        />
-                        <FaTrash
-                          onClick={() => handleDelete(item.id)}
-                          aria-label="Excluir gasto"
-                          className={styles.icone}
-                        />
-                      </td>
-                    </motion.tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className={styles.noData}>
-                      Nenhum gasto cadastrado.
+    <section className={styles.section}>
+      <div className={styles.tableContainer}>
+        <div className={styles.scrollBody}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Categoria</th>
+                <th scope="col" className={styles.alignRight}>
+                  Valor
+                </th>
+                <th scope="col" className={styles.alignCenter}>
+                  Ações
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {gastos.length > 0 ? (
+                gastos.map((item) => (
+                  <motion.tr
+                    key={item.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <td>{formatDate(item.data_gasto)}</td>
+                    <td>{item.descricao}</td>
+                    <td>
+                      <span className={styles.badge}>{item.categoria}</span>
                     </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                    <td className={styles.alignRight}>
+                      <span>{formatCurrency(item.valor)}</span>
+                    </td>
+                    <td className={styles.actions}>
+                      <button
+                        onClick={() => handleEditClick(item)}
+                        aria-label="Editar gasto"
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        aria-label="Excluir gasto"
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </motion.tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className={styles.noData}>
+                    Nenhum gasto cadastrado.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

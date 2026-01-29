@@ -1,5 +1,5 @@
 .card {
-  background-color: #1f1f1f;
+  background-color: #2e2e2e;
   border-radius: 16px;
   padding: 1.25rem;
 
@@ -39,7 +39,7 @@
 }
 
 .icon {
-  background-color: #2e2e2e;
+  background-color: #444444;
   padding: 8px;
   border-radius: 10px;
   color: #e0af0e;

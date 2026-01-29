@@ -119,18 +119,26 @@ export function useHome() {
       ? `R$ ${value.toFixed(2).replace(".", ",")}`
       : "*****";
 
+  const refreshGastos = async () => {
+    const res = await api.get("/gastos", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setGastos(res.data);
+  };
   return {
     gastos,
     totalGastos,
     saldoDisponivel,
-    gastoToEdit,
     mostrarValor,
-    isModalOpen,
-    calcularInvestimentos,
+    toggleValor,
     formatCurrency,
+    calcularInvestimentos,
+    handleDeleteGasto,
     setGastoToEdit,
     setIsModalOpen,
-    toggleValor,
-    handleDeleteGasto,
+    isModalOpen,
+    gastoToEdit,
+    getGastos: reloadData,
+    getTotalGastos: fetchData,
   };
 }

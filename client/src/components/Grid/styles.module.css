@@ -1,116 +1,85 @@
 .section {
-  width: 900px;
-  margin: 0 auto;
+  width: 100%;
 }
 
-.container {
-  max-height: 300px;
-  overflow-y: scroll;
+.tableContainer {
+  background-color: #2e2e2e;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.scrollBody {
+  max-height: 420px;
+  overflow-y: auto;
 }
 
 .table {
   width: 100%;
-  border-spacing: 10px;
-  word-break: break-all;
   border-collapse: collapse;
-}
-
-.thead {
-  background-color: rgb(235, 235, 235);
-}
-
-.thead tr {
-  border-bottom: 1px solid rgb(238, 235, 235) !important;
-}
-
-.thead tr th {
-  padding: 5px;
-  text-align: start;
-  margin-bottom: 50px;
-  font-size: 18px;
-}
-
-.tbody tr td {
-  vertical-align: text-top;
-  padding: 6px;
-  max-width: 50px;
-}
-
-.tbody tr {
-  margin-bottom: 50px;
-}
-.tbody td {
-  font-size: 16px;
-}
-
-.tbody tr:hover {
-  background-color: rgba(28, 26, 29, 0.33);
-  cursor: pointer;
-}
-
-.icone {
-  cursor: pointer;
-  margin-right: 5px;
+  color: #e5e5e5;
   font-size: 14px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #444444;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #333;
+  z-index: 10;
+}
+
+tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #2e2e2e;
+}
+
+tbody tr:hover {
+  background-color: #2a2a2a;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  color: #bdbdbd;
+  cursor: pointer;
+  font-size: 16px;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.actions button:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.badge {
+  background-color: #444444;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
 }
 
 .noData {
   text-align: center;
-  padding: 1rem;
-}
-
-/* .scrollBody {
-  max-height: 300px; 
-  overflow-y: scroll; 
-} */
-
-/* Estilizando a barra de rolagem */
-.container::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem */
-}
-
-/* Removendo as setas da rolagem */
-.container::-webkit-scrollbar-button {
-  display: none; /* Remove as setas */
-}
-
-/* Estilizando o "track" da rolagem */
-.container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Cor de fundo da barra de rolagem */
-  border-radius: 10px; /* Arredondando as bordas do track */
-}
-
-/* Estilizando o "thumb" (a parte que você arrasta) */
-.container::-webkit-scrollbar-thumb {
-  background-color: #888; /* Cor do "thumb" */
-  border-radius: 10px; /* Arredondando as bordas do thumb */
-}
-
-/* Estilizando o "thumb" quando está sendo hover */
-.container::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Cor do "thumb" ao passar o mouse */
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 100%;
-  }
-
-  .section {
-    width: 100%;
-  }
-
-  .thead th {
-    font-size: 5px;
-  }
-
-  .tbody td {
-    font-size: 12px;
-  }
-
-  .firstConfigTd,
-  .secondConfigTd {
-    padding: 0.5rem;
-    font-size: 13px;
-  }
+  padding: 24px;
+  color: #aaa;
 }

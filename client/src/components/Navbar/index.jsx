@@ -12,9 +12,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { use } from "react";
 
 const navItems = [
-  { path: "/home", icon: <FaHome size={26} />, label: "Dashboard" },
-  { path: "/report", icon: <FaFileAlt size={26} />, label: "Relatórios" },
-  { path: "/settings", icon: <FaCog size={26} />, label: "Minha conta" },
+  { path: "/home", icon: <FaHome size={20} />, label: "Dashboard" },
+  { path: "/report", icon: <FaFileAlt size={20} />, label: "Relatórios" },
+  { path: "/settings", icon: <FaCog size={20} />, label: "Minha conta" },
 ];
 
 export default function Navbar() {
@@ -52,13 +52,13 @@ export default function Navbar() {
             className={styles.bottomItem}
             onClick={() => setDarkMode(!darkMode)}
           >
-            {darkMode ? <FaMoon size={22} /> : <FaSun size={22} />}
+            {darkMode ? <FaMoon size={20} /> : <FaSun size={20} />}
             <span>{darkMode ? "Modo escuro" : "Modo claro"}</span>
           </li>
 
           <li className={styles.bottomItem} onClick={handleLogout}>
-            <FaSignOutAlt size={26} />
-            <span>Sair</span>
+            <FaSignOutAlt size={20} color="#ff6262" />
+            <span className={styles.sair}>Sair</span>
           </li>
         </ul>
       </div>
