@@ -5,7 +5,6 @@
 
 /* ===== SUMMARY ===== */
 .summary {
-  background-color: #1f1f1f;
   border-radius: 16px;
   padding: 0 24px;
   display: flex;
@@ -22,6 +21,15 @@
 .summaryHeader h2 {
   font-size: 20px;
   font-weight: 600;
+  color: #fff;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 .cards {

@@ -37,7 +37,7 @@ export default function ExpenseModalView({
   isEditing = false,
 }) {
   return (
-    <div className={styles.modalOverlay} onClick={closeModal}>
+    <div className={styles.modalContainer} onClick={closeModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button
           className={styles.closeModalButton}
@@ -48,7 +48,7 @@ export default function ExpenseModalView({
           <FaTimes />
         </button>
 
-        <h2>{isEditing ? "Editar Gasto" : "Adicionar Gasto"}</h2>
+        <h2 className={styles.titulo}>{isEditing ? "Editar Gasto" : "Adicionar Gasto"}</h2>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           {/* Descrição */}
@@ -137,6 +137,7 @@ export default function ExpenseModalView({
               type="checkbox"
               checked={fixo}
               onChange={() => setFixo(!fixo)}
+              className={styles.checkboxInput}
             />
             Gasto fixo mensal
           </label>

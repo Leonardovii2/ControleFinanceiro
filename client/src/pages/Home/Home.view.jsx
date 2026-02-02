@@ -33,8 +33,8 @@ const HomeView = ({
       <section className={styles.summary}>
         <div className={styles.summaryHeader}>
           <h2>Resumo</h2>
-          <button onClick={toggleValor}>
-            {mostrarValor ? <FaEyeSlash /> : <FaEye />}
+          <button onClick={toggleValor} className={styles.toggleButton}>
+            {mostrarValor ? <FaEyeSlash  /> : <FaEye />}
           </button>
         </div>
 
