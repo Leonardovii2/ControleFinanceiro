@@ -1,46 +1,39 @@
-// components/ModalConfirm.jsx
-import React from "react";
-import styles from "./styles.module.css"; // ou use estilos embutidos
-import { FaTimes } from "react-icons/fa";
+import styles from "./styles.module.css";
 
-const ModalConfirm = ({ message, onConfirm, onCancel }) => (
-  <div className={styles.modalOverlay}>
-    <div className={styles.modalContent}>
-      <div className={styles.divButton}>
-        <button
-          className={styles.closeModalButton}
-          onClick={onCancel}
-          type="button"
-        >
-          <FaTimes
-            size={20}
-            color="#333"
-            onClick={onCancel}
-            style={{
-              position: "absolute",
-              top: "10px",
-              right: "10px",
-              cursor: "pointer",
-            }}
-          />
-        </button>
-        <p>{message}</p>
-      </div>
+export default function ModalConfirm({
+  isOpen,
+  title,
+  description,
+  confirmText = "Confirmar",
+  cancelText = "Cancelar",
+  confirmColor = "primary",
+  onConfirm,
+  onCancel,
+}) {
+  if (!isOpen) return null;
 
-      <hr />
+  return (
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <h2>{title}</h2>
+        <p>{description}</p>
 
-      <p className={styles.firstP}>Essa ação não poderá ser disfeita</p>
+        <div className={styles.buttons}>
+          <button type="button" className={styles.cancel} onClick={onCancel}>
+            {cancelText}
+          </button>
 
-      <div className={styles.actions}>
-        <button className={styles.addButtonCall} onClick={onCancel}>
-          Cancelar
-        </button>
-        <button className={styles.addButton} onClick={onConfirm}>
-          Confirmar
-        </button>
+          <button
+            type="button"
+            className={`${styles.confirm} ${
+              confirmColor === "danger" ? styles.danger : ""
+            }`}
+            onClick={onConfirm}
+          >
+            {confirmText}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
-
-export default ModalConfirm;
+  );
+}

@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
 import {
   FaHome,
@@ -9,7 +9,7 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
-import { use } from "react";
+import ModalConfirm from "../ModalConfirm";
 
 const navItems = [
   { path: "/home", icon: <FaHome size={20} />, label: "Dashboard" },
@@ -19,6 +19,8 @@ const navItems = [
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(true);
+  const [openLogoutConfirm, setOpenLogoutConfirm] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -56,11 +58,28 @@ export default function Navbar() {
             <span>{darkMode ? "Modo escuro" : "Modo claro"}</span>
           </li>
 
-          <li className={styles.bottomItem} onClick={handleLogout}>
+          <li
+            className={styles.bottomItem}
+            onClick={() => setOpenLogoutConfirm(true)}
+          >
             <FaSignOutAlt size={20} color="#ff6262" />
             <span className={styles.sair}>Sair</span>
           </li>
         </ul>
+
+        <ModalConfirm
+          isOpen={openLogoutConfirm}
+          title="Sair da conta"
+          description="Tem certeza que deseja sair da sua conta?"
+          confirmText="Sair"
+          cancelText="Cancelar"
+          confirmColor="danger"
+          onCancel={() => setOpenLogoutConfirm(false)}
+          onConfirm={() => {
+            handleLogout();
+            setOpenLogoutConfirm(false);
+          }}
+        />
       </div>
     </nav>
   );

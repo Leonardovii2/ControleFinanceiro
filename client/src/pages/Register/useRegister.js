@@ -11,10 +11,6 @@ export default function useRegister() {
 
   const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setMostrarSenha((prev) => !prev);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,7 +46,7 @@ export default function useRegister() {
     senha,
     setSenha,
     mostrarSenha,
-    togglePasswordVisibility,
+    setMostrarSenha,
     handleSubmit,
     handleLoginClick,
   };

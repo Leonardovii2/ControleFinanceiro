@@ -11,7 +11,7 @@ export default function useExpenseModal({
 }) {
   const [descricao, setDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
-  const [valor, setValor] = useState(0);
+  const [valor, setValor] = useState("");
   const [metodo, setMetodo] = useState("");
   const [parcelas, setParcelas] = useState(1);
   const [fixo, setFixo] = useState(false);
@@ -73,10 +73,17 @@ export default function useExpenseModal({
 
     const token = localStorage.getItem("token");
 
+    const valorNumber = Number(valor);
+
+    if (valorNumber <= 0) {
+      toast.error("Informe um valor válido.");
+      return;
+    }
+
     const payload = {
       descricao,
       categoria,
-      valor,
+      valor: valorNumber,
       metodo: categoria === "Investimento" ? null : metodo,
       parcelas: metodo === "credito" ? parcelas : null,
       fixo,

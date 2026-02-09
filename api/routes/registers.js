@@ -13,6 +13,6 @@ const validarRegister = (req, res, next) => {
   next();
 };
 
-router.post("/register", validarRegister, registerController);
+router.post("/", validarRegister, registerController);
 
 export default router;

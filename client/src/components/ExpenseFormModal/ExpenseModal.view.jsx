@@ -14,8 +14,8 @@ const CATEGORIAS = [
 ];
 
 const METODOS_PAGAMENTO = [
-  { value: "debito", label: "Débito" },
   { value: "pix", label: "Pix" },
+  { value: "debito", label: "Débito" },
   { value: "credito", label: "Crédito" },
 ];
 
@@ -39,19 +39,22 @@ export default function ExpenseModalView({
   return (
     <div className={styles.modalContainer} onClick={closeModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button
-          className={styles.closeModalButton}
-          onClick={closeModal}
-          type="button"
-          aria-label="Fechar modal"
-        >
-          <FaTimes />
-        </button>
+        <div className={styles.modalHeader}>
+          <button
+            className={styles.closeModalButton}
+            onClick={closeModal}
+            type="button"
+            aria-label="Fechar modal"
+          >
+            <FaTimes />
+          </button>
 
-        <h2 className={styles.titulo}>{isEditing ? "Editar Gasto" : "Adicionar Gasto"}</h2>
+          <h2 className={styles.titulo}>
+            {isEditing ? "Editar Gasto" : "Adicionar Gasto"}
+          </h2>
+        </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Descrição */}
           <div className={styles.field}>
             <label>Descrição</label>
             <input
@@ -63,7 +66,6 @@ export default function ExpenseModalView({
             />
           </div>
 
-          {/* Categoria */}
           <div className={styles.field}>
             <label>Categoria</label>
             <select
@@ -80,20 +82,19 @@ export default function ExpenseModalView({
             </select>
           </div>
 
-          {/* Valor */}
           <div className={styles.field}>
             <label>Valor (R$)</label>
             <input
+              className={styles.inputValor}
               type="number"
               step="0.01"
               placeholder="0,00"
               value={valor}
-              onChange={(e) => setValor(Number(e.target.value))}
+              onChange={(e) => setValor(e.target.value)}
               required
             />
           </div>
 
-          {/* Método de pagamento */}
           {categoria !== "Investimento" && (
             <div className={styles.paymentMethods}>
               <label>Método de pagamento</label>
@@ -114,7 +115,6 @@ export default function ExpenseModalView({
             </div>
           )}
 
-          {/* Parcelas */}
           {metodo === "credito" && (
             <div className={styles.field}>
               <label>Parcelas</label>
@@ -131,7 +131,6 @@ export default function ExpenseModalView({
             </div>
           )}
 
-          {/* Gasto fixo */}
           <label className={styles.checkbox}>
             <input
               type="checkbox"
@@ -142,9 +141,19 @@ export default function ExpenseModalView({
             Gasto fixo mensal
           </label>
 
-          <button type="submit" className={styles.button}>
-            {isEditing ? "Salvar alterações" : "Adicionar gasto"}
-          </button>
+          <div className={styles.buttonsContainer}>
+            <button
+              onClick={closeModal}
+              className={styles.buttonCancel}
+              type="button"
+            >
+              Cancelar
+            </button>
+
+            <button type="submit" className={styles.buttonPrimary}>
+              {isEditing ? "Salvar alterações" : "Adicionar"}
+            </button>
+          </div>
         </form>
       </div>
     </div>

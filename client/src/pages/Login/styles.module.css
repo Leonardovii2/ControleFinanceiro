@@ -1,31 +1,30 @@
 .container {
   background-color: #2e2e2e;
-  min-height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
-  padding: 4rem;
-  color: #fff;
+  min-height: 100dvh;
+  gap: 20rem;
 }
 
-/* ===== Lado esquerdo ===== */
 .firstSection {
   max-width: 480px;
 }
 
-.firstSection h1 {
+h1 {
   font-size: 40px;
   font-weight: 700;
+  color: #fff;
 }
 
-.firstSection p {
+p {
   margin: 2rem 0;
   font-weight: 500;
   line-height: 1.6;
   color: #e5e5e5;
 }
 
-.buttonRegister {
+.buttonSecondary {
   width: 60%;
   background-color: #b5911b;
   color: #fff;
@@ -37,13 +36,8 @@
   transition: 0.25s;
 }
 
-.buttonRegister:hover {
-  background-color: #947a27;
-}
-
-/* ===== Formulário ===== */
 .form {
-  background-color: #5f5f5f;
+  background-color: #464646;
   padding: 3rem 2.5rem;
   border-radius: 2rem;
   display: flex;
@@ -53,44 +47,43 @@
 }
 
 .form h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
 }
 
-.label {
-  font-weight: bold;
-  font-size: 0.9rem;
+.inputEmail,
+.inputPassword {
+  position: relative;
+  width: 100%;
 }
 
-.input {
-  height: 2.4rem;
-  border: none;
-  border-radius: 6px;
-  padding-left: 1rem;
-  font-size: 0.9rem;
+.inputEmail input,
+.inputPassword input {
+  width: 100%;
+  padding: 12px 12px 12px 35px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
 }
 
-.input:focus {
-  outline: 2px solid #b5911b;
-}
-
-/* ===== Senha ===== */
-.eyeIcon {
+.icon {
   position: absolute;
-  right: 12px;
-  top: 8px;
-  cursor: pointer;
-  color: #2e2e2e;
+  left: 12px;
+  top: 55%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
 }
 
-/* ===== Ações ===== */
-.esqueciSenha {
+.forgotPassword {
+  align-self: flex-end;
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
   background: none;
   border: none;
-  color: #fff;
-  font-size: 13px;
   cursor: pointer;
-  text-align: right;
-  margin: 0.5rem 0;
 }
 
 .button {
@@ -104,27 +97,37 @@
   transition: 0.25s;
 }
 
-.button:hover {
-  background-color: #947a27;
+.eye {
+  position: absolute;
+  right: 12px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
 }
 
-/* ===== Responsivo ===== */
-@media (max-width: 900px) {
+.eye:hover {
+  color: #b5911b;
+}
+
+.inputPassword input {
+  padding: 12px 40px 12px 35px;
+}
+
+@media (max-width: 575.98px) {
   .container {
     flex-direction: column;
-    gap: 2rem;
     padding: 2rem;
+    gap: 1.3rem;
+    overflow-y: auto;
   }
 
   .firstSection {
+    max-width: none;
     text-align: center;
   }
 
-  .buttonRegister {
-    width: 100%;
-  }
-
-  .form {
+  .buttonSecondary {
     width: 100%;
   }
 }

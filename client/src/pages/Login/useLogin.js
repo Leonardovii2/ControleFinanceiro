@@ -13,8 +13,6 @@ export function useLogin() {
   const location = useLocation();
   const { login } = useAuth();
 
-  const togglePasswordVisibility = () => setMostrarSenha((prev) => !prev);
-
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -68,9 +66,8 @@ export function useLogin() {
     senha,
     setSenha,
     mostrarSenha,
-    togglePasswordVisibility,
+    setMostrarSenha,
     handleSubmit,
     handleRegisterClick: () => navigate("/register"),
-    handleForgotPasswordClick: () => navigate("/requestPassword"),
   };
 }

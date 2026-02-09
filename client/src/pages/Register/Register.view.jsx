@@ -1,6 +1,5 @@
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaUser, FaLock, FaIdCard } from "react-icons/fa";
 import styles from "./styles.module.css";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function RegisterView({
@@ -11,14 +10,12 @@ export default function RegisterView({
   senha,
   setSenha,
   mostrarSenha,
-  togglePasswordVisibility,
+  setMostrarSenha,
   handleSubmit,
   handleLoginClick,
 }) {
   return (
     <main className={styles.container}>
-      <ToastContainer />
-
       <section className={styles.firstSection}>
         <h1>Crie sua conta</h1>
         <p>
@@ -27,7 +24,7 @@ export default function RegisterView({
         </p>
 
         <button
-          className={styles.buttonRegister}
+          className={styles.buttonSecondary}
           type="button"
           onClick={handleLoginClick}
         >
@@ -39,37 +36,50 @@ export default function RegisterView({
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Cadastrar</h2>
 
-          <label className={styles.label}>Nome completo</label>
-          <input
-            className={styles.input}
-            type="text"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            placeholder="Seu nome"
-            required
-          />
-
-          <label className={styles.label}>Email</label>
-          <input
-            className={styles.input}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-
-          <label className={styles.label}>Senha</label>
-          <div style={{ position: "relative" }}>
+          <div className={styles.inputName}>
+            <span className={styles.icon}>
+              <FaIdCard />
+            </span>
             <input
               className={styles.input}
+              type="text"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              placeholder="Nome"
+              required
+            />
+          </div>
+
+          <div className={styles.inputEmail}>
+            <span className={styles.icon}>
+              <FaUser />
+            </span>
+            <input
+              className={styles.input}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+          </div>
+
+          <div className={styles.inputPassword}>
+            <span className={styles.icon}>
+              <FaLock />
+            </span>
+            <input
               type={mostrarSenha ? "text" : "password"}
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Senha"
               required
             />
-            <span className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+
+            <span
+              className={styles.eye}
+              onClick={() => setMostrarSenha(!mostrarSenha)}
+            >
               {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>

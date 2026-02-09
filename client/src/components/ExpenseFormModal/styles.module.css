@@ -1,49 +1,11 @@
-.titulo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-  color: #000000;
-}
-
-.input,
-.button {
-  width: 100%;
-  padding: 0 10px;
-  border-radius: 5px;
-  height: 40px;
-  border: 1px solid #bbb;
-}
-
-.input {
-  margin-bottom: 1rem;
-}
-
-.button {
-  background-color: #2e2e2e;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #444444;
-}
-
-.labelStyle {
-  font-weight: bold;
-  margin-right: 0.4rem;
-}
-
 .modalContainer {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.55);
 
   display: flex;
   align-items: center;
   justify-content: center;
-
   z-index: 9999;
 }
 
@@ -54,9 +16,8 @@
 
 .modal {
   background-color: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  width: 350px;
+  border-radius: 12px;
+  width: 400px;
   height: auto;
   position: relative;
   display: block;
@@ -65,128 +26,137 @@
   overflow: hidden;
 }
 
-form {
+.modalHeader {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  border-radius: 5px;
-  height: 35px;
-  border: 1px solid #bbb;
-}
-
-.contentForm {
-  display: flex;
-  flex-direction: column;
-}
-
-.contentForm select {
-  border: 1px solid #c7c7c7;
-}
-
-.contentForm input,
-select {
-  padding: 0.7rem;
-  border-radius: 0.3rem;
-}
-
-.modal input {
-  border: 1px solid #ccc;
-}
-
-.modalButtons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.modalbutton {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.2rem;
+  justify-content: space-between;
+  flex-direction: row-reverse;
   background-color: #2e2e2e;
-  border-radius: 0.4rem;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.modalbutton:hover {
-  background-color: #444;
+  color: #fff;
+  padding: 1rem;
 }
 
 .closeModalButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #333;
+  color: #fff;
   transition: color 0.3s ease;
 }
 
-.closeModalButton:hover {
-  color: #3a554e;
-}
-
-.metodoPagamento {
+.form {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-}
-
-.contentMetodoCredito {
-  width: 100%;
-  display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
-.contentMetodoCredito select {
-  width: 20%;
-}
-
-.radioGroup {
+.field {
   display: flex;
-  flex-direction: row;
+  gap: 0.5rem;
 }
 
-input {
-  padding-left: 12px;
+.field label {
+  flex: 1;
+  font-weight: 500;
+  align-self: center;
 }
 
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
+.field input,
+.field select {
+  flex: 2;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
-.radio {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-right: 0.5rem;
+.inputValor {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: right;
+  padding-right: 1rem;
+}
+
+/* Esconder a setinha no Chrome, Edge */
+.inputValor::-webkit-inner-spin-button,
+.inputValor::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Esconder a setinha no Firefox */
+.inputValor {
+  -moz-appearance: textfield;
 }
 
 @keyframes slideUp {
   from {
-    transform: translateY(20px);
+    transform: translateY(20%);
     opacity: 0;
   }
   to {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.paymentMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.buttonCancel {
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #9ca3af;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.buttonCancel:hover {
+  background: #d2d5d8;
+}
+
+.buttonPrimary {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.buttonPrimary:hover {
+  background-color: #1d4ed8;
 }
